@@ -1,0 +1,19 @@
+{
+  "name": "unipi-dev",
+  "image": "unipi-dev:latest",
+  "containerName": "unipi-container",
+  "workspaceFolder": "/workspace/progetto-lab2-2025",
+  "mounts": [
+    "source=/Users/poppae/Documents/UniPi/container,target=/workspace,type=bind"
+  ],
+  "remoteUser": "biajoe",
+  "overrideCommand": false,
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode-remote.remote-containers",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  }
+}

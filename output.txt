@@ -1,0 +1,65 @@
+gcc -Wall -Wextra -std=c11 -Iinclude -c src/client.c -o build/client.o
+src/client.c: In function 'get_rescuer_digital_twin_by_index':
+src/client.c:9:5: warning: 'main' is normally a non-static function [-Wmain]
+    9 | int main(int argc, char* argv[]){
+      |     ^~~~
+src/client.c:49:6: error: static declaration of 'handle_stop_mode_client' follows non-static declaration
+   49 | void handle_stop_mode_client(void){
+      |      ^~~~~~~~~~~~~~~~~~~~~~~
+In file included from src/client.c:1:
+include/client.h:42:6: note: prev ious declaration of 'handle_stop_mode_client' with type 'void(void)'
+   42 | void handle_stop_mode_client(void);
+      |      ^~~~~~~~~~~~~~~~~~~~~~~
+src/client.c:57:5: error: static declaration of 'send_emergency_request_message' follows non-static declaration
+   57 | int send_emergency_request_message(char *name, char *x_string, char *y_string, char *delay_string) {
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+include/client.h:41:6: note: previous declaration of 'send_emergency_request_message' with type 'int(char *, char *, char *, char *)'
+   41 | int  send_emergency_request_message(char *name, char *x_string, char *y_string, char *delay_string);
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/client.c: In function 'send_emergency_request_message':
+src/client.c:76:57: warning: format '%ld' expects argument of type 'long int', but argument 7 has type 'int' [-Wformat=]
+   76 |         if(snprintf(buffer, sizeof(buffer), "%s %d %d %ld", name, x, y, d) >= MAX_EMERGENCY_REQUEST_LENGTH + 1){
+      |                                                       ~~^               ~
+      |                                                         |               |
+      |                                                         long int        int
+      |                                                       %d
+src/client.c: In function 'get_rescuer_digital_twin_by_index':
+src/client.c:93:6: error: static declaration of 'handle_normal_mode_input' follows non-static declaration
+   93 | void handle_normal_mode_input(char* args[]){
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~
+include/client.h:39:6: note: previous declaration of 'handle_normal_mode_input' with type 'void(char **)'
+   39 | void handle_normal_mode_input(char* args[]);
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~
+src/client.c:99:6: error: static declaration of 'handle_file_mode_input' follows non-static declaration
+   99 | void handle_file_mode_input(char* args[]){
+      |      ^~~~~~~~~~~~~~~~~~~~~~
+include/client.h:40:6: note: previous declaration of 'handle_file_mode_input' with type 'void(char **)'
+   40 | void handle_file_mode_input(char* args[]);
+      |      ^~~~~~~~~~~~~~~~~~~~~~
+src/client.c:139:1: error: expected declaration or statement at end of input
+  139 | }
+      | ^
+In file included from include/logger.h:10,
+                 from include/log.h:11,
+                 from include/client.h:7:
+include/utils.h:71:75: warning: unused parameter 'r' [-Wunused-parameter]
+   71 | rescuer_digital_twin_t *get_rescuer_digital_twin_by_index(rescuer_type_t *r, int rescuer_digital_twin_index){
+      |                                                           ~~~~~~~~~~~~~~~~^
+include/utils.h:71:82: warning: unused parameter 'rescuer_digital_twin_index' [-Wunused-parameter]
+   71 | rescuer_digital_twin_t *get_rescuer_digital_twin_by_index(rescuer_type_t *r, int rescuer_digital_twin_index){
+      |                                                                              ~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~
+src/client.c:141: warning: control reaches end of non-void function [-Wreturn-type]
+src/client.c: At top level:
+src/client.c:99:6: warning: 'handle_file_mode_input' defined but not used [-Wunused-function]
+   99 | void handle_file_mode_input(char* args[]){
+      |      ^~~~~~~~~~~~~~~~~~~~~~
+src/client.c:93:6: warning: 'handle_normal_mode_input' defined but not used [-Wunused-function]
+   93 | void handle_normal_mode_input(char* args[]){
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~
+src/client.c:49:6: warning: 'handle_stop_mode_client' defined but not used [-Wunused-function]
+   49 | void handle_stop_mode_client(void){
+      |      ^~~~~~~~~~~~~~~~~~~~~~~
+src/client.c:9:5: warning: 'main' defined but not used [-Wunused-function]
+    9 | int main(int argc, char* argv[]){
+      |     ^~~~
+make: *** [Makefile:40: build/client.o] Error 1
