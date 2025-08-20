@@ -115,7 +115,7 @@ void handle_file_mode_input(char* args[]){
 	while (getline(&line, &len, emergency_requests_file) != -1) {
 		line_count++;
 
-		if(line_count > MAX_FILE_LINES)
+		if(line_count > MAX_CLIENT_INPUT_FILE_LINES)
 			log_fatal_error("linee massime superate nel client. Interruzione della lettura emergenze");
 		if(emergency_count > MAX_EMERGENCY_REQUEST_COUNT)
 			log_fatal_error("numero di emergenze richieste massime superate nel client. Interruzione della lettura emergenze");

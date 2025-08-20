@@ -7,6 +7,7 @@
 #include "debug.h"
 #include "log.h"
 
+#define MAX_CLIENT_INPUT_FILE_LINES 128
 #define LOG_IGNORING_ERROR(m) log_event(AUTOMATIC_LOG_ID, WRONG_EMERGENCY_REQUEST_IGNORED_CLIENT, m) 
 
 #define PRINT_CLIENT_USAGE(argv0)  \

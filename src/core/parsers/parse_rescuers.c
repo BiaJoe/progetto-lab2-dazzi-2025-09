@@ -2,13 +2,16 @@
 
 static int rescuer_digital_twins_total_count = 0;								// conto dei gemelli digitali, necessario per il logging
 
-void parse_rescuers(server_context_t *ctx){
+rescuers_t *parse_rescuers(int x, int y){
 	parsing_state_t *ps = mallocate_parsing_state(RESCUERS_CONF);
 	rescuer_type_t **rescuer_types = callocate_rescuer_types();		
 	rescuer_type_fields_t fields = {0};		
 
-	fields.max_x_coordinate = ctx->width;		// inizializzo le massime coordinate per evitare di scomodare
-	fields.max_y_coordinate = ctx->height;	// il campo ctx durante il parsing. 
+	rescuers_t *rescuers = (rescuers_t *)malloc(sizeof(rescuers_t));
+	check_error_memory_allocation(rescuers);
+
+	fields.max_x_coordinate = x;
+	fields.max_y_coordinate = y;	
 	
 	while (go_to_next_line(ps)) {						// Leggo ogni riga del file e processo le informazioni contenute
 		log_and_fail_if_file_line_cant_be_processed(ps, MAX_RESCUER_CONF_LINES, MAX_RESCUER_TYPES_COUNT, MAX_RESCUER_CONF_LINE_LENGTH);
@@ -19,30 +22,31 @@ void parse_rescuers(server_context_t *ctx){
 		rescuer_types[ps->parsed_so_far++] = mallocate_and_populate_rescuer_type(&fields); 							// i campi sono validi e il nome non è presente, alloco il rescuer 
 		log_event(ps->line_number, RESCUER_TYPE_PARSED, "🚨 Rescuer %s con base in (%d, %d) e %d gemelli digitali aggiunto!", fields.name, fields.x, fields.y, fields.amount);
 	}
-	ctx -> rescuer_types_count = ps->parsed_so_far;
-	ctx -> rescuer_types = rescuer_types;
+	rescuers -> count = ps->parsed_so_far;
+	rescuers -> types = rescuer_types;
 	free_parsing_state(ps);
+	return rescuers;
 }
 
-int check_and_extract_rescuer_type_fields_from_line(parsing_state_t *ps, rescuer_type_t **rescuer_types, rescuer_type_fields_t *fields){
+bool check_and_extract_rescuer_type_fields_from_line(parsing_state_t *ps, rescuer_type_t **rescuer_types, rescuer_type_fields_t *fields){
 	if (sscanf(ps->line, RESCUERS_SYNTAX, fields->name, &(fields->amount), &(fields->speed), &(fields->x), &(fields->y)) != 5)																													
 		log_fatal_error(LINE_FILE_ERROR_STRING "sintassi. %s", ps->line_number, ps->filename, ps->line);
 	if (rescuer_type_values_are_illegal(fields))
 		log_fatal_error(LINE_FILE_ERROR_STRING "valori illegali. %s", ps->line_number, ps->filename, ps->line);
 	if(check_and_log_if_rescuer_type_already_parsed(ps, rescuer_types, fields->name))
-		return NO;
-	return YES;
+		return false;
+	return true;
 }
 
-int check_and_log_if_rescuer_type_already_parsed(parsing_state_t *ps, rescuer_type_t **types, char* name){
+bool check_and_log_if_rescuer_type_already_parsed(parsing_state_t *ps, rescuer_type_t **types, char* name){
 	if(get_rescuer_type_by_name(name, types)){ 																																					// Controllo che non ci siano duplicati, se ci sono ignoro la riga
 		log_event(ps->line_number, DUPLICATE_RESCUER_TYPE_IGNORED, "Linea %d file %s: il rescuer %s è gìa stato aggiunto, ignorato", ps->line_number, ps->filename, name);
-		return YES;
+		return true;
 	}
-	return NO;
+	return false;
 }
 
-int rescuer_type_values_are_illegal(rescuer_type_fields_t *fields){
+bool rescuer_type_values_are_illegal(rescuer_type_fields_t *fields){
 	return (
 		strlen(fields->name) <= 0 || 
 		fields->amount < MIN_RESCUER_AMOUNT || 
@@ -53,11 +57,11 @@ int rescuer_type_values_are_illegal(rescuer_type_fields_t *fields){
 		fields->x > fields->max_x_coordinate || 
 		fields->y < MIN_Y_COORDINATE_ABSOLUTE_VALUE || 
 		fields->y > fields->max_y_coordinate
-	);
+	) ? true : false;
 }
 
 rescuer_type_t ** callocate_rescuer_types(){
-	rescuer_type_t **rescuer_types = (rescuer_type_t **)calloc((MAX_FILE_LINES + 1),  sizeof(rescuer_type_t*));
+	rescuer_type_t **rescuer_types = (rescuer_type_t **)calloc((MAX_RESCUER_CONF_LINES + 1),  sizeof(rescuer_type_t*));
 	check_error_memory_allocation(rescuer_types);
 	return rescuer_types;
 }
@@ -89,16 +93,16 @@ rescuer_digital_twin_t **callocate_and_populate_rescuer_digital_twins(rescuer_ty
 rescuer_digital_twin_t *mallocate_rescuer_digital_twin(rescuer_type_t* r){
 	rescuer_digital_twin_t *t = (rescuer_digital_twin_t *)malloc(sizeof(rescuer_digital_twin_t));
 	check_error_memory_allocation(t);
-	t->id 							= rescuer_digital_twins_total_count++;	// in questo modo ogni gemello è unico
-	t->x 								= r->x;
-	t->y 								= r->y;
-	t->rescuer 					= r;
-	t->status 					= IDLE;
-	t->trajectory				= mallocate_bresenham_trajectory(); 		// non inizializzato perchè nessun valore è sensato prima di aver dato una destinazione reale
+	t->id 				= rescuer_digital_twins_total_count++;	// in questo modo ogni gemello è unico
+	t->x 				= r->x;
+	t->y 				= r->y;
+	t->rescuer 			= r;
+	t->status 			= IDLE;
+	t->trajectory		= mallocate_bresenham_trajectory(); 		// non inizializzato perchè nessun valore è sensato prima di aver dato una destinazione reale
 	t->emergency_node 	= NULL; 
-	t->is_travelling 		= NO;
-	t->has_arrived			= YES;																	// il gemello viene messo nella base all'inizio, quindi in effetti è arrivato
-	t->time_to_manage		= INVALID_TIME;
+	t->is_travelling 	= false;
+	t->has_arrived		= true;																	// il gemello viene messo nella base all'inizio, quindi in effetti è arrivato
+	t->time_to_manage	= INVALID_TIME;
 	t->time_left_before_it_can_leave_the_scene = INVALID_TIME;
 
 	return t;

@@ -9,8 +9,7 @@ void funzione_per_sigchild(int sig) {
 // mentre il logger aspetta per messaggi da loggare
 // il server fa il parsing e aspetta per richieste di emergenza
 int main(void){
-	LOG_INIT_SERVER(); // creo la coda di messaggi per il logging
-	FORK_PROCESS(logger, server);
+	log_init(LOG_ROLE_SERVER);
 	return 0;
 }
 
@@ -64,15 +63,15 @@ server_context_t *mallocate_server_context(){
 	check_error_memory_allocation(ctx);
 
 	// Parsing dei file di configurazione
-	parse_env(ctx);
-	parse_rescuers(ctx);
-	parse_emergencies(ctx);
+	ctx -> enviroment  = parse_env();														// ottengo l'ambiente
+	ctx -> rescuers    = parse_rescuers(ctx->enviroment->width, ctx->enviroment->height);	// ottengo i rescuers (mi servono max X e max Y)
+	ctx -> emergencies = parse_emergencies(ctx->rescuers);									// ottengo le emergenze (mi servono i rescuers per le richieste di rescuer)
 	
 	// popolo ctx
-	ctx -> emergency_requests_count = 0; 	// all'inizio non ci sono state ancora richieste
+	ctx -> emergency_requests_count = 0; 		// all'inizio non ci sono state ancora richieste
 	ctx -> valid_emergency_request_count = 0;
 	ctx -> tick = NO;											
-	ctx -> tick_count_since_start = 0; 		// il server non ha ancora fatto nessun tick
+	ctx -> tick_count_since_start = 0; 			// il server non ha ancora fatto nessun tick
 	ctx -> waiting_queue = mallocate_emergency_queue();
 	ctx -> working_queue = mallocate_emergency_queue();
 	ctx -> completed_emergencies = mallocate_emergency_list(); 
@@ -86,8 +85,10 @@ server_context_t *mallocate_server_context(){
 		.mq_curmsgs = 0
 	};
 
-	mq_unlink(EMERGENCY_QUEUE_NAME_BARRED);
-	ctx->mq = mq_open(EMERGENCY_QUEUE_NAME_BARRED, O_CREAT | O_RDONLY, 0644, &attr);
+	char queue_name[MAX_EMERGENCY_QUEUE_NAME_LENGTH + 1];
+	snprintf(queue_name, MAX_EMERGENCY_QUEUE_NAME_LENGTH, "/%s", ctx->enviroment->queue_name);
+	mq_unlink(queue_name);
+	ctx->mq = mq_open(queue_name, O_CREAT | O_RDONLY, 0644, &attr);
 	check_error_mq_open(ctx->mq);
 
 	check_error_mtx_init(mtx_init(&(ctx->clock_mutex), mtx_plain));

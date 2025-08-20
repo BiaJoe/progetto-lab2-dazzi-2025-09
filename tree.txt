@@ -1,0 +1,60 @@
+.
+|-- Makefile
+|-- README.md
+|-- build
+|-- conf
+|   |-- emergency_types.conf
+|   |-- env.conf
+|   `-- rescuers.conf
+|-- config.def.h
+|-- config.h
+|-- docs
+|   `-- Testo_per_progetto_estivo_di_Laboratorio_2___aa24_25\ (2).pdf
+|-- include
+|   |-- bresenham.h
+|   |-- client.h
+|   |-- constants.h
+|   |-- debug.h
+|   |-- emergency_priority_queue.h
+|   |-- emergency_requests_reciever.h
+|   |-- errors.h
+|   |-- log.h
+|   |-- logger.h
+|   |-- parsers.h
+|   |-- server.h
+|   |-- server_clock.h
+|   |-- server_emergency_handler.h
+|   |-- server_updater.h
+|   |-- server_utils.h
+|   |-- structs.h
+|   `-- utils.h
+|-- log.txt
+|-- src
+|   |-- client
+|   |   `-- main.c
+|   |-- core
+|   |   |-- log.c
+|   |   |-- logger.c
+|   |   |-- parsers
+|   |   |   |-- parse_emergencies.c
+|   |   |   |-- parse_env.c
+|   |   |   |-- parse_rescuers.c
+|   |   |   `-- parsing_utils.c
+|   |   `-- utils
+|   |       `-- utils.c
+|   |-- dependencies
+|   |   |-- bresenham.c
+|   |   |-- emergency_priority_queue.c
+|   |   |-- emergency_requests_reciever.c
+|   |   |-- server_clock.c
+|   |   |-- server_emergency_handler.c
+|   |   |-- server_updater.c
+|   |   `-- server_utils.c
+|   |-- server
+|   |   `-- main.c
+|   `-- tests
+|       |-- debug.c
+|       `-- log_test.c
+`-- tree.txt
+
+13 directories, 45 files
