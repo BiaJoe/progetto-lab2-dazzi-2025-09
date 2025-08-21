@@ -1,29 +1,29 @@
+#include "constants.h"
+#include "structs.h"
 
 // ======================================= //
 //    CONFIGURAZIONE GESTIONE EMERGENZE    //
 // ======================================= //
 
-#define MAX_EMERGENCY_QUEUE_NAME_LENGTH 16
-#define MAX_EMERGENCY_QUEUE_MESSAGE_LENGTH 512
-#define STOP_MESSAGE_FROM_CLIENT "-stop"
+#define TIME_BEFORE_AN_EMERGENCY_SHOULD_BE_CANCELLED_TICKS 300
 
-// le priorità possono essere anche diverse, ma ci sono delle condizioni da rispettare
-// 1. devono essere in ordine crescente
-// 2. devono essere consecutive, niente salti
-// il motivo sta in come è stato implementato il sistema di ordinamento delle priorità nel server
-#define MIN_EMERGENCY_PRIORITY 0
-#define MEDIUM_EMERGENCY_PRIORITY 1
-#define MAX_EMERGENCY_PRIORITY 2
-#define PRIORITY_LEVELS 3 // 0,1,2
+#define NO_TIMEOUT   -1
+#define NO_PROMOTION -1
+
+
+// struttura che permette di decidere quali sono le priorità che le emergenze possono avere
+// non importa ordine, consecutività o altro, basta che siano uniche
+static const priority_rule_t priority_lookup_table[] = {
+//   priority number        secondi prima della promozione,     tempo prima di andare in timeout
+    {0,                     120,                                NO_TIMEOUT},
+    {1,                     NO_PROMOTION,                       30},
+    {2,                     NO_PROMOTION,                       10}
+};
+
+static const int priority_count = (int)(sizeof(priority_lookup_table)/sizeof(priority_lookup_table[0]));
 
 #define MIN_TIME_TO_MANAGE 1
 #define MAX_TIME_TO_MANAGE 1000
-
-#define MAX_TIME_IN_MIN_PRIORITY_BEFORE_PROMOTION		   120
-#define MAX_TIME_IN_MEDIUM_PRIORITY_BEFORE_TIMEOUT		   30
-#define MAX_TIME_IN_MAX_PRIORITY_BEFORE_TIMEOUT			   10
-#define TIME_BEFORE_AN_EMERGENCY_SHOULD_BE_CANCELLED_TICKS 300
-
 
 
 // ======================================= //

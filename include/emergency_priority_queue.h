@@ -3,6 +3,40 @@
 
 #include "utils.h"
 
+// emergency queue
+
+// forward declaration per node e list
+typedef struct emergency_list emergency_list_t;
+
+#define UNDEFINED_TIME_FOR_RESCUERS_TO_ARRIVE -1
+
+struct emergency_list {
+	emergency_node_t *head;
+	emergency_node_t *tail;
+	int node_amount; 
+	mtx_t mutex;
+};
+
+struct emergency_node {
+	emergency_list_t *list;
+	int rescuers_found;
+	int rescuers_are_arriving;
+	int rescuers_have_arrived;
+	int time_estimated_for_rescuers_to_arrive;
+	emergency_t *emergency;
+	struct emergency_node *prev;
+	struct emergency_node *next;
+	mtx_t mutex;			
+	cnd_t waiting;
+};
+
+typedef struct {
+	emergency_list_t* lists[priority_count]; 
+	int is_empty;
+	cnd_t not_empty;									// condizione per notificare che la coda non è vuota
+	mtx_t mutex; 
+} emergency_queue_t;
+
 emergency_t *mallocate_emergency(server_context_t *ctx, char* name, int x, int y, time_t timestamp);
 void free_emergency(emergency_t* e);
 emergency_node_t* mallocate_emergency_node(emergency_t *e);

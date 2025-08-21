@@ -234,8 +234,7 @@ void log_event(int id, log_event_type_t event_type, char *format, ...) {
     va_end(ap);
     msg.text[sizeof(msg.text) - 1] = '\0'; // mi assicuro che l'ultimo carattere sia il terminatore
    
-
-    mq_send(log_mq_writer, (const char*)&msg, sizeof(msg), 0);
+    check_error_mq_send(mq_send(log_mq_writer, (const char*)&msg, sizeof(msg), 0));
 }
 
 void log_fatal_error(char *format, ...) {

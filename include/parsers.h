@@ -17,6 +17,17 @@
 #define MAX_ENV_CONF_LINES 12
 #define MAX_ENV_CONF_LINE_LENGTH 128
 
+// STRUTTURA HELPER PER IL PARSING
+
+typedef struct {
+	FILE   *fp;
+	char   *filename;			
+	char   *line;						// la linea che stiamo parsando (init a NULL perchè sarà analizzata da getline())
+	size_t 	len;						// per getline()
+	int 	line_number;			// il suo numero		
+	int 	parsed_so_far;			// quante entità abbiamo raccolto fin ora
+} parsing_state_t;
+
 typedef struct {
 	char name[MAX_RESCUER_NAME_LENGTH];
 	int amount;
@@ -29,27 +40,11 @@ typedef struct {
 
 typedef struct {
 	short priority;																								
-	char emergency_desc[EMERGENCY_NAME_LENGTH];											
+	char emergency_desc[MAX_EMERGENCY_NAME_LENGTH];											
 	char rescuer_requests_string[MAX_RESCUER_REQUESTS_LENGTH + 1];	
 	int rescuers_req_number;	
 	rescuer_request_t **rescuers; 		
 } emergency_type_fields_t;
-
-typedef struct {
-	char queue_name[MAX_EMERGENCY_QUEUE_NAME_LENGTH + 1];
-	int height;
-	int width;
-} environment_t;
-
-typedef struct {
-	rescuer_type_t **types;
-	int count;
-} rescuers_t;
-
-typedef struct {
-	emergency_type_t **types;
-	int count;
-} emergencies_t;
 
 // funzioni generali
 environment_t *parse_env();

@@ -1,6 +1,8 @@
 #ifndef STRUCTS_H
 #define STRUCTS_H
 
+#define _POSIX_C_SOURCE 200809L 
+
 #include <stdbool.h>
 #include <time.h>
 #include <mqueue.h>
@@ -11,16 +13,17 @@
 #include <stdbool.h>
 #include "constants.h"
 
-// STRUTTURA HELPER PER IL PARSING
+#define MAX_EMERGENCY_QUEUE_NAME_LENGTH 16
+#define MAX_EMERGENCY_QUEUE_MESSAGE_LENGTH 512
+#define STOP_MESSAGE_FROM_CLIENT "-stop"
+
+// sgtruttura per la priorità delle emergenze
 
 typedef struct {
-	FILE *fp;
-	char* filename;			
-	char* line;						// la linea che stiamo parsando (init a NULL perchè sarà analizzata da getline())
-	size_t len;						// per getline()
-	int 	line_number;		// il suo numero		
-	int 	parsed_so_far;	// quante entità abbiamo raccolto fin ora
-}	parsing_state_t;
+    short number;
+    int seconds_before_promotion; 
+    int time_before_timeout;
+} priority_rule_t;
 
 
 // STRUTTURE PER I RESCUER
@@ -62,7 +65,7 @@ struct rescuer_digital_twin {
 	int y;
 	rescuer_type_t *rescuer;
 	rescuer_status_t status;
-	bresenham_trajectory_t *trajectory; // serve per tenere traccia di dove il gemello sta andando e del percorso che fa 
+	bresenham_trajectory_t *trajectory; 	// serve per tenere traccia di dove il gemello sta andando e del percorso che fa 
 	emergency_node_t *emergency_node;		// ogni gemello è legato all'emergenza che sta gestendo
 	bool is_travelling;
 	bool has_arrived;
@@ -98,41 +101,46 @@ typedef enum {
 } emergency_status_t;
 
 
-
-
-// emergency queue
-
-// forward declaration per node e list
-typedef struct emergency_list emergency_list_t;
-
-#define UNDEFINED_TIME_FOR_RESCUERS_TO_ARRIVE -1
-
-struct emergency_list {
-	emergency_node_t *head;
-	emergency_node_t *tail;
-	int node_amount; 
-	mtx_t mutex;
-};
-
-struct emergency_node {
-	emergency_list_t *list;
-	int rescuers_found;
-	int rescuers_are_arriving;
-	int rescuers_have_arrived;
-	int time_estimated_for_rescuers_to_arrive;
-	emergency_t *emergency;
-	struct emergency_node *prev;
-	struct emergency_node *next;
-	mtx_t mutex;			
-	cnd_t waiting;
-};
+// Strutture per contenere i dati parsati dai file di configurazione
 
 typedef struct {
-	emergency_list_t* lists[PRIORITY_LEVELS]; 
-	int is_empty;
-	cnd_t not_empty;									// condizione per notificare che la coda non è vuota
-	mtx_t mutex; 
-} emergency_queue_t;
+	char queue_name[MAX_EMERGENCY_QUEUE_NAME_LENGTH + 1];
+	int height;
+	int width;
+} environment_t;
 
+typedef struct {
+	rescuer_type_t **types;
+	int count;
+} rescuers_t;
+
+typedef struct {
+	emergency_type_t **types;
+	int count;
+} emergencies_t;
+
+// struttura per shared memory: comunicazione client server del nome della coda
+
+#define SHM_NAME "/emergency_shm"
+#define SEM_NAME "/emergency_shm_ready" 
+
+typedef struct {
+    char queue_name[MAX_EMERGENCY_QUEUE_NAME_LENGTH];
+	int x;
+	int y;
+} client_server_shm_t;
+
+// funzioni di accesso a strutture
+rescuer_type_t * get_rescuer_type_by_name(char *name, rescuer_type_t **rescuer_types);
+emergency_type_t * get_emergency_type_by_name(char *name, emergency_type_t **emergency_types);
+rescuer_request_t * get_rescuer_request_by_name(char *name, rescuer_request_t **rescuers);
+char* get_name_of_rescuer_requested(rescuer_request_t *rescuer_request);
+int get_time_before_emergency_timeout_from_priority(int p);
+
+// funzioni per liberare strutture allocate dinamicamente che non sono ad uso specifico del processo in cui sono allocate
+// esempio: i rescuer types sono allocati dal parser ma liberati dal server
+void free_rescuer_types(rescuer_type_t **rescuer_types);
+void free_emergency_types(emergency_type_t **emergency_types);
+void free_rescuer_requests(rescuer_request_t **rescuer_requests);
 
 #endif

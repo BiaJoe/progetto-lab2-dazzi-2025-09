@@ -27,12 +27,17 @@
 
 // modalità del client
 
-#define UNDEFINED_MODE -1
-#define NORMAL_MODE 1
+typedef enum {
+	UNDEFINED_MODE,
+	NORMAL_MODE,
+	FILE_MODE,
+	STOP_MODE,
+	NUMBER_OF_CLIENT_MODES,
+} client_mode_t;
+
 #define FILE_MODE_STRING "-f"
-#define FILE_MODE 2
 #define STOP_MODE_STRING "-s"
-#define STOP_MODE 99
+
 
 #define MAX_EMERGENCY_REQUEST_COUNT 256 
 #define MAX_EMERGENCY_REQUEST_LENGTH 512
@@ -41,4 +46,5 @@ void handle_normal_mode_input(char* args[]);
 void handle_file_mode_input(char* args[]);
 int  send_emergency_request_message(char *name, char *x_string, char *y_string, char *delay_string);
 void handle_stop_mode_client(void);
+
 #endif
