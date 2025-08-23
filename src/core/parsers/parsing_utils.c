@@ -4,7 +4,7 @@ parsing_state_t *mallocate_parsing_state(char *filename){
 	parsing_state_t *ps = (parsing_state_t *)malloc(sizeof(parsing_state_t));
 	check_error_memory_allocation(ps);
 	ps->fp = fopen(filename, "r");					
-	check_opened_file_error_log(ps->fp);	
+	check_error_fopen(ps->fp);	
 	ps->filename = strdup(filename); // alloco e copio il filename
   check_error_memory_allocation(ps->filename);
 	ps->line = NULL; 

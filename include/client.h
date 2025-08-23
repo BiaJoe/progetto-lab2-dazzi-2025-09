@@ -3,8 +3,20 @@
 
 #define _GNU_SOURCE // per usare getline
 
+#include <fcntl.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
 #include <unistd.h>
-#include "debug.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdatomic.h>
+#include <unistd.h>
+#include <mqueue.h>
+#include <semaphore.h>
+#include <errno.h>
+#include <stdlib.h>
+
+#include "utils.h"
 #include "log.h"
 
 #define MAX_CLIENT_INPUT_FILE_LINES 128

@@ -1,4 +1,4 @@
-#include "server_emergency_handler.h"
+#include "server.h"
 
 // ----------- funzioni per il thread worker -----------
 
@@ -8,7 +8,7 @@
 // esegue i processi necessari per la sua elaborazione
 // ad ogni "step" controlla che l'emergenza non sia stata cancellata o messa in pausa
 // se lo è stata agisce di conseguenza e passa alla prossima, altrimenti va avanti su quella
-int server_emergency_handler(void *arg){
+int thread_emergency_handler(void *arg){
 	server_context_t *ctx = arg;
 	emergency_node_t *n = NULL;
 	emergency_queue_t *waiting_queue = ctx->waiting_queue; 	// estraggo la coda delle emergenze in attesa

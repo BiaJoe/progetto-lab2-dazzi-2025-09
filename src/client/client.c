@@ -1,11 +1,13 @@
 #include "client.h"
 
+
 // client.c prende in input le emergenze e fa un minimo di error handling
 // poi invia le emergenze, ma lascia al server il compito di finire il check dei valori
 mqd_t mq;
 
 int main(int argc, char* argv[]){
-	LOG_INIT_CLIENT();
+	// inizio a loggare lato client
+	log_init(LOG_ROLE_CLIENT);
 
 	// controllo il numero di argomenti
 	if(argc != 3 && argc != 5 && argc != 2) 
@@ -14,29 +16,45 @@ int main(int argc, char* argv[]){
 	// capisco in quale modalità mi trovo
 	// in questo caso le modalità sono 2 + undefined, 
 	// ma non sarebbe difficile espandere il codice ed aggiungerne di più in futuro
-	int mode = UNDEFINED_MODE;
+	client_mode_t mode = UNDEFINED_MODE;
 
 	switch (argc) {
-		case 5: mode = NORMAL_MODE;  break;	
-		case 3: if (strcmp(argv[1], FILE_MODE_STRING) == 0) mode = FILE_MODE;
-						// espandibile
-			break;
-		case 2: if (strcmp(argv[1], STOP_MODE_STRING) == 0) mode = STOP_MODE;
-						// espandibile
-			break;
-		default: DIE(argv[0], "modalità di inserimento dati non riconosciuta");
+		case 5: 
+			mode = NORMAL_MODE;  
+			break;	
+		case 3: 
+			if (strcmp(argv[1], FILE_MODE_STRING) == 0) mode = FILE_MODE;
+			break; // espandibile
+		case 2: 
+			if (strcmp(argv[1], STOP_MODE_STRING) == 0) mode = STOP_MODE;
+			break; // espandibile
+		default: 
+			DIE(argv[0], "modalità di inserimento dati non riconosciuta");
+			break; // non dovrebbe mai arrivarci
 	}
 
 
-	// apro la coda su cui manderò la/le emergenza/e
+	sem_t *sem;
+	int shared_memory_fd;
+	client_server_shm_t *shm_data;
 
-	check_error_mq_open(mq = mq_open(EMERGENCY_QUEUE_NAME_BARRED, O_WRONLY));
+	SYSV(sem = sem_open(SEM_NAME, 0), SEM_FAILED, "sem_open");
+    SYSC(sem_wait(sem), "sem_wait");
+	SYSC(sem_post(sem), "sem_post"); // ripostoi il semaforo per altri client ipotetici
+    SYSC(sem_close(sem), "sem_close");
+    SYSC(shared_memory_fd = shm_open(SHM_NAME, O_RDONLY, 0), "shm_open");
+    SYSV(shm_data = mmap(NULL, sizeof(*shm_data), PROT_READ, MAP_SHARED, shared_memory_fd, 0), MAP_FAILED, "mmap");
+	SYSC(close(shared_memory_fd), "close");
+	SYSV(mq = mq_open(shm_data->queue_name, O_WRONLY), MQ_FAILED, "mq_open");
+    SYSC(munmap(shm_data, sizeof(*shm_data)), "munmap");
+
+	
 
 	switch (mode) {
 		case NORMAL_MODE: handle_normal_mode_input(argv); break;
-		case FILE_MODE: 	handle_file_mode_input(argv); break;
-		case STOP_MODE: 	handle_stop_mode_client(); break;
-		default: 					DIE(argv[0], "modalità di inserimento dati non valida");
+		case FILE_MODE:   handle_file_mode_input(argv); break;
+		case STOP_MODE:   handle_stop_mode_client(); break;
+		default: 		  DIE(argv[0], "modalità di inserimento dati non valida"); break;
 	}
 
 	// a questo punto l'emergenza o le emergenze sono state inviate.
@@ -44,6 +62,7 @@ int main(int argc, char* argv[]){
 	// spetta al server controllare la SEMANTICA (se i valori x,y,timestamo sono nei limiti)
 	// se non lo sono l'emergenza viene ignorata nel server
 	log_event(AUTOMATIC_LOG_ID, MESSAGE_QUEUE_CLIENT, "il lavoro del client è finito. Il processo si chiude");
+	mq_close(mq);
 	log_close();
 	return 0;
 }
@@ -51,7 +70,7 @@ int main(int argc, char* argv[]){
 
 void handle_stop_mode_client(){
 	char *buffer = STOP_MESSAGE_FROM_CLIENT;
-	check_error_mq_send(mq_send(mq, buffer, strlen(buffer) + 1, 0));
+	SYSC(mq_send(mq, buffer, strlen(buffer) + 1, 0), "mq_send");
 	log_event(AUTOMATIC_LOG_ID, MESSAGE_QUEUE_CLIENT, "inviato messaggio di stop dal client");
 }
 
@@ -71,7 +90,7 @@ int send_emergency_request_message(char *name, char *x_string, char *y_string, c
 		return 0;
 	}
 
-	if(strlen(name) >= EMERGENCY_NAME_LENGTH){
+	if(strlen(name) >= MAX_EMERGENCY_NAME_LENGTH){
 		LOG_IGNORING_ERROR("nome emergenza troppo lungo");
 		return 0;
 	}
@@ -86,7 +105,7 @@ int send_emergency_request_message(char *name, char *x_string, char *y_string, c
 
 	// il client garantisce la correttezza sintattica della richiesta
 	// al server spetta controllare la correttezza semantica e processare la richiesta
-	check_error_mq_send(mq_send(mq, buffer, strlen(buffer) + 1, 0));
+	SYSC(mq_send(mq, buffer, strlen(buffer) + 1, 0), "mq_send");
 	log_event(AUTOMATIC_LOG_ID, MESSAGE_QUEUE_CLIENT, "inviata emergenza al server");
 
 	return 1;
@@ -120,10 +139,10 @@ void handle_file_mode_input(char* args[]){
 		if(emergency_count > MAX_EMERGENCY_REQUEST_COUNT)
 			log_fatal_error("numero di emergenze richieste massime superate nel client. Interruzione della lettura emergenze");
 		
-		name 					= strtok(line, EMERGENCY_REQUEST_ARGUMENT_SEPARATOR);
-		x 						= strtok(NULL, EMERGENCY_REQUEST_ARGUMENT_SEPARATOR);
-		y 						= strtok(NULL, EMERGENCY_REQUEST_ARGUMENT_SEPARATOR);
-		d 						= strtok(NULL, EMERGENCY_REQUEST_ARGUMENT_SEPARATOR);
+		name 			= strtok(line, EMERGENCY_REQUEST_ARGUMENT_SEPARATOR);
+		x 				= strtok(NULL, EMERGENCY_REQUEST_ARGUMENT_SEPARATOR);
+		y 				= strtok(NULL, EMERGENCY_REQUEST_ARGUMENT_SEPARATOR);
+		d 				= strtok(NULL, EMERGENCY_REQUEST_ARGUMENT_SEPARATOR);
 		must_be_null 	= strtok(NULL, EMERGENCY_REQUEST_ARGUMENT_SEPARATOR);
 
 		if(name == NULL || x == NULL || y == NULL || d == NULL || must_be_null != NULL){

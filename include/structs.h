@@ -11,11 +11,12 @@
 #include <threads.h>
 #include <stdatomic.h>
 #include <stdbool.h>
-#include "constants.h"
 
 #define MAX_EMERGENCY_QUEUE_NAME_LENGTH 16
 #define MAX_EMERGENCY_QUEUE_MESSAGE_LENGTH 512
 #define STOP_MESSAGE_FROM_CLIENT "-stop"
+
+#define INVALID_TIME -1
 
 // sgtruttura per la priorità delle emergenze
 
@@ -126,8 +127,6 @@ typedef struct {
 
 typedef struct {
     char queue_name[MAX_EMERGENCY_QUEUE_NAME_LENGTH];
-	int x;
-	int y;
 } client_server_shm_t;
 
 // funzioni di accesso a strutture

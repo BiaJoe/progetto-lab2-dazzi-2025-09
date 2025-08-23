@@ -254,3 +254,4 @@ void log_fatal_error(char *format, ...) {
     perror(buf);
     exit(EXIT_FAILURE);
 }
+
