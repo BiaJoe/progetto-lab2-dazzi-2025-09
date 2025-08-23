@@ -92,7 +92,7 @@ void unlock_server_clock(server_context_t *ctx);
 // thread_reciever.c
 
 int thread_reciever(server_context_t *ctx);
-int parse_emergency_request(char *message, char* name, int *x, int *y, time_t *timestamp);
+bool parse_emergency_request(char *message, char* name, int *x, int *y, time_t *timestamp);
 bool emergency_request_values_are_illegal(server_context_t *ctx, char* name, int x, int y, time_t timestamp);
 emergency_t *mallocate_emergency(server_context_t *ctx, char* name, int x, int y, time_t timestamp);
 void free_emergency(emergency_t* e);

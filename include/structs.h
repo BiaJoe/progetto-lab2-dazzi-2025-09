@@ -16,6 +16,11 @@
 #define MAX_EMERGENCY_QUEUE_MESSAGE_LENGTH 512
 #define STOP_MESSAGE_FROM_CLIENT "-stop"
 
+#define STR_HELPER(x) #x    
+#define STR(x) STR_HELPER(x)
+
+#define NO_TIMEOUT   -1
+#define NO_PROMOTION -1
 #define INVALID_TIME -1
 
 // sgtruttura per la priorità delle emergenze

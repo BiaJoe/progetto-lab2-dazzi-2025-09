@@ -31,10 +31,10 @@ int thread_reciever(server_context_t *ctx){
 	return 0;
 }
 
-int parse_emergency_request(char *message, char* name, int *x, int *y, time_t *timestamp){
+bool parse_emergency_request(char *message, char* name, int *x, int *y, time_t *timestamp){
 	if(sscanf(message, EMERGENCY_REQUEST_SYNTAX, name, x, y, timestamp) != 4)
-		return 0;
-	return 1;
+		return false;
+	return true;
 }
 
 bool emergency_request_values_are_illegal(server_context_t *ctx, char* name, int x, int y, time_t timestamp){

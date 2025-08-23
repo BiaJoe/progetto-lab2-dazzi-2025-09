@@ -2,6 +2,7 @@
 
 // struttura globale per contenere le strutture utili del server
 server_context_t *ctx;
+// prendo da config.h il numero di priorità ammesse
 extern const int priority_count;
 
 // divido in due processi: logger e server
@@ -24,14 +25,12 @@ int main(void){
 	thrd_t reciever_thread;
 	thrd_t worker_threads[THREAD_POOL_SIZE];
 
-	
-
 	if (thrd_create(&clock_thread, thread_clock, ctx) != thrd_success) {
 		log_fatal_error("errore durante la creazione di del clock nel server");
 		return;
 	}
 
-	if (thrd_create(&updater_thread, updater_thread, ctx) != thrd_success) {
+	if (thrd_create(&updater_thread, thread_updater, ctx) != thrd_success) {
 		log_fatal_error("errore durante la creazione di dell'updater nel server");
 		return;
 	}
@@ -42,7 +41,7 @@ int main(void){
 	}
 
 	thrd_join(clock_thread, NULL);
-	// thrd_join(updater_thread, NULL);
+	thrd_join(updater_thread, NULL);
 	thrd_join(reciever_thread, NULL);
 
 	// for (int i = 0; i < THREAD_POOL_SIZE; i++) {
@@ -52,11 +51,6 @@ int main(void){
 	close_server(ctx);
 }
 
-
-// faccio il parsing dei file
-// ottengo numero e puntatore ad emergenze e rescuers
-// creo la coda di messaggi ricevuti dal client
-// inizializzo i mutex
 server_context_t *mallocate_server_context(){
 	server_context_t *ctx = (server_context_t *)malloc(sizeof(server_context_t));	
 	check_error_memory_allocation(ctx);
@@ -101,8 +95,6 @@ void server_ipc_setup(server_context_t *ctx){
         .mq_curmsgs = 0
     };
 
-    // Assicurati che env->queue_name inizi con '/'
-    // Se parse_env ti fornisce già "/qualcosa", non aggiungere slash.
     const char *qname = ctx->enviroment->queue_name;
     ERR_CHECK(qname == NULL || qname[0] != '/', "queue_name deve iniziare con '/'");
 

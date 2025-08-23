@@ -1,17 +1,44 @@
 #include "structs.h"
 
+
+
+// ======================================= //
+//  CONFIGURAZIONE DEL SISTEMA DI LOGGING  //
+// ======================================= //
+
+#define LOG_FILE "log.txt"
+#define NON_APPLICABLE_LOG_ID_STRING "N/A"
+#define LOG_EVENT_STRING_SYNTAX "%-16s %-6s %-35s %s\n"
+// #define LOG_EVENT_STRING_SYNTAX "[%s] [%s] [%s] [%s]\n"
+
+#define LOG_TO_FILE             1         // 1 = si logga in LOG_FILE
+#define LOG_TO_STDOUT           1         // 1 = si logga su stdout
+#define LOG_RING_CAP            4096
+#define LOG_WRITER_BLOCKING     1
+#define LOG_FLUSH_EVERY_N       64
+
+
+
+
+
+// ======================================= //
+//          CONFIGURAZIONE SERVER          //
+// ======================================= //
+
+static const struct timespec server_tick_time = {
+	.tv_sec = 1,
+	.tv_nsec = 0
+};
+
+
+
+
 // ======================================= //
 //    CONFIGURAZIONE GESTIONE EMERGENZE    //
 // ======================================= //
 
 #define TIME_BEFORE_AN_EMERGENCY_SHOULD_BE_CANCELLED_TICKS 300
 
-#define NO_TIMEOUT   -1
-#define NO_PROMOTION -1
-
-
-// struttura che permette di decidere quali sono le priorità che le emergenze possono avere
-// non importa ordine, consecutività o altro, basta che siano uniche
 static const priority_rule_t priority_lookup_table[] = {
 //   priority number        secondi prima della promozione,     tempo prima di andare in timeout
     {0,                     120,                                NO_TIMEOUT},
@@ -23,6 +50,9 @@ static const int priority_count = (int)(sizeof(priority_lookup_table)/sizeof(pri
 
 #define MIN_TIME_TO_MANAGE 1
 #define MAX_TIME_TO_MANAGE 1000
+
+
+
 
 
 // ======================================= //
@@ -53,9 +83,6 @@ static const int priority_count = (int)(sizeof(priority_lookup_table)/sizeof(pri
 #define MAX_RESCUER_REQ_NUMBER_PER_EMERGENCY 16
 #define MAX_ENV_FIELD_LENGTH 32
 
-#define STR_HELPER(x) #x    // todo: cleanup utils.h, metterlo lì e includerlo qui
-#define STR(x) STR_HELPER(x)
-
 #define RESCUERS_SYNTAX "[%" STR(MAX_RESCUER_NAME_LENGTH) "[^]]][%d][%d][%d;%d]"
 #define RESCUER_REQUEST_SYNTAX "%" STR(MAX_RESCUER_NAME_LENGTH) "[^:]:%d,%d"
 #define EMERGENCY_TYPE_SYNTAX "[%" STR(MAX_EMERGENCY_NAME_LENGTH) "[^]]] [%hd] %" STR(MAX_RESCUER_REQUESTS_LENGTH) "[^\n]"
@@ -66,20 +93,5 @@ static const int priority_count = (int)(sizeof(priority_lookup_table)/sizeof(pri
 #define ENV_CONF_QUEUE_SYNTAX 	"queue= %" STR(EMERGENCY_QUEUE_NAME_LENGTH) "s"
 #define ENV_CONF_HEIGHT_SYNTAX 	"height= %d"
 #define ENV_CONF_WIDTH_SYNTAX 	"width= %d"
-
-// ======================================= //
-//  CONFIGURAZIONE DEL SISTEMA DI LOGGING  //
-// ======================================= //
-
-#define LOG_FILE "log.txt"
-#define NON_APPLICABLE_LOG_ID_STRING "N/A"
-#define LOG_EVENT_STRING_SYNTAX "%-16s %-6s %-35s %s\n"
-// #define LOG_EVENT_STRING_SYNTAX "[%s] [%s] [%s] [%s]\n"
-
-#define LOG_TO_FILE             1         // 1 = si logga in LOG_FILE
-#define LOG_TO_STDOUT           1         // 1 = si logga su stdout
-#define LOG_RING_CAP            4096
-#define LOG_WRITER_BLOCKING     1
-#define LOG_FLUSH_EVERY_N       64
 
 

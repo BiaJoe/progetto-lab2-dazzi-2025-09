@@ -2,10 +2,8 @@
 
 // ----------- funzioni per il thread clock e chi deve avere accesso ai tick del server ----------- 
 
-static const struct timespec server_tick_time = {
-	.tv_sec = SERVER_TICK_INTERVAL_SECONDS,
-	.tv_nsec = SERVER_TICK_INTERVAL_NANOSECONDS
-};
+// prendo da config.h la struttura con il tempo di un tick del server
+extern const struct timespec server_tick_time;
 
 int thread_clock(void *arg){
 	server_context_t *ctx = arg;
