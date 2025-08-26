@@ -2,13 +2,10 @@
 
 // ----------- funzioni per il thread clock e chi deve avere accesso ai tick del server ----------- 
 
-// prendo da config.h la struttura con il tempo di un tick del server
-extern const struct timespec server_tick_time;
-
 int thread_clock(void *arg){
 	server_context_t *ctx = arg;
 	while(!ctx->server_must_stop){
-		thrd_sleep(&server_tick_time, NULL); 	// attendo un tick di tempo del server
+		thrd_sleep(&(ctx->clock->tick_time), NULL); 	// attendo un tick di tempo del server
 		lock_server_clock(ctx);					// blocco il mutex per il tempo del server
 		tick(ctx); 								// il sterver ha tickato
 		cnd_broadcast(&ctx->clock->updated);	// segnalo al thread updater che il tempo è stato aggiornato

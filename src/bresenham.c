@@ -11,9 +11,9 @@ bresenham_trajectory_t *mallocate_bresenham_trajectory(){
 // calcola un passo lungo la linea che percorre al massimo cells_per_step celle in totale
 // cammina una cella alla volta finchè o è arrivata o ha camminato esattamente cells_per_step celle
 // ritorna se siamo arrivati a destinazione o no
-int compute_bresenham_step(int x, int y, bresenham_trajectory_t *trajectory, int cells_per_step, int *x_step, int *y_step){
-	if(!trajectory) return NO;										// senza traiettoria non si fa nulla
-	if(cells_per_step < 0) return YES; 		
+bool compute_bresenham_step(int x, int y, bresenham_trajectory_t *trajectory, int cells_per_step, int *x_step, int *y_step){
+	if(!trajectory) return false;										// senza traiettoria non si fa nulla
+	if(cells_per_step < 0) return true; 		
 	
 	*x_step = 0;
 	*y_step = 0;
@@ -25,7 +25,7 @@ int compute_bresenham_step(int x, int y, bresenham_trajectory_t *trajectory, int
 	if(manhattan_distance <= cells_per_step){			// caso in cui in un passo o meno siamo arrivati
 		*x_step = distance_x;
 		*y_step = distance_y;
-		return YES;
+		return true;
 	}
 
 	int xA = x;
@@ -41,7 +41,7 @@ int compute_bresenham_step(int x, int y, bresenham_trajectory_t *trajectory, int
 	while (i < cells_per_step) {			// faccio un passo alla volta percorrendo la linea di Bresenham 
 		log_event(69, DEBUG, "step = (%d, %d)", *x_step, *y_step);
 		if (xA == xB && yA == yB) 			// siamo arrivati
-			return YES;				
+			return true;				
 		int e2 = 2 * trajectory->err;		// l'errore serve a dirci se siamo più lontani sulla x o sulla y 
 		if (e2 >= -dy) {								// se siamo più lontani sulla x facciamo un passo sulla x
 			trajectory->err -= dy;				// aggiorno l'errore 
@@ -59,7 +59,7 @@ int compute_bresenham_step(int x, int y, bresenham_trajectory_t *trajectory, int
 		}
 	}
 
-	return (xA == xB && yA == yB) ? YES : NO;								// siamo arrivati?
+	return (xA == xB && yA == yB) ? true : false;								// siamo arrivati?
 }
 
 void change_bresenham_trajectory(bresenham_trajectory_t *t, int current_x, int current_y, int new_x, int new_y){

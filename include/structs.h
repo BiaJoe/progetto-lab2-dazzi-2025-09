@@ -1,8 +1,6 @@
 #ifndef STRUCTS_H
 #define STRUCTS_H
 
-#define _POSIX_C_SOURCE 200809L 
-
 #include <stdbool.h>
 #include <time.h>
 #include <mqueue.h>
@@ -11,10 +9,18 @@
 #include <threads.h>
 #include <stdatomic.h>
 #include <stdbool.h>
+#include <semaphore.h>
+#include <string.h>
 
-#define MAX_EMERGENCY_QUEUE_NAME_LENGTH 16
+#include "bresenham.h"
+
+#define MAX_EMERGENCY_QUEUE_NAME_LENGTH 32
 #define MAX_EMERGENCY_QUEUE_MESSAGE_LENGTH 512
+
 #define STOP_MESSAGE_FROM_CLIENT "-stop"
+
+#define MAX_EMERGENCY_NAME_LENGTH 64
+
 
 #define STR_HELPER(x) #x    
 #define STR(x) STR_HELPER(x)
@@ -31,6 +37,14 @@ typedef struct {
     int time_before_timeout;
 } priority_rule_t;
 
+// RICHIESTE DI EMERGENZA
+
+typedef struct {
+	char emergency_name[MAX_EMERGENCY_NAME_LENGTH];
+	int x;
+	int y;
+	time_t timestamp;
+} emergency_request_t;
 
 // STRUTTURE PER I RESCUER
 
@@ -41,15 +55,6 @@ typedef enum {
 	RETURNING_TO_BASE
 } rescuer_status_t;
 
-typedef struct {	// struttura per la computazione del percorso di ogni rescuer
-	int x_target;
-	int y_target;
-	int dx;					// distanze tra partenza e arrivo in x e y
-	int dy;
-	int sx;					// direzioni: x e y aumentano o diminuiscono?
-	int sy;
-	int err;				// l'errore di Bresenham: permette di decidere se muoversi sulla x o sulla y
-} bresenham_trajectory_t;
 
 // Foreward declaration per rescuer_digital_twin
 
@@ -76,7 +81,7 @@ struct rescuer_digital_twin {
 	bool is_travelling;
 	bool has_arrived;
 	int time_to_manage;
-	int time_left_before_it_can_leave_the_scene;
+	int time_left_before_leaving;
 };
 
 // STRUTTURE PER LE EMERGENZE
@@ -110,7 +115,7 @@ typedef enum {
 // Strutture per contenere i dati parsati dai file di configurazione
 
 typedef struct {
-	char queue_name[MAX_EMERGENCY_QUEUE_NAME_LENGTH + 1];
+	char queue_name[MAX_EMERGENCY_QUEUE_NAME_LENGTH];
 	int height;
 	int width;
 } environment_t;
@@ -132,6 +137,7 @@ typedef struct {
 
 typedef struct {
     char queue_name[MAX_EMERGENCY_QUEUE_NAME_LENGTH];
+	char requests_argument_separator;
 } client_server_shm_t;
 
 // funzioni di accesso a strutture
@@ -139,7 +145,6 @@ rescuer_type_t * get_rescuer_type_by_name(char *name, rescuer_type_t **rescuer_t
 emergency_type_t * get_emergency_type_by_name(char *name, emergency_type_t **emergency_types);
 rescuer_request_t * get_rescuer_request_by_name(char *name, rescuer_request_t **rescuers);
 char* get_name_of_rescuer_requested(rescuer_request_t *rescuer_request);
-int get_time_before_emergency_timeout_from_priority(int p);
 
 // funzioni per liberare strutture allocate dinamicamente che non sono ad uso specifico del processo in cui sono allocate
 // esempio: i rescuer types sono allocati dal parser ma liberati dal server

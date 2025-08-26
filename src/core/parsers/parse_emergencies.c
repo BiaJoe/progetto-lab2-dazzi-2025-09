@@ -2,8 +2,13 @@
 
 static int rescuer_requests_total_count = 0;
 
-emergencies_t *parse_emergencies(rescuers_t *rescuers){
-	parsing_state_t *ps = mallocate_parsing_state(EMERGENCY_TYPES_CONF);
+static int local_priority_count;
+static const priority_rule_t* local_priority_lookup_table;
+
+emergencies_t 	*parse_emergencies(char *filename, rescuers_t *rescuers, const priority_rule_t* priority_lookup_table_from_caller, int priority_count_from_caller){
+	local_priority_count = priority_count_from_caller;
+	local_priority_lookup_table = priority_lookup_table_from_caller;
+	parsing_state_t *ps = mallocate_parsing_state(filename);
 	emergency_type_t **emergency_types = callocate_emergency_types();	
 	emergency_type_fields_t fields = {0};	
 	emergencies_t *emergencies = (emergencies_t *)malloc(sizeof(emergencies_t));
@@ -18,11 +23,12 @@ emergencies_t *parse_emergencies(rescuers_t *rescuers){
 		if (!check_and_extract_emergency_type_fields_from_line(ps, emergency_types, rescuer_types, &fields))
 			continue;
 		emergency_types[ps->parsed_so_far++] = mallocate_and_populate_emergency_type(&fields); // metto l'emergenza nell'array di emergenze
-		log_event(ps->parsed_so_far, EMERGENCY_PARSED, "⚠️ Emergenza %s di priorità %hd con %d tipi di rescuer registrata tra i tipi di emergenze", fields.emergency_desc,  fields.priority,  fields.rescuers_req_number);
+		log_event(ps->parsed_so_far, EMERGENCY_PARSED, "⚠️  Emergenza %s P:%hd R:%d registrata", fields.emergency_desc,  fields.priority,  fields.rescuers_req_number);
 	}
 	emergencies->count = ps->parsed_so_far; // restituisco il numero di emergenze lette
 	emergencies->types = emergency_types;	
 	free_parsing_state(ps);
+	return emergencies;
 }
 
 bool check_and_extract_emergency_type_fields_from_line(parsing_state_t *ps, emergency_type_t **emergency_types, rescuer_type_t **rescuer_types, emergency_type_fields_t *fields){
@@ -103,12 +109,43 @@ bool rescuer_request_values_are_illegal(char *name, int required_count, int time
 }
 
 bool emergency_values_are_illegal(emergency_type_fields_t *fields){
-	return (
-		strlen(fields->emergency_desc) <= 0 || 
-		fields->priority < MIN_EMERGENCY_PRIORITY || 
-		fields->priority > MAX_EMERGENCY_PRIORITY
-	) ? true : false;
+	if (strlen(fields->emergency_desc) <= 0)
+		return true;
+	for (int i = 0; i < local_priority_count; i++) {
+		if (fields->priority == local_priority_lookup_table[i].number) {
+			return false; // La priorità è valida
+		}
+	}
+	return true; // La priorità non è valida
 }
+
+// emergency requests
+
+emergency_request_t *parse_emergency_request(char *message, emergency_type_t **types, int envh, int envw){
+	char n[MAX_EMERGENCY_NAME_LENGTH];
+	int x, y, d;
+	time_t t = time(NULL);
+	if (sscanf(message, EMERGENCY_REQUEST_SYNTAX, n, &x, &y, &d) != 4)
+		return NULL;
+	if (emergency_request_values_are_illegal(types, envh, envw, n, x, y))
+		return NULL;
+	emergency_request_t *r = (emergency_request_t *)malloc(sizeof(emergency_request_t));
+	check_error_memory_allocation(r);
+	strncpy(r->emergency_name, n, sizeof(r->emergency_name));
+	r->x = x;
+	r->y = y;
+	r->timestamp = t;
+	return r;
+}
+
+bool emergency_request_values_are_illegal(emergency_type_t **types, int envh, int envw, char* name, int x, int y){
+	if(strlen(name) <= 0) return true;
+	if(!get_emergency_type_by_name(name, types)) return true;
+	if(ABS(x) < MIN_X_COORDINATE_ABSOLUTE_VALUE || ABS(x) > ABS(envw)) return true;
+	if(ABS(y) < MIN_Y_COORDINATE_ABSOLUTE_VALUE || ABS(y) > ABS(envh)) return true;
+	return false;
+}
+
 
 // memory management
 
@@ -127,7 +164,7 @@ rescuer_request_t **callocate_rescuer_requests(){
 emergency_type_t *mallocate_emergency_type(){
 	emergency_type_t *e = (emergency_type_t *)malloc(sizeof(emergency_type_t));	
 	check_error_memory_allocation(e);
-	e->emergency_desc = (char *)calloc((EMERGENCY_NAME_LENGTH + 1), sizeof(char));		
+	e->emergency_desc = (char *)calloc((MAX_EMERGENCY_NAME_LENGTH + 1), sizeof(char));		
 	check_error_memory_allocation(e->emergency_desc);
 	e->priority = 0;
 	e->rescuers_req_number = 0;

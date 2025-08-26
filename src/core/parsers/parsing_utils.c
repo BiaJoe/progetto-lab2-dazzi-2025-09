@@ -54,6 +54,6 @@ void log_and_fail_if_file_line_cant_be_processed(parsing_state_t *ps, int max_li
 void skip_and_log_empty_or_illegal_lines(parsing_state_t *ps, int max_lines, int max_parsable_lines, int max_line_length){
     while(go_to_next_line(ps)){
         log_and_fail_if_file_line_cant_be_processed(ps, max_lines, max_parsable_lines, max_line_length);
-        if(check_and_log_if_line_is_empty(ps)) return;
+        if(!check_and_log_if_line_is_empty(ps)) return;
     }
 }

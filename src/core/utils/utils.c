@@ -54,3 +54,14 @@ int my_atoi(char a[]){
 	// mette il segno e ritona	
 	return sign * res;									
 }
+
+
+
+char* extract_last_token(char *s, char separator) {
+    char *last_space = strrchr(s, separator); // ritorna il puntatore all'ultima occorrenza di uno spazio
+    if (last_space) {
+        return last_space + 1; // subito dopo l’ultimo spazio
+    }
+    return s; // se non ci sono spazi, tutta la stringa è il token
+}
+

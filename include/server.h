@@ -1,9 +1,26 @@
 #ifndef SERVER_H
 #define SERVER_H
 
+#ifndef _POSIX_C_SOURCE
+#define _POSIX_C_SOURCE 200809L
+#endif
+
 #include <signal.h>
 #include <sys/wait.h>
-#include "config.h"
+#include <mqueue.h>
+#include <semaphore.h>
+#include <fcntl.h>
+#include <sys/mman.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <threads.h>
+#include <stdatomic.h>
+#include <time.h>
+#include <stdbool.h>
+#include <string.h>
+#include <stdio.h>
+#include <errno.h>
+
 #include "priority_queue.h"
 #include "log.h"
 #include "parsers.h"
@@ -16,16 +33,9 @@
 // STRUTTURE PER LE RICHIESTE DI EMERGENZA
 
 typedef struct {
-	char emergency_name[MAX_EMERGENCY_NAME_LENGTH];
-	int x;
-	int y;
-	time_t timestamp;
-} emergency_request_t;
-
-typedef struct {
 	emergency_type_t *type;
 	int id;
-	int priority;
+	short priority;
 	emergency_status_t status;
 	int x;
 	int y;
@@ -44,12 +54,13 @@ typedef struct {
 	int valid_count;
 } requests_t;
 
-typedef struct {
+typedef struct server_clock {
+	struct timespec tick_time;
 	bool tick;						// tick del server, per sincronizzare i thread
 	int tick_count_since_start;		// contatore dei tick del server, per tenere traccia di quanti tick sono stati fatti
 	mtx_t mutex;					// mutex per proteggere l'accesso al tick del server
 	cnd_t updated;					// condizione per comunicare al therad updater di fare l'update
-} clock_t;
+} server_clock_t;
 
 typedef struct {
 	environment_t *enviroment;
@@ -60,7 +71,7 @@ typedef struct {
 	pq_t* emergency_queue;			// coda per contenere le emergenze da processare
 	pq_t* completed_emergencies;	// lista per tenere traccia di tutte le emergenze completate
 	pq_t* canceled_emergencies; 	// lista delle emergenze cancellate
-	clock_t *clock;					// struttura per gestire il clock del server
+	server_clock_t *clock;			// struttura per gestire il clock del server
 	atomic_bool server_must_stop;	// flag che segnala ai thread di fermarsi
 	mqd_t mq;						// message queue per ricevere le emergenze dai client	
     int shm_fd;                	 	// file descriptior della SHM
@@ -75,11 +86,9 @@ void server_ipc_setup(server_context_t *ctx);
 void close_server(server_context_t *ctx);
 server_context_t *mallocate_server_context();
 void cleanup_server_context(server_context_t *ctx);
+int get_time_before_emergency_timeout_from_priority(int p);
 
 // thread_clock.c
-
-#define SERVER_TICK_INTERVAL_SECONDS 1
-#define SERVER_TICK_INTERVAL_NANOSECONDS 0
 
 int thread_clock(void *arg);
 void tick(server_context_t *ctx);
@@ -91,10 +100,8 @@ void unlock_server_clock(server_context_t *ctx);
 
 // thread_reciever.c
 
-int thread_reciever(server_context_t *ctx);
-bool parse_emergency_request(char *message, char* name, int *x, int *y, time_t *timestamp);
-bool emergency_request_values_are_illegal(server_context_t *ctx, char* name, int x, int y, time_t timestamp);
-emergency_t *mallocate_emergency(server_context_t *ctx, char* name, int x, int y, time_t timestamp);
+int thread_reciever(void *arg);
+emergency_t *mallocate_emergency(int id, emergency_type_t **types, emergency_request_t *request);
 void free_emergency(emergency_t* e);
 
 // thread_worker.c
@@ -112,13 +119,6 @@ void update_rescuers_states_and_positions_on_the_map_logging(server_context_t *c
 bool update_rescuer_digital_twin_state_and_position_logging(rescuer_digital_twin_t *t, int minx, int miny, int height, int width);
 void send_rescuer_digital_twin_back_to_base_logging(rescuer_digital_twin_t *t);
 void change_rescuer_digital_twin_destination(rescuer_digital_twin_t *t, int new_x, int new_y);
-
-// UTILS
-
-
-//funzioni per lockare e unlockare mutex 
-
-
 
 
 #endif

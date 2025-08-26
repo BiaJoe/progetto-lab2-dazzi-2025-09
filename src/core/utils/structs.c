@@ -34,13 +34,7 @@ rescuer_request_t * get_rescuer_request_by_name(char *name, rescuer_request_t **
 extern const priority_rule_t priority_lookup_table[];
 extern const int priority_count;
 
-int get_time_before_emergency_timeout_from_priority(int p){
-	for (int i = 0; i < priority_count; i++){
-		if(priority_lookup_table[i].number == p)
-			return priority_lookup_table[i].time_before_timeout;
-	}
-	return INVALID_TIME;
-}
+
 
 
 // funzioni per liberare strutture importanti

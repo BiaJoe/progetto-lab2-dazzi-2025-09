@@ -1,9 +1,11 @@
 #ifndef LOG_H
 #define LOG_H
 
+#include "errors.h"
+
 #ifndef _POSIX_C_SOURCE
-#define _POSIX_C_SOURCE 199309L
-#endif 
+#define _POSIX_C_SOURCE 200809L
+#endif
 
 #include <mqueue.h>
 #include <errno.h>
@@ -18,29 +20,23 @@
 #include <time.h>
 #include <threads.h>
 #include <unistd.h>
+#include <stdatomic.h>
 
-#include "errors.h"
-#include "config.h"
+#define LOG_EVENT_TOTAL_LENGTH 512
+#define LOG_EVENT_NAME_LENGTH 64
+#define LOG_EVENT_CODE_LENGTH 5
 
 #define LOG_QUEUE_NAME 						   "/log_queue"
 #define MAX_LOG_QUEUE_MESSAGES 				   10
 #define LOG_QUEUE_OPEN_MAX_RETRIES             128    
 #define LOG_QUEUE_OPEN_RETRY_INTERVAL_NS	   5000000   // 5 ms
 
-#define MAX_LOG_EVENT_MQ_MESSAGE_LENGTH        1024   
-#define MAX__LOG_EVENT_TIMESTAMP_STRING_LENGTH 32
+#define MAX_LOG_EVENT_TIMESTAMP_STRING_LENGTH  32
 #define MAX_LOG_EVENT_ID_STRING_LENGTH         16
-#define MAX_LOG_EVENT_FORMATTED_MESSAGE_LENGTH 256
-#define LOG_EVENT_NAME_LENGTH                  64
-#define LOG_EVENT_CODE_LENGTH                  5
+#define MAX_LOG_EVENT_FORMATTED_MESSAGE_LENGTH 300
 
 // ID speciali
 enum { AUTOMATIC_LOG_ID = -1, NON_APPLICABLE_LOG_ID = -2 };
-
-// una macro per standardizzare il formato degli errori in linee di file
-#define LINE_FILE_ERROR_STRING "Errore a linea %d in file %s: "
-
-// STRUTTURE PER IL LOGGING
 
 typedef struct {
 	char name[LOG_EVENT_NAME_LENGTH];	// versione stringa del tipo
@@ -48,6 +44,22 @@ typedef struct {
 	bool is_terminating;					// se loggarlo vuol dire terminare il programma		
 	bool is_to_log;						// se va scritto o no nel file di log
 } log_event_info_t;
+
+
+typedef struct logging_config {
+    char *log_file;
+    FILE *log_file_ptr;
+    char *logging_syntax;
+    char *non_applicable_log_id_string;
+    bool log_to_file;
+    bool log_to_stdout;
+    int  flush_every_n;
+} logging_config_t;
+
+// una macro per standardizzare il formato degli errori in linee di file
+#define LINE_FILE_ERROR_STRING "Errore a linea %d in file %s: "
+
+// STRUTTURE PER IL LOGGING
 
 typedef enum {
     NON_APPLICABLE = 0,
@@ -105,33 +117,28 @@ typedef enum {
     LOG_EVENT_TYPES_COUNT // deve essere l'ultimo
 } log_event_type_t;
 
-typedef struct {
-	int id;                       // id esplicito o AUTOMATIC_LOG_ID
-    log_event_type_t event_type;                      
-    char text[MAX_LOG_EVENT_FORMATTED_MESSAGE_LENGTH];  // SOLO il testo, senza prefisso
-} log_message_t;
-
-/* Ruolo:
-   - server: consuma dalla /log_queue e scrive su file/stdout (centralizzato)
-   - client: solo produttore (invia in mqueue) */
 typedef enum { 
-	LOG_ROLE_SERVER = 1,
-	LOG_ROLE_CLIENT = 0 
+	LOG_ROLE_SERVER = 1, // consuma e produce messaggi di log
+	LOG_ROLE_CLIENT = 0  // produce messaggi di log
 } log_role_t;
 
-// API 🐝🐝🐝
-int  log_init(log_role_t role);      // server crea sink; client apre writer 
-void log_close(void);                // chiusura ordinata 
+typedef struct {
+    log_role_t role; 
+    char timestamp[MAX_LOG_EVENT_TIMESTAMP_STRING_LENGTH];
+    int id;
+    log_event_type_t event_type;            
+    char formatted_message[MAX_LOG_EVENT_FORMATTED_MESSAGE_LENGTH];            
+    char text[LOG_EVENT_TOTAL_LENGTH];  // SOLO il testo, senza prefisso
+} log_message_t;
 
-/* Funzione principale per loggare eventi:
-   - formatta solo il testo del messaggio (printf-like)
-   - invia (evt,id,testo) alla coda; prefisso lo aggiunge il server */
+
+int  log_init(log_role_t role, const logging_config_t config);
+void log_close(void);  
+
+void assemble_log_text(char destination_string[LOG_EVENT_TOTAL_LENGTH], log_message_t m);
 void log_event(int id, log_event_type_t event_type, char *format, ...);
-
-// Helper per eventi fatali: logga come FATAL_ERROR e esce con errore 
 void log_fatal_error(char *format, ...);
 
-// Accessor LUT (diagnostica/debug) 
 const log_event_info_t* get_log_event_info(log_event_type_t event_type);
 
 

@@ -29,10 +29,10 @@ int thread_updater(void *arg){
 void update_rescuers_states_and_positions_on_the_map_logging(server_context_t *ctx){
 	int amount = ctx->rescuers->count;
 	for(int i = 0; i < amount; i++){													// aggiorno le posizioni dei gemelli rescuers
-		rescuer_type_t *r = get_rescuer_type_by_index(ctx, i);
+		rescuer_type_t *r = ctx->rescuers->types[i];
 		if(r == NULL) continue; 																// se il rescuer type è NULL non faccio nulla (precauzione)
 		for(int j = 0; j < r->amount; j++){
-			rescuer_digital_twin_t *dt = get_rescuer_digital_twin_by_index(r, j);
+			rescuer_digital_twin_t *dt = r->twins[j];
 			log_event(dt->id, DEBUG, "%s [%d] stato = %d", dt->rescuer->rescuer_type_name, dt->id, dt->status);
 			update_rescuer_digital_twin_state_and_position_logging(dt, MIN_X_COORDINATE_ABSOLUTE_VALUE, MIN_Y_COORDINATE_ABSOLUTE_VALUE, ctx->enviroment->height, ctx->enviroment->width);
 		}
@@ -44,7 +44,7 @@ bool update_rescuer_digital_twin_state_and_position_logging(rescuer_digital_twin
 		return false; 										// la posizione non va aggiornata
 	
 	if(t->status == ON_SCENE){			// se sta gestendo un'emergenza
-		if(--(t->time_left_before_it_can_leave_the_scene) > 0)
+		if(--(t->time_left_before_leaving) > 0)
 			return false;									// deve ancora stare sulla scena dell'emergenza
 		else													// ha finito: può tornare alla base!
 			send_rescuer_digital_twin_back_to_base_logging(t);
@@ -84,7 +84,7 @@ bool update_rescuer_digital_twin_state_and_position_logging(rescuer_digital_twin
 
 	switch (t->status) {
 		case EN_ROUTE_TO_SCENE:
-			t->time_left_before_it_can_leave_the_scene = t->time_to_manage;
+			t->time_left_before_leaving = t->time_to_manage;
 			t->status = ON_SCENE;
 			log_event(t->id, RESCUER_STATUS, "🚨 %s [%d] -> [%d, %d] il rescuer è arrivato alla scena dell'emergenza  !!!!", t->rescuer->rescuer_type_name, t->id, t->x, t->x);
 			return true;		
@@ -121,5 +121,5 @@ void change_rescuer_digital_twin_destination(rescuer_digital_twin_t *t, int new_
 	change_bresenham_trajectory(t->trajectory, t->x, t->y, new_x, new_y);
 	t->is_travelling = true;
 	t->has_arrived = false;
-	t->time_left_before_it_can_leave_the_scene = INVALID_TIME;
+	t->time_left_before_leaving = INVALID_TIME;
 }

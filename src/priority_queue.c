@@ -33,7 +33,7 @@ pq_t* pq_create(int levels){
     pq_t* q = malloc(sizeof(pq_t));
     check_error_memory_allocation(q);
     q->levels = levels;
-    q->lists = calloc(levels,sizeof(list_t));
+    q->lists = calloc((size_t)levels,sizeof(list_t));
     check_error_memory_allocation(q->lists);
     q->size = 0;
     q->closed = false;

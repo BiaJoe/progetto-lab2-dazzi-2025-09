@@ -2,8 +2,8 @@
 
 static int rescuer_digital_twins_total_count = 0;								// conto dei gemelli digitali, necessario per il logging
 
-rescuers_t *parse_rescuers(int x, int y){
-	parsing_state_t *ps = mallocate_parsing_state(RESCUERS_CONF);
+rescuers_t *parse_rescuers(char *filename, int x, int y){
+	parsing_state_t *ps = mallocate_parsing_state(filename);
 	rescuer_type_t **rescuer_types = callocate_rescuer_types();		
 	rescuer_type_fields_t fields = {0};		
 
@@ -20,7 +20,7 @@ rescuers_t *parse_rescuers(int x, int y){
 		if(!check_and_extract_rescuer_type_fields_from_line(ps, rescuer_types, &fields))
 			continue;
 		rescuer_types[ps->parsed_so_far++] = mallocate_and_populate_rescuer_type(&fields); 							// i campi sono validi e il nome non è presente, alloco il rescuer 
-		log_event(ps->line_number, RESCUER_TYPE_PARSED, "🚨 Rescuer %s con base in (%d, %d) e %d gemelli digitali aggiunto!", fields.name, fields.x, fields.y, fields.amount);
+		log_event(ps->line_number, RESCUER_TYPE_PARSED, "🚨 Rescuer (%d, %d) %s e %d gemelli digitali aggiunto!", fields.x, fields.y, fields.name, fields.amount);
 	}
 	rescuers -> count = ps->parsed_so_far;
 	rescuers -> types = rescuer_types;
@@ -81,11 +81,11 @@ rescuer_type_t *mallocate_and_populate_rescuer_type(rescuer_type_fields_t *field
 }
 
 rescuer_digital_twin_t **callocate_and_populate_rescuer_digital_twins(rescuer_type_t* r){
-	rescuer_digital_twin_t **twins = (rescuer_digital_twin_t **)calloc(r->amount + 1, sizeof(rescuer_digital_twin_t*));
+	rescuer_digital_twin_t **twins = (rescuer_digital_twin_t **)calloc((size_t)r->amount + 1, sizeof(rescuer_digital_twin_t*));
 	check_error_memory_allocation(twins);
 	for(int i = 0; i < r->amount; i++){
 		twins[i] = mallocate_rescuer_digital_twin(r);
-		log_event(twins[i]->id, RESCUER_DIGITAL_TWIN_ADDED, "⛑️ %s #%d [%d, %d] Aggiunto ai gemelli digitali ", r->rescuer_type_name, twins[i]->id, twins[i]->x, twins[i]->y);
+		log_event(twins[i]->id, RESCUER_DIGITAL_TWIN_ADDED, "⛑️  Gemello [%d, %d] (ID:%d) %s creato ", twins[i]->x, twins[i]->y, twins[i]->id,  r->rescuer_type_name);
 	}
 	return twins;
 }
@@ -103,7 +103,7 @@ rescuer_digital_twin_t *mallocate_rescuer_digital_twin(rescuer_type_t* r){
 	t->is_travelling 	= false;
 	t->has_arrived		= true;																	// il gemello viene messo nella base all'inizio, quindi in effetti è arrivato
 	t->time_to_manage	= INVALID_TIME;
-	t->time_left_before_it_can_leave_the_scene = INVALID_TIME;
+	t->time_left_before_leaving = INVALID_TIME;
 
 	return t;
 }

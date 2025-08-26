@@ -1,100 +1,60 @@
+// log_test.c
 #define _POSIX_C_SOURCE 200809L
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <time.h>
-#include <string.h>
-#include <errno.h>
 
+#include <stdio.h>
+#include <string.h>
+#include <time.h>
 #include "log.h"
 
-// Parametri del test
-enum {
-    TEST_NUM_CLIENTS    = 3,
-    TEST_BURST_PER_CLIENT = 64,
-    TEST_CLIENT_SLEEP_US  = 2000  // 2 ms tra alcune write per variare timing
+#define RESCUERS_CONF        "conf/rescuers.conf"
+#define EMERGENCY_TYPES_CONF "conf/emergency_types.conf"
+#define ENV_CONF             "conf/env.conf"
+
+static const logging_config_t server_logging_config = {
+    .log_file                       = "log.txt",
+    .log_file_ptr                   = NULL,
+    .logging_syntax                 = "%-16s %-6s %-35s %s\n",
+    .non_applicable_log_id_string   = "N/A",
+    .log_to_file                    = true,
+    .log_to_stdout                  = true,
+    .flush_every_n                  = 64
 };
 
-static void client_work(int cid) {
-    if (log_init(LOG_ROLE_CLIENT) != 0) {
-        fprintf(stderr, "[client %d] log_init failed\n", cid);
-        _exit(2);
-    }
 
-    // messaggi base
-    log_event(AUTOMATIC_LOG_ID, CLIENT, "client %d: avvio", cid);
-    log_event(42, DEBUG, "client %d: debug con id esplicito 42", cid);
-    log_event(NON_APPLICABLE_LOG_ID, EMERGENCY_REQUEST_RECEIVED,
-              "client %d: richiesta emergenza arrivata", cid);
-
-    // burst per stressare la coda
-    for (int i = 0; i < TEST_BURST_PER_CLIENT; ++i) {
-        log_event(AUTOMATIC_LOG_ID, MESSAGE_QUEUE_CLIENT,
-                  "client %d: burst #%d", cid, i);
-        if ((i % 8) == 0) usleep(TEST_CLIENT_SLEEP_US);
-    }
-
-    // Un solo client (ad es. cid == 1) prova il fatal "locale"
-    if (cid == 1) {
-        // usa FATAL_ERROR_CLIENT grazie alla logica in log_fatal_error
-        log_fatal_error("client %d: fatal (solo client), test di uscita controllata", cid);
-        // non si arriva qui
-    }
-
-    log_event(AUTOMATIC_LOG_ID, CLIENT, "client %d: fine normale", cid);
-    log_close();
-    _exit(0);
+// piccola pausa cross‑platform con C11 threads.h
+static void tiny_sleep_ms(long ms) {
+    struct timespec t = { .tv_sec = ms / 1000, .tv_nsec = (ms % 1000) * 1000000L };
+    thrd_sleep(&t, NULL);
 }
 
 int main(void) {
-    // SERVER: init e thread logger
-    if (log_init(LOG_ROLE_SERVER) != 0) {
-        fprintf(stderr, "[server] log_init failed\n");
+    // 1) Avvio logging come SERVER (apre la coda, il thread logger, ecc.)
+    if (log_init(LOG_ROLE_SERVER, server_logging_config) != 0) {
+        fprintf(stderr, "log_init fallita\n");
         return 1;
     }
 
-    // qualche riga dal server stesso
-    log_event(AUTOMATIC_LOG_ID, SERVER, "server: logger avviato");
-    log_event(NON_APPLICABLE_LOG_ID, SERVER_UPDATE, "server: update non loggato? (dipende LUT)");
+    // 2) Alcuni eventi di prova con ID automatico (contatori indipendenti per tipo evento)
+    log_event(AUTOMATIC_LOG_ID, DEBUG, "Debug (auto id) #1");
+    log_event(AUTOMATIC_LOG_ID, DEBUG, "Debug (auto id) #2");
+    log_event(AUTOMATIC_LOG_ID, PARSING_STARTED, "Parsing iniziato di %s", RESCUERS_CONF);
+    log_event(AUTOMATIC_LOG_ID, EMERGENCY_REQUEST_RECEIVED, "Richiesta emergenza fittizia arrivata");
 
-    // fork dei client
-    pid_t children[TEST_NUM_CLIENTS];
-    for (int i = 0; i < TEST_NUM_CLIENTS; ++i) {
-        pid_t pid = fork();
-        if (pid < 0) {
-            perror("fork");
-            // continua: i client già creati faranno comunque il loro lavoro
-            continue;
-        }
-        if (pid == 0) {
-            // processo figlio → client
-            client_work(i);
-        }
-        children[i] = pid;
-    }
+    // 3) Eventi con ID esplicito e con ID NON_APPLICABILE
+    log_event(42, SERVER, "Messaggio SERVER con id esplicito = 42");
+    log_event(NON_APPLICABLE_LOG_ID, CLIENT, "Messaggio CLIENT con id N/A");
 
-    // Il server continua a loggare mentre i client scrivono
-    for (int k = 0; k < 8; ++k) {
-        log_event(AUTOMATIC_LOG_ID, MESSAGE_QUEUE_SERVER, "server: heartbeat #%d", k);
-        usleep(3000); // 3 ms
-    }
+    // 4) Messaggio lungo per verificare il troncamento a MAX_LOG_EVENT_FORMATTED_MESSAGE_LENGTH
+    char long_msg[1024];
+    memset(long_msg, 'X', sizeof(long_msg));
+    long_msg[sizeof(long_msg) - 1] = '\0';
+    log_event(AUTOMATIC_LOG_ID, DEBUG, "Lungo: %s", long_msg);
 
-    // attende i client
-    for (int i = 0; i < TEST_NUM_CLIENTS; ++i) {
-        if (children[i] > 0) {
-            int st = 0;
-            (void)waitpid(children[i], &st, 0);
-        }
-    }
+    // 5) Piccola attesa così il thread logger consuma qualcosa prima della chiusura
+    tiny_sleep_ms(20);
 
-    // messaggi finali server
-    log_event(AUTOMATIC_LOG_ID, SERVER, "server: tutti i client terminati");
-    log_event(NON_APPLICABLE_LOG_ID, EMERGENCY_PARSED, "server: esempio N/A id");
-
-    // chiusura ordinata: log_close() logga anche LOGGING_ENDED e sveglia la mq
+    // 6) Chiusura ordinata: invia LOGGING_ENDED e join del thread
     log_close();
 
-    fprintf(stderr, "[server] test completato. Controlla stdout e/o %s\n", LOG_FILE);
     return 0;
 }
