@@ -12,7 +12,21 @@ int thread_reciever(void *arg){
 	char buffer[MAX_EMERGENCY_QUEUE_MESSAGE_LENGTH];
 
 	while (1) {
-		check_error_mq_receive(mq_receive(ctx->mq, buffer, sizeof(buffer), NULL));
+		ssize_t nread = mq_receive(ctx->mq, buffer, sizeof(buffer), NULL);
+    	check_error_mq_receive(nread);
+
+    	if (nread < 0) { 
+			log_event(NON_APPLICABLE_LOG_ID, WRONG_EMERGENCY_REQUEST_IGNORED_SERVER, "Thread reciever non ha letto niente!");
+		}
+
+		if ((size_t)nread >= sizeof(buffer)) {
+			buffer[sizeof(buffer) - 1] = '\0';
+			log_event(NON_APPLICABLE_LOG_ID, WRONG_EMERGENCY_REQUEST_IGNORED_SERVER, "messaggio MQ troncato: \"%s\"", buffer);
+			continue;
+		}	
+
+		buffer[nread] = '\0';  
+
 		if (strcmp(buffer, STOP_MESSAGE_FROM_CLIENT) == 0) {		// se è il messaggio di stop devo uscire!
 			ctx -> server_must_stop = true;
 			return 0;
@@ -21,16 +35,16 @@ int thread_reciever(void *arg){
 		ctx->requests->count++;
 		emergency_request_t *r = parse_emergency_request(buffer, ctx->emergencies->types, ctx->enviroment->height, ctx->enviroment->width);
 		if(!r) {
-			log_event(ctx->requests->count, WRONG_EMERGENCY_REQUEST_IGNORED_SERVER, "emergenza %s rifiutata perchè non conforme alla sintassi", buffer);
+			log_event(ctx->requests->count, WRONG_EMERGENCY_REQUEST_IGNORED_SERVER, "emergenza \"%s\" rifiutata perchè non conforme alla sintassi", buffer);
 			continue;
 		}
 
 		ctx->requests->valid_count++;
-		log_event(ctx->requests->valid_count, EMERGENCY_REQUEST_RECEIVED, "emergenza %s (%d, %d) %ld ricevuta e messa in attesa di essere processata!", r->emergency_name, r->x, r->y, r->timestamp);
-
-		// emergency_t *emergency = mallocate_emergency(ctx->emergencies->count++, ctx->emergencies->types, r);
+		emergency_t *e = mallocate_emergency(ctx->emergencies->count++, ctx->emergencies->types, r);
+		pq_push(ctx->emergency_queue, e, priority_to_level(e->priority));
+		log_event(ctx->requests->valid_count, EMERGENCY_REQUEST_RECEIVED, "emergenza %s (%d, %d) P:%d R:%d ricevuta!", e->type->emergency_desc, e->x, e->y, (int)e->priority, e->rescuer_count);
 		free(r);
-
+		r = NULL;
 	}
 	return 0;
 }

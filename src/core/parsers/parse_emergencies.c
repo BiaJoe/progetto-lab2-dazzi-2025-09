@@ -90,7 +90,7 @@ void check_and_extract_rescuer_requests_from_string(parsing_state_t *ps, rescuer
 			continue;
 		check_if_rescuer_requested_is_available(ps, rescuer_types, name, required_count);
 		requests[requests_parsed_so_far] = mallocate_and_populate_rescuer_request(required_count, time_to_manage, get_rescuer_type_by_name(name, rescuer_types));	
-		log_event(rescuer_requests_total_count, RESCUER_REQUEST_ADDED, "Richiesta di %d unità di %s registrate a linea %d del file %s", required_count, name, ps->line_number, ps->filename);
+		log_event(rescuer_requests_total_count, RESCUER_REQUEST_ADDED, "⛑️  Richiesta di %d unità di %s per %s registrata", required_count, name, fields->emergency_desc);
 		requests_parsed_so_far++;														
 		rescuer_requests_total_count++;
 	}
@@ -125,10 +125,13 @@ emergency_request_t *parse_emergency_request(char *message, emergency_type_t **t
 	char n[MAX_EMERGENCY_NAME_LENGTH];
 	int x, y, d;
 	time_t t = time(NULL);
-	if (sscanf(message, EMERGENCY_REQUEST_SYNTAX, n, &x, &y, &d) != 4)
+
+	if (sscanf(message, EMERGENCY_REQUEST_SYNTAX, n, &x, &y, &d) != 4) 
 		return NULL;
+
 	if (emergency_request_values_are_illegal(types, envh, envw, n, x, y))
 		return NULL;
+	
 	emergency_request_t *r = (emergency_request_t *)malloc(sizeof(emergency_request_t));
 	check_error_memory_allocation(r);
 	strncpy(r->emergency_name, n, sizeof(r->emergency_name));
@@ -139,10 +142,11 @@ emergency_request_t *parse_emergency_request(char *message, emergency_type_t **t
 }
 
 bool emergency_request_values_are_illegal(emergency_type_t **types, int envh, int envw, char* name, int x, int y){
-	if(strlen(name) <= 0) return true;
+	if(strlen(name) <= 0) { return true; }
 	if(!get_emergency_type_by_name(name, types)) return true;
 	if(ABS(x) < MIN_X_COORDINATE_ABSOLUTE_VALUE || ABS(x) > ABS(envw)) return true;
 	if(ABS(y) < MIN_Y_COORDINATE_ABSOLUTE_VALUE || ABS(y) > ABS(envh)) return true;
+	fflush(stdout);
 	return false;
 }
 
@@ -178,6 +182,7 @@ emergency_type_t *mallocate_and_populate_emergency_type(emergency_type_fields_t 
 	e->emergency_desc = (char *)malloc((strlen(fields->emergency_desc) + 1) * sizeof(char));		
 	check_error_memory_allocation(e->emergency_desc);							// alloco il nome dell'emergency_type_t e lo copio
 	strcpy(e->emergency_desc, fields->emergency_desc);
+	trim_right(e->emergency_desc);
 	e->priority = fields->priority;																				// popolo il resto dei campi
 	e->rescuers_req_number = fields->rescuers_req_number;
 	e->rescuers = fields->rescuers;																				// assegno i rescuer richiesti

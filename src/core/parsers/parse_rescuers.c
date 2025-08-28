@@ -20,7 +20,7 @@ rescuers_t *parse_rescuers(char *filename, int x, int y){
 		if(!check_and_extract_rescuer_type_fields_from_line(ps, rescuer_types, &fields))
 			continue;
 		rescuer_types[ps->parsed_so_far++] = mallocate_and_populate_rescuer_type(&fields); 							// i campi sono validi e il nome non è presente, alloco il rescuer 
-		log_event(ps->line_number, RESCUER_TYPE_PARSED, "🚨 Rescuer (%d, %d) %s e %d gemelli digitali aggiunto!", fields.x, fields.y, fields.name, fields.amount);
+		log_event(ps->line_number, RESCUER_TYPE_PARSED, "🚨  Rescuer (%d, %d) %s e %d gemelli digitali aggiunto!", fields.x, fields.y, fields.name, fields.amount);
 	}
 	rescuers -> count = ps->parsed_so_far;
 	rescuers -> types = rescuer_types;
@@ -72,6 +72,7 @@ rescuer_type_t *mallocate_and_populate_rescuer_type(rescuer_type_fields_t *field
 	r->rescuer_type_name = (char *)malloc((strlen(fields->name) + 1) * sizeof(char));	// alloco il nome del rescuer_type_t e lo copio
 	check_error_memory_allocation(r->rescuer_type_name);
 	strcpy(r->rescuer_type_name, fields->name);																				// popolo i campi del rescuer type
+	trim_right(r->rescuer_type_name);
 	r->amount = fields->amount;									
 	r->speed = fields->speed;										
 	r->x = fields->x;											

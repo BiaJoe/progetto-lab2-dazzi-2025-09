@@ -49,7 +49,6 @@ int main(int argc, char* argv[]){
     SYSV(shm_data = mmap(NULL, sizeof(*shm_data), PROT_READ, MAP_SHARED, shared_memory_fd, 0), MAP_FAILED, "mmap");
 	SYSC(close(shared_memory_fd), "close");
 	SYSV(mq = mq_open(shm_data->queue_name, O_WRONLY), MQ_FAILED, "mq_open");
-	printf("9\n");
     requests_argument_separator = shm_data->requests_argument_separator;
 	SYSC(munmap(shm_data, sizeof(*shm_data)), "munmap");
 

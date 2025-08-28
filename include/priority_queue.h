@@ -36,6 +36,7 @@ typedef struct pq {
 pq_t* pq_create(int levels);
 void  pq_destroy(pq_t* q);
 void  pq_close(pq_t* q);
+
 // Inserisce un item a priorità p (clamped tra 0 e levels-1).
 void pq_push(pq_t* q, void* item, int prio);
 

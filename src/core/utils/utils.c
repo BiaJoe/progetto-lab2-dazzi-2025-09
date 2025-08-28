@@ -65,3 +65,12 @@ char* extract_last_token(char *s, char separator) {
     return s; // se non ci sono spazi, tutta la stringa è il token
 }
 
+
+
+void trim_right(char *string) {
+	size_t cutoff = strlen(string);
+	if (cutoff == 0) return;
+
+    while (cutoff > 0 && isspace(string[cutoff - 1]))
+        string[--cutoff] = '\0';
+}

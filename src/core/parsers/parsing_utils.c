@@ -39,7 +39,7 @@ bool go_to_next_line(parsing_state_t *ps){
 
 bool check_and_log_if_line_is_empty(parsing_state_t *ps){
 	if (is_line_empty(ps->line)){
-		log_event(AUTOMATIC_LOG_ID, EMPTY_CONF_LINE_IGNORED, "linea %d in %s vuota, ignorata", ps->line_number, ps->filename);
+		log_event(AUTOMATIC_LOG_ID, EMPTY_CONF_LINE_IGNORED, "linea vuota ignorata (%d) %s", ps->line_number, ps->filename);
 		return true;
 	}
 	return false;

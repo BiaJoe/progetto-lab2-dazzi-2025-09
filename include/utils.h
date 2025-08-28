@@ -35,6 +35,6 @@
 int is_line_empty(char *line);
 int my_atoi(char a[]);
 char* extract_last_token(char *s, char separator);
-
+void trim_right(char *string);
 
 #endif

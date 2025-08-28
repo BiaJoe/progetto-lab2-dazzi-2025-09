@@ -31,8 +31,8 @@ const log_event_info_t LOG_EVENT_LOOKUP_TABLE[LOG_EVENT_TYPES_COUNT] = {
     [RESCUER_TYPE_PARSED]               		= { "RESCUER_TYPE_PARSED",              			"rtpa",  			false,  		true },
     [RESCUER_DIGITAL_TWIN_ADDED]        		= { "RESCUER_DIGITAL_TWIN_ADDED",       			"rdta",  			false,  		true },
     [EMERGENCY_PARSED]                  		= { "EMERGENCY_PARSED",                 			"empa",  			false,  		true },
-    [RESCUER_REQUEST_ADDED]             		= { "RESCUER_REQUEST_ADDED",            			"rrad",  			false,  		false },
-    [SERVER_UPDATE]                     		= { "SERVER_UPDATE",                    			"seup",  			false,  		false },
+    [RESCUER_REQUEST_ADDED]             		= { "RESCUER_REQUEST_ADDED",            			"rrad",  			false,  		true },
+    [SERVER_UPDATE]                     		= { "SERVER_UPDATE",                    			"seup",  			false,  		true },
     [SERVER]                            		= { "SERVER",                           			"srvr",  			false,  		true },
     [CLIENT]                            		= { "CLIENT",                           			"clnt",  			false,  		true },
     [EMERGENCY_REQUEST_RECEIVED]        		= { "EMERGENCY_REQUEST_RECEIVED",       			"errr",  			false,  		true },
@@ -47,3 +47,4 @@ const log_event_info_t LOG_EVENT_LOOKUP_TABLE[LOG_EVENT_TYPES_COUNT] = {
 };			
 
 #endif
+

@@ -14,11 +14,11 @@
 static const logging_config_t server_logging_config = {
     .log_file                       = "log.txt",
     .log_file_ptr                   = NULL,
-    .logging_syntax                 = "%-16s %-6s %-35s %s\n",
+    .logging_syntax                 = "%-13s %-4s %-30s %s\n",
     .non_applicable_log_id_string   = "N/A",
     .log_to_file                    = true,
     .log_to_stdout                  = true,
-    .flush_every_n                  = 64
+    .flush_every_n                  = 2
 };
 
 #define EMERGENCY_REQUESTS_ARGUMENT_SEPARATOR_CHAR ' '
@@ -36,10 +36,6 @@ static const priority_rule_t priority_lookup_table[] = {
     {1,                     NO_PROMOTION,                       30          },
     {2,                     NO_PROMOTION,                       10          }
 };
-
-const int priority_count = (int)(sizeof(priority_lookup_table)/sizeof(priority_lookup_table[0]));
-
-
 
 #endif
 

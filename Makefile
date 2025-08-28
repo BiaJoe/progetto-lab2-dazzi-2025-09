@@ -31,7 +31,7 @@ COMMON_SRCS := \
 # ---- Server
 SERVER_SRCS := \
   src/server/main.c \
-  src/server/thread_functions/server_updater.c \
+  src/server/thread_functions/thread_updater.c \
   src/server/thread_functions/thread_clock.c \
   src/server/thread_functions/thread_reciever.c \
   src/server/thread_functions/thread_worker.c
@@ -46,8 +46,8 @@ SERVER_OBJS := $(SERVER_SRCS:.c=.o)
 CLIENT_OBJS := $(CLIENT_SRCS:.c=.o)
 
 # ---- Eseguibili
-SERVER_BIN := /server
-CLIENT_BIN := /client
+SERVER_BIN := ./server
+CLIENT_BIN := ./client
 
 # ---- Target principali
 .PHONY: all clean distclean run tests
@@ -61,7 +61,7 @@ $(CLIENT_BIN): $(COMMON_OBJS) $(CLIENT_OBJS)
 	$(CC) -o $@ $^ $(LDLIBS)
 
 # ---- Run: solo server
-run: $(SERVER_BIN)
+run: $(SERVER_BIN) $(CLIENT_BIN)
 	@echo "▶ Avvio server…"
 	@$(SERVER_BIN)
 
@@ -73,12 +73,9 @@ run: $(SERVER_BIN)
 clean:
 	@$(RM) $(COMMON_OBJS) $(SERVER_OBJS) $(CLIENT_OBJS)
 	@$(RM) $(COMMON_OBJS:.o=.d) $(SERVER_OBJS:.o=.d) $(CLIENT_OBJS:.o=.d)
-	@$(RM) log.txt
-	@echo "Puliti oggetti e deps."
-
-distclean: clean
 	@$(RM) $(CLIENT_BIN) $(SERVER_BIN)
-	@echo "Puliti eseguibili."
+	@$(RM) log.txt
+	@echo "Puliti oggetti, deps ed eseguibili."
 
 # ---- Dipendenze auto-generate
 DEPS := $(COMMON_OBJS:.o=.d) $(SERVER_OBJS:.o=.d) $(CLIENT_OBJS:.o=.d)

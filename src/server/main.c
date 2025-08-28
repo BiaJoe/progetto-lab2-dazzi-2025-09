@@ -1,12 +1,13 @@
 #include "server.h"
 #include "config_server.h"
 
+static int priority_count = (int)(sizeof(priority_lookup_table)/sizeof(priority_lookup_table[0]));
+
 // divido in due processi: logger e server
 int main(void){
 	log_init(LOG_ROLE_SERVER, server_logging_config);
 
 	server_context_t *ctx;
-	log_event(NON_APPLICABLE_LOG_ID, LOGGING_STARTED, "Inizio logging");	
 	ctx = mallocate_server_context();		
 
 	log_event(NON_APPLICABLE_LOG_ID, PARSING_STARTED, "Inizio parsing dei file di configurazione");
@@ -137,7 +138,6 @@ void cleanup_server_context(server_context_t *ctx){
 
 	mq_close(ctx->mq);
 	mq_unlink(ctx->enviroment->queue_name);
-	free(ctx->enviroment->queue_name);
 	free(ctx->enviroment);
 	mtx_destroy(&(ctx->clock->mutex));
 	// mtx_destroy(&(ctx->rescuers_mutex));
@@ -148,8 +148,10 @@ void cleanup_server_context(server_context_t *ctx){
 
 
 void close_server(server_context_t *ctx){
-	log_event(AUTOMATIC_LOG_ID, SERVER, "dopo %d updates, il serve si chiud. Sono state elaborate %d emergenze, di cui %d completate", ctx->clock->tick_count_since_start, ctx->requests->valid_count, ctx->completed_emergencies->size);
-	log_event(AUTOMATIC_LOG_ID, LOGGING_ENDED, "Fine del logging");
+	log_event(AUTOMATIC_LOG_ID, SERVER, "🏁  dopo %d updates, il serve si chiude  🏁", ctx->clock->tick_count_since_start);
+	log_event(AUTOMATIC_LOG_ID, SERVER, "📋  Emergenze elaborate:  %d", ctx->requests->valid_count);
+	log_event(AUTOMATIC_LOG_ID, SERVER, "✅  Emergenze completate: %d", ctx->completed_emergencies->size);
+	log_close();
 	cleanup_server_context(ctx);
 	exit(EXIT_SUCCESS);
 }
@@ -161,3 +163,32 @@ int get_time_before_emergency_timeout_from_priority(int p){
 	}
 	return INVALID_TIME;
 }
+
+int get_priority_level(short priority_number, const priority_rule_t *table, int how_many_levels){
+    if (!table || how_many_levels == 0) 
+		return how_many_levels;
+    bool found = false;
+    for (int i = 0; i < how_many_levels; ++i) {
+        if (table[i].number == priority_number) {
+            found = true;
+            break;
+        }
+    }
+    if (!found) 
+		return how_many_levels; 
+	int level = 0;
+    for (int i = 0; i < how_many_levels; ++i)
+        if (table[i].number < priority_number) level++;
+
+    return level;
+}
+
+int priority_to_level(short priority){
+	return get_priority_level(priority, priority_lookup_table, priority_count);
+}
+
+short level_to_priority(int level){
+	int index = level >= priority_count ? level : 0;
+	return priority_lookup_table[index].number;
+}
+

@@ -13,7 +13,7 @@ static thrd_t      logger_thread_id;
 static atomic_bool logger_running = false;
 static atomic_int  flushed_stdout_n_times = 0;
 static bool        queue_was_opened = false; 
-mtx_t              stdout_flush_mutex;
+static mtx_t       stdout_flush_mutex;
 
 
 static logging_config_t config;
@@ -68,7 +68,7 @@ static int logger_thread(void *arg) {
 		// scrivi la riga nel log
 		logger_write_line(m);
 		lines_logged_since_last_flush++;
-		if (info->is_terminating) 
+		if (info->is_terminating && m.role == log_role) // solo se il server ha loggato un evento che fa terminare ci si ferma, non il client
             atomic_store(&logger_running, false);
 		if (lines_logged_since_last_flush >= config.flush_every_n) {
             lines_logged_since_last_flush = 0;
@@ -93,14 +93,16 @@ static int logger_thread(void *arg) {
 int log_init(log_role_t role, logging_config_t logging_config){
     log_role = role;
     config = logging_config;
+    flushed_stdout_n_times = 0;
     check_error_mtx_init(mtx_init(&stdout_flush_mutex, mtx_plain));
-    atomic_store(&logger_running, true);
+    atomic_store(&logger_running, (role == LOG_ROLE_SERVER ? true : false));  // logger_running serve solo al thread logger dentro al server
+
 
     if (role == LOG_ROLE_SERVER) {
-        struct mq_attr attr = {0};
-        attr.mq_flags   = 0;
-        attr.mq_maxmsg  = MAX_LOG_QUEUE_MESSAGES;
-        attr.mq_msgsize = sizeof(log_message_t);
+        struct mq_attr attr = { 0 };
+        attr.mq_flags       = 0;
+        attr.mq_maxmsg      = MAX_LOG_QUEUE_MESSAGES;
+        attr.mq_msgsize     = sizeof(log_message_t);
 
         mq_unlink(LOG_QUEUE_NAME);
         log_mq_reader = mq_open(LOG_QUEUE_NAME, O_CREAT | O_RDONLY, 0644, &attr);
@@ -109,25 +111,27 @@ int log_init(log_role_t role, logging_config_t logging_config){
         log_mq_writer = mq_open(LOG_QUEUE_NAME, O_WRONLY);
         check_error_mq_open(log_mq_writer);
 
-        check_error_thread_create(thrd_create(&logger_thread_id, logger_thread, NULL));
-        log_event(AUTOMATIC_LOG_ID, LOGGING_STARTED, "logging avviato");
-        return 0;
-    } 
-
-	// non siamo nel server
-	log_mq_writer = mq_open(LOG_QUEUE_NAME, O_WRONLY);
-	if (log_mq_writer == (mqd_t)-1) {
-		for (int i = 0; i < LOG_QUEUE_OPEN_MAX_RETRIES && log_mq_writer == (mqd_t)-1; ++i) {
-			struct timespec t = { .tv_sec = 0, .tv_nsec = LOG_QUEUE_OPEN_RETRY_INTERVAL_NS };
-			thrd_sleep(&t, NULL);
-			log_mq_writer = mq_open(LOG_QUEUE_NAME, O_WRONLY);
-		}
-		// check_error_mq_open(log_mq_writer);
-	}
-    if (!(log_mq_writer == (mqd_t)-1)){
         queue_was_opened = true;
-    }
 
+        check_error_thread_create(thrd_create(&logger_thread_id, logger_thread, NULL));
+        log_event(NON_APPLICABLE_LOG_ID, LOGGING_STARTED, "(SERVER) Inizio del Logging!");
+
+    } else {
+        // non siamo nel server
+        log_mq_writer = mq_open(LOG_QUEUE_NAME, O_WRONLY);
+        if (log_mq_writer == (mqd_t)-1) {
+            for (int i = 0; i < LOG_QUEUE_OPEN_MAX_RETRIES && log_mq_writer == (mqd_t)-1; ++i) {
+                struct timespec t = { .tv_sec = 0, .tv_nsec = LOG_QUEUE_OPEN_RETRY_INTERVAL_NS };
+                thrd_sleep(&t, NULL);
+                log_mq_writer = mq_open(LOG_QUEUE_NAME, O_WRONLY);
+            }
+        }
+        if (!(log_mq_writer == (mqd_t)-1)){
+            queue_was_opened = true;
+        }
+        log_event(NON_APPLICABLE_LOG_ID, LOGGING_STARTED, "(CLIENT) Inizio del Logging!");
+
+    }
 	return 0;
 }
 
@@ -137,30 +141,34 @@ int log_init(log_role_t role, logging_config_t logging_config){
 // se siamo nel client chiude solo la coda di logging
 // LOGGA la chiusura, serve per svegloare la mq_receive nel thread logger
 void log_close(void) {
-    mtx_destroy(&stdout_flush_mutex);
-
+    // quest'ultuimo evento serve a loggare e anche a far chiudere il logger thread se siamo nel server
     if (log_role == LOG_ROLE_CLIENT) {
+        log_event(NON_APPLICABLE_LOG_ID, LOGGING_ENDED, "(CLIENT) Logging terminato :)");
         if (log_mq_writer != (mqd_t)-1) mq_close(log_mq_writer);
+        if (config.log_to_stdout) fflush(stdout);
+        mtx_destroy(&stdout_flush_mutex);
         return;
     }
 
-	// siamo nel server
-	log_event(AUTOMATIC_LOG_ID, LOGGING_ENDED, "logging terminato");
-    atomic_store(&logger_running, false);
-    thrd_join(logger_thread_id, NULL);
+    log_event(NON_APPLICABLE_LOG_ID, LOGGING_ENDED, "(SERVER) Logging terminato :)");
+
+    // nel server
+    thrd_join(logger_thread_id, NULL);       // aspetto che il logger abbia finito
+    atomic_store(&logger_running, false);   
 
     if (log_mq_writer != (mqd_t)-1) { 
-		mq_close(log_mq_writer); 
-		log_mq_writer = (mqd_t)-1; 
-	}
-
+        mq_close(log_mq_writer); 
+        log_mq_writer = (mqd_t)-1; 
+    }
     if (log_mq_reader != (mqd_t)-1) {
         mq_close(log_mq_reader);
         mq_unlink(LOG_QUEUE_NAME);
         log_mq_reader = (mqd_t)-1;
     }
+    queue_was_opened = false;
 
-    if(config.log_to_stdout) fflush(stdout);
+    if (config.log_to_stdout) fflush(stdout);
+    mtx_destroy(&stdout_flush_mutex);
 }
 
 void assemble_log_text(char destination_string[LOG_EVENT_TOTAL_LENGTH], log_message_t m){

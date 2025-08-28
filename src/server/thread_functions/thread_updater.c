@@ -13,15 +13,15 @@ int thread_updater(void *arg){
 	while(!ctx->server_must_stop){		
 		lock_server_clock(ctx); 																					
 		while(!server_is_ticking(ctx)) 
-			wait_for_a_tick(ctx); 							// attendo che il server ticki				
-		untick(ctx); 													// il server ha tickato, lo sblocco		
+			wait_for_a_tick(ctx); 		// attendo che il server ticki				
+		untick(ctx); 					// il server ha tickato, lo sblocco		
 		unlock_server_clock(ctx); 																				
 		
-		log_event(AUTOMATIC_LOG_ID, SERVER_UPDATE, "🔄 inizio aggiornamento #%d del server...", ctx->clock->tick_count_since_start);
+		log_event(AUTOMATIC_LOG_ID, SERVER_UPDATE, "🔄  aggiornamento #%d del server iniziato...", ctx->clock->tick_count_since_start);
 
 		// aggiorno lo stato del server: posizioni dei gemelli, stato delle emergenze etc...
 										
-		log_event(AUTOMATIC_LOG_ID, SERVER_UPDATE, "aggiornamento #%d del server eseguito con successo", ctx->clock->tick_count_since_start);
+		log_event(AUTOMATIC_LOG_ID, SERVER_UPDATE, "👍  aggiornamento #%d del server finito!", ctx->clock->tick_count_since_start);
 	}
 	return 0;
 }

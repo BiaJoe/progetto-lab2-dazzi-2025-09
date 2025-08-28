@@ -119,6 +119,9 @@ void update_rescuers_states_and_positions_on_the_map_logging(server_context_t *c
 bool update_rescuer_digital_twin_state_and_position_logging(rescuer_digital_twin_t *t, int minx, int miny, int height, int width);
 void send_rescuer_digital_twin_back_to_base_logging(rescuer_digital_twin_t *t);
 void change_rescuer_digital_twin_destination(rescuer_digital_twin_t *t, int new_x, int new_y);
+int get_priority_level(short priority_number, const priority_rule_t *table, int priority_count);
+int priority_to_level(short priority);
+short level_to_priority(int level);
 
 
 #endif
