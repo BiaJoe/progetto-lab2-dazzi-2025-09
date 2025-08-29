@@ -74,6 +74,7 @@ typedef enum {
     FATAL_ERROR_FILE_OPENING,
     
     // errori non fatali
+    PARSING_ERROR,
     EMPTY_CONF_LINE_IGNORED,
     DUPLICATE_RESCUER_REQUEST_IGNORED,
     WRONG_RESCUER_REQUEST_IGNORED,
@@ -137,7 +138,10 @@ void log_close(void);
 
 void assemble_log_text(char destination_string[LOG_EVENT_TOTAL_LENGTH], log_message_t m);
 void log_event(int id, log_event_type_t event_type, char *format, ...);
+void log_error_and_exit(void (*exit_function)(int), const char *format, ...);
 void log_fatal_error(char *format, ...);
+void log_parsing_error(char *format, ...);
+
 
 const log_event_info_t* get_log_event_info(log_event_type_t event_type);
 

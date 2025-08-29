@@ -17,6 +17,7 @@ const log_event_info_t LOG_EVENT_LOOKUP_TABLE[LOG_EVENT_TYPES_COUNT] = {
     [FATAL_ERROR_LOGGING]               		= { "FATAL_ERROR_LOGGING",              			"felo",  			true, 			true },
     [FATAL_ERROR_MEMORY]                		= { "FATAL_ERROR_MEMORY",               			"feme",  			true, 			true },
     [FATAL_ERROR_FILE_OPENING]          		= { "FATAL_ERROR_FILE_OPENING",         			"fefo",  			true, 			true },
+    [PARSING_ERROR]           		            = { "PARSING_ERROR",          			            "paer",  			false, 			true },
     [EMPTY_CONF_LINE_IGNORED]           		= { "EMPTY_CONF_LINE_IGNORED",          			"ecli",  			false, 			true },
     [DUPLICATE_RESCUER_REQUEST_IGNORED] 		= { "DUPLICATE_RESCUER_REQUEST_IGNORED",			"drri",  			false, 			true },
     [WRONG_RESCUER_REQUEST_IGNORED]     		= { "WRONG_RESCUER_REQUEST_IGNORED",    			"wrri",  			false, 			true },

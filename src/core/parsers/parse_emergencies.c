@@ -1,27 +1,34 @@
 #include "parsers.h"
 
 static int rescuer_requests_total_count = 0;
-
 static int local_priority_count;
 static const priority_rule_t* local_priority_lookup_table;
 
-emergencies_t 	*parse_emergencies(char *filename, rescuers_t *rescuers, const priority_rule_t* priority_lookup_table_from_caller, int priority_count_from_caller){
+emergencies_t *parse_emergencies(char *filename, rescuers_t *rescuers, const priority_rule_t* priority_lookup_table_from_caller, int priority_count_from_caller){
 	local_priority_count = priority_count_from_caller;
 	local_priority_lookup_table = priority_lookup_table_from_caller;
 	parsing_state_t *ps = mallocate_parsing_state(filename);
 	emergency_type_t **emergency_types = callocate_emergency_types();	
 	emergency_type_fields_t fields = {0};	
-	emergencies_t *emergencies = (emergencies_t *)malloc(sizeof(emergencies_t));
+	emergencies_t *emergencies = (emergencies_t *)calloc(1, sizeof(emergencies_t));
 	check_error_memory_allocation(emergencies);
 
 	rescuer_type_t **rescuer_types = rescuers->types;																																																				
 
 	while (go_to_next_line(ps)) {
-		log_and_fail_if_file_line_cant_be_processed(ps, MAX_EMERGENCY_CONF_LINES, MAX_EMERGENCY_TYPES_COUNT, MAX_EMERGENCY_CONF_LINE_LENGTH);
-		if (check_and_log_if_line_is_empty(ps)) 
-			continue;
-		if (!check_and_extract_emergency_type_fields_from_line(ps, emergency_types, rescuer_types, &fields))
-			continue;
+
+		if(!check_if_line_can_be_processed_logging(ps, MAX_RESCUER_CONF_LINES, MAX_RESCUER_TYPES_COUNT, MAX_RESCUER_CONF_LINE_LENGTH)){
+			if (ps->should_continue_parsing) continue;		
+			free_parsing_state(ps);	
+			return NULL;
+		}
+
+		if (!check_and_extract_emergency_type_fields_from_line(ps, emergency_types, rescuer_types, &fields)){
+			if (ps->should_continue_parsing) continue;
+			free_parsing_state(ps);	
+			return NULL;
+		}
+
 		emergency_types[ps->parsed_so_far++] = mallocate_and_populate_emergency_type(&fields); // metto l'emergenza nell'array di emergenze
 		log_event(ps->parsed_so_far, EMERGENCY_PARSED, "⚠️  Emergenza %s P:%hd R:%d registrata", fields.emergency_desc,  fields.priority,  fields.rescuers_req_number);
 	}
@@ -32,10 +39,12 @@ emergencies_t 	*parse_emergencies(char *filename, rescuers_t *rescuers, const pr
 }
 
 bool check_and_extract_emergency_type_fields_from_line(parsing_state_t *ps, emergency_type_t **emergency_types, rescuer_type_t **rescuer_types, emergency_type_fields_t *fields){
-	check_and_extract_simple_emergency_type_fields_from_line(ps, fields);
+	if(!check_and_extract_simple_emergency_type_fields_from_line(ps, fields))
+		return false;
 	if(check_and_log_if_emergency_type_already_parsed(ps, emergency_types, fields))
 		return false;
-	check_and_extract_rescuer_requests_from_string(ps, rescuer_types, fields);
+	if(!check_and_extract_rescuer_requests_from_string(ps, rescuer_types, fields))
+		return false;
 	return true;
 }
 
@@ -47,22 +56,38 @@ bool check_and_log_if_emergency_type_already_parsed(parsing_state_t *ps, emergen
 	return false;
 }
 
-void check_and_extract_simple_emergency_type_fields_from_line(parsing_state_t *ps, emergency_type_fields_t *fields){
+bool check_and_extract_simple_emergency_type_fields_from_line(parsing_state_t *ps, emergency_type_fields_t *fields){
 	if(
 		sscanf(ps->line, EMERGENCY_TYPE_SYNTAX, fields->emergency_desc, &(fields->priority), fields->rescuer_requests_string) !=3 ||
 		emergency_values_are_illegal(fields)
-	)	{
-		log_fatal_error(LINE_FILE_ERROR_STRING "%s", ps->line_number, ps->filename, ps->line);
+	) {
+		log_parsing_error(LINE_FILE_ERROR_STRING "%s", ps->line_number, ps->filename, ps->line);
+		ps->should_continue_parsing = false;
+		return false;
 	}
+	return true;
 }
 
-void check_and_extract_rescuer_request_fields_from_token(parsing_state_t *ps, int requests_parsed_so_far, char*token, char *name, int *count, int *time){
-	if(requests_parsed_so_far > MAX_RESCUER_REQ_NUMBER_PER_EMERGENCY)		
-		log_fatal_error(LINE_FILE_ERROR_STRING "Numero massimo di rescuer richiesti per una sola emergenza superato", ps->line_number, ps->filename);	
-	if(sscanf(token, RESCUER_REQUEST_SYNTAX, name, count, time) != 3) 	
-		log_fatal_error(LINE_FILE_ERROR_STRING "la richiesta del rescuer numero %d è errata", ps->line_number, ps->filename, requests_parsed_so_far);	
-	if(rescuer_request_values_are_illegal(name, *count, *time))					
-		log_fatal_error(LINE_FILE_ERROR_STRING "la richiesta del rescuer numero %d contiene valori illegali", ps->line_number, ps->filename, requests_parsed_so_far);	
+bool check_and_extract_rescuer_request_fields_from_token(parsing_state_t *ps, int requests_parsed_so_far, char*token, char *name, int *count, int *time){
+	if(requests_parsed_so_far > MAX_RESCUER_REQ_NUMBER_PER_EMERGENCY){		
+		log_parsing_error(LINE_FILE_ERROR_STRING "Numero massimo di rescuer richiesti per una sola emergenza superato", ps->line_number, ps->filename);	
+		ps->should_continue_parsing = false;
+		return false;
+	}
+
+	if(sscanf(token, RESCUER_REQUEST_SYNTAX, name, count, time) != 3) {
+		log_parsing_error(LINE_FILE_ERROR_STRING "la richiesta del rescuer numero %d è errata", ps->line_number, ps->filename, requests_parsed_so_far);	
+		ps->should_continue_parsing = false;
+		return false;	
+	}
+
+	if(rescuer_request_values_are_illegal(name, *count, *time)) {					
+		log_parsing_error(LINE_FILE_ERROR_STRING "la richiesta del rescuer numero %d contiene valori illegali", ps->line_number, ps->filename, requests_parsed_so_far);	
+		ps->should_continue_parsing = false;
+		return false;	
+	}
+
+	return true;
 }
 
 bool check_and_log_if_rescuer_request_already_parsed(parsing_state_t *ps, rescuer_request_t **requests, char* name){
@@ -73,22 +98,35 @@ bool check_and_log_if_rescuer_request_already_parsed(parsing_state_t *ps, rescue
 	return false;	
 }
 
-void check_if_rescuer_requested_is_available(parsing_state_t *ps, rescuer_type_t **types, char *name, int count){
+bool check_if_rescuer_requested_is_available(parsing_state_t *ps, rescuer_type_t **types, char *name, int count){
 	rescuer_type_t *type = get_rescuer_type_by_name(name, types);
-	if(!type) log_fatal_error(LINE_FILE_ERROR_STRING "Richiesto rescuer inesistente %s", ps->line_number, ps->filename, name);	
-	if(count > type->amount) log_fatal_error(LINE_FILE_ERROR_STRING "Numero di rescuer richiesti superiore a quelli disponibili (%d > %d)", ps->line_number, ps->filename, count, type->amount);	
+	if(!type) { 
+		log_parsing_error(LINE_FILE_ERROR_STRING "Richiesto rescuer inesistente %s", ps->line_number, ps->filename, name);	
+		return false;
+	}
+	if(count > type->amount) {
+		log_parsing_error(LINE_FILE_ERROR_STRING "Numero di rescuer richiesti superiore a quelli disponibili (%d > %d)", ps->line_number, ps->filename, count, type->amount);
+		return false;
+	}
+	return true;
 }
 
-void check_and_extract_rescuer_requests_from_string(parsing_state_t *ps, rescuer_type_t **rescuer_types, emergency_type_fields_t *fields){
+bool check_and_extract_rescuer_requests_from_string(parsing_state_t *ps, rescuer_type_t **rescuer_types, emergency_type_fields_t *fields){
 	rescuer_request_t **requests = callocate_rescuer_requests();
 	char name[MAX_RESCUER_NAME_LENGTH];			// buffer per il nome del rescuer
 	int required_count, time_to_manage; 		// variabili temporanee per i campi del rescuer
 	int requests_parsed_so_far = 0;					// aumenta ad ogni rescuer registrato e rappresenta anche l'indice dove mettere la richiesta nell'array
 	for(char *token = strtok(fields->rescuer_requests_string, RESCUER_REQUESTS_SEPARATOR); token != NULL; token = strtok(NULL, RESCUER_REQUESTS_SEPARATOR)){
-		check_and_extract_rescuer_request_fields_from_token(ps, requests_parsed_so_far, token, name, &required_count, &time_to_manage);
+		if(!check_and_extract_rescuer_request_fields_from_token(ps, requests_parsed_so_far, token, name, &required_count, &time_to_manage)){
+			ps->should_continue_parsing = false;
+			return false;
+		}
 		if(check_and_log_if_rescuer_request_already_parsed(ps, requests, name))
 			continue;
-		check_if_rescuer_requested_is_available(ps, rescuer_types, name, required_count);
+		if(!check_if_rescuer_requested_is_available(ps, rescuer_types, name, required_count)) {
+			ps->should_continue_parsing = false;
+			return false;
+		}
 		requests[requests_parsed_so_far] = mallocate_and_populate_rescuer_request(required_count, time_to_manage, get_rescuer_type_by_name(name, rescuer_types));	
 		log_event(rescuer_requests_total_count, RESCUER_REQUEST_ADDED, "⛑️  Richiesta di %d unità di %s per %s registrata", required_count, name, fields->emergency_desc);
 		requests_parsed_so_far++;														
@@ -96,6 +134,7 @@ void check_and_extract_rescuer_requests_from_string(parsing_state_t *ps, rescuer
 	}
 	fields->rescuers_req_number = requests_parsed_so_far;
 	fields->rescuers = requests;
+	return true;
 }
 
 bool rescuer_request_values_are_illegal(char *name, int required_count, int time_to_manage){

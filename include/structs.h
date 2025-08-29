@@ -17,7 +17,7 @@
 #define MAX_EMERGENCY_QUEUE_NAME_LENGTH 32
 #define MAX_EMERGENCY_QUEUE_MESSAGE_LENGTH 512
 
-#define STOP_MESSAGE_FROM_CLIENT "-stop"
+#define MQ_STOP_MESSAGE "-stop"
 
 #define MAX_EMERGENCY_NAME_LENGTH 64
 
@@ -25,19 +25,19 @@
 #define STR_HELPER(x) #x    
 #define STR(x) STR_HELPER(x)
 
-#define NO_TIMEOUT   -1
-#define NO_PROMOTION -1
+#define NO_TIMEOUT   -10
+#define NO_PROMOTION -10
 #define INVALID_TIME -1
 
 // sgtruttura per la priorità delle emergenze
 
 typedef struct {
     short number;
-    int seconds_before_promotion; 
+    int time_before_promotion; 
     int time_before_timeout;
 } priority_rule_t;
 
-// RICHIESTE DI EMERGENZA
+
 
 typedef struct {
 	char emergency_name[MAX_EMERGENCY_NAME_LENGTH];
@@ -46,51 +46,9 @@ typedef struct {
 	time_t timestamp;
 } emergency_request_t;
 
-// STRUTTURE PER I RESCUER
-
-typedef enum {
-	IDLE,
-	EN_ROUTE_TO_SCENE,
-	ON_SCENE,
-	RETURNING_TO_BASE
-} rescuer_status_t;
 
 
-// Foreward declaration per rescuer_digital_twin
 
-typedef struct emergency_node emergency_node_t;
-typedef struct rescuer_digital_twin rescuer_digital_twin_t;
-
-typedef struct {
-	char *rescuer_type_name;
-	int amount;
-	int speed;
-	int x;
-	int y;
-	rescuer_digital_twin_t **twins;
-} rescuer_type_t;
-
-struct rescuer_digital_twin {
-	int id;
-	int x;
-	int y;
-	rescuer_type_t *rescuer;
-	rescuer_status_t status;
-	bresenham_trajectory_t *trajectory; 	// serve per tenere traccia di dove il gemello sta andando e del percorso che fa 
-	emergency_node_t *emergency_node;		// ogni gemello è legato all'emergenza che sta gestendo
-	bool is_travelling;
-	bool has_arrived;
-	int time_to_manage;
-	int time_left_before_leaving;
-};
-
-// STRUTTURE PER LE EMERGENZE
-
-typedef struct {
-	rescuer_type_t *type;
-	int required_count;
-	int time_to_manage;
-} rescuer_request_t;
 
 typedef struct {
 	short priority;
@@ -110,6 +68,74 @@ typedef enum {
 	CANCELED,
 	TIMEOUT
 } emergency_status_t;
+
+typedef struct {
+	emergency_type_t *type;
+	int id;
+	short priority;							// la priorità è anche qui perché potrebbe cambiare, non basta quindi emergency_type
+	emergency_status_t status;
+	int x;
+	int y;
+	time_t time;							// momento in cui viene registrata
+	int rescuer_count;
+	rescuer_digital_twin_t **rescuer_twins;
+	atomic_bool has_been_paused;
+	atomic_int rescuers_not_arrived_yet;
+	atomic_int rescuers_not_done_yet;		// numero atomico necessario per controllare lo stato dell'emergenza senza fare il lock ogni volta
+	atomic_int tick_time;					// il tick in cui è stata registrata
+	atomic_int timeout_timer;				// timeout che conta i tick prima di essere messa in timeout
+	atomic_int promotion_timer;
+	mtx_t mutex;
+	cnd_t cond;
+} emergency_t;
+
+
+
+typedef enum {
+	IDLE,
+	EN_ROUTE_TO_SCENE,
+	ON_SCENE,
+	RETURNING_TO_BASE
+} rescuer_status_t;
+
+
+// Foreward declaration per rescuer_digital_twin
+
+typedef struct rescuer_digital_twin rescuer_digital_twin_t;
+
+typedef struct {
+	char *rescuer_type_name;
+	int amount;
+	int speed;
+	int x;
+	int y;
+	rescuer_digital_twin_t **twins;
+} rescuer_type_t;
+
+struct rescuer_digital_twin {
+	int id;
+	int x;
+	int y;
+	rescuer_type_t *rescuer;
+	rescuer_status_t status;
+	bresenham_trajectory_t *trajectory; 	// serve per tenere traccia di dove il gemello sta andando e del percorso che fa 
+	emergency_t *emergency;		// ogni gemello è legato all'emergenza che sta gestendo
+	bool is_travelling;
+	bool has_arrived;
+	int time_to_manage;
+	int time_left_before_leaving;
+	mtx_t mutex;
+};
+
+// STRUTTURE PER LE EMERGENZE
+
+typedef struct {
+	rescuer_type_t *type;
+	int required_count;
+	int time_to_manage;
+} rescuer_request_t;
+
+
 
 
 // Strutture per contenere i dati parsati dai file di configurazione
@@ -149,7 +175,9 @@ char* get_name_of_rescuer_requested(rescuer_request_t *rescuer_request);
 // funzioni per liberare strutture allocate dinamicamente che non sono ad uso specifico del processo in cui sono allocate
 // esempio: i rescuer types sono allocati dal parser ma liberati dal server
 void free_rescuer_types(rescuer_type_t **rescuer_types);
+void free_rescuers(rescuers_t *rescuers);
 void free_emergency_types(emergency_type_t **emergency_types);
 void free_rescuer_requests(rescuer_request_t **rescuer_requests);
+void free_emergencies(emergencies_t *emergencies);
 
 #endif

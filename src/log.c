@@ -239,6 +239,28 @@ void log_event(int id, log_event_type_t event_type, char *format, ...) {
     SYSV(mq_send(log_mq_writer, (const char*)&msg, sizeof(msg), 0), MQ_FAILED, "mq_send");
 }
 
+void log_error_and_exit(void (*exit_function)(int), const char *format, ...){
+    char buf[MAX_LOG_EVENT_FORMATTED_MESSAGE_LENGTH];
+
+    va_list ap;
+    va_start(ap, format);
+    vsnprintf(buf, sizeof(buf), format, ap);
+    va_end(ap);
+
+    log_event_type_t fatal_type = (log_role == LOG_ROLE_CLIENT) ? FATAL_ERROR_CLIENT : FATAL_ERROR;
+    log_event(NON_APPLICABLE_LOG_ID, fatal_type, "%s", buf);
+    
+
+    if (exit_function) {
+        // prima la exit funztion, che potrebbe voler loggare
+        // ed ha la responsabilità di chiamare log_close prima di uscire
+        exit_function(EXIT_FAILURE);
+    } else {
+        log_close();
+        exit(EXIT_FAILURE);
+    }
+}
+
 void log_fatal_error(char *format, ...) {
     char buf[MAX_LOG_EVENT_FORMATTED_MESSAGE_LENGTH];
     va_list ap; 
@@ -250,10 +272,15 @@ void log_fatal_error(char *format, ...) {
 	// per questo FATAL_ERROR_CLIENT non è un evento terminatore (vedi la log event types lookup table)
 	log_event_type_t fatal_type = (log_role == LOG_ROLE_CLIENT) ? FATAL_ERROR_CLIENT : FATAL_ERROR;
 	
-	// scrive anche su stderr
     log_event(NON_APPLICABLE_LOG_ID, fatal_type, "%s", buf);
 	log_close(); // chiude il logging in modo ordinato
-    perror(buf);
-    exit(EXIT_FAILURE);
 }
 
+void log_parsing_error(char *format, ...) {
+    char buf[MAX_LOG_EVENT_FORMATTED_MESSAGE_LENGTH];
+    va_list ap; 
+	va_start(ap, format);
+    vsnprintf(buf, sizeof(buf), format, ap);
+    va_end(ap);
+    log_event(NON_APPLICABLE_LOG_ID, PARSING_ERROR, "%s", buf);
+}

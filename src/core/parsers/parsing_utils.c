@@ -11,6 +11,7 @@ parsing_state_t *mallocate_parsing_state(char *filename){
 	ps->len = 0;
 	ps->line_number = 0;
 	ps->parsed_so_far = 0;
+	ps->should_continue_parsing = true;
 	return ps;
 }
 
@@ -37,7 +38,7 @@ bool go_to_next_line(parsing_state_t *ps){
 	return true;
 }
 
-bool check_and_log_if_line_is_empty(parsing_state_t *ps){
+bool line_is_empty_logging(parsing_state_t *ps){
 	if (is_line_empty(ps->line)){
 		log_event(AUTOMATIC_LOG_ID, EMPTY_CONF_LINE_IGNORED, "linea vuota ignorata (%d) %s", ps->line_number, ps->filename);
 		return true;
@@ -45,15 +46,42 @@ bool check_and_log_if_line_is_empty(parsing_state_t *ps){
 	return false;
 }
 
-void log_and_fail_if_file_line_cant_be_processed(parsing_state_t *ps, int max_lines, int max_parsable_lines, int max_line_length){
-	if(ps->line_number > max_lines)				 log_fatal_error("Numero massimo di linee superato in %s", ps->filename);
-	if(ps->parsed_so_far > max_parsable_lines)	 log_fatal_error("Numero massimo di linee elaborate superato in %s", ps->filename);
-	if((int) strlen(ps->line) > max_line_length) log_fatal_error(LINE_FILE_ERROR_STRING "Linea troppo lunga", ps->line_number, ps->filename);
+// logga e ritorna false se la riga analizzata è illegale secondo i criteri passati da input
+bool check_if_line_can_be_processed_logging(parsing_state_t *ps, int max_lines, int max_parsable_lines, int max_line_length){
+	if(ps->line_number > max_lines) { 				
+		ps->should_continue_parsing = false; 
+		log_parsing_error("Numero massimo di linee superato in %s", ps->filename);
+		return false;
+	}
+
+	if(ps->parsed_so_far > max_parsable_lines) {
+		ps->should_continue_parsing = false; 
+		log_parsing_error("Numero massimo di linee elaborate superato in %s", ps->filename);
+		return false;
+	}
+
+	if((int) strlen(ps->line) > max_line_length) {
+		ps->should_continue_parsing = false; 
+		log_parsing_error(LINE_FILE_ERROR_STRING "Linea troppo lunga", ps->line_number, ps->filename);
+		return false;
+	}
+
+	if (is_line_empty(ps->line)){
+		log_event(AUTOMATIC_LOG_ID, EMPTY_CONF_LINE_IGNORED, "linea vuota ignorata (%d) %s", ps->line_number, ps->filename);
+		return false;
+	}
+
+	return true;
 }
 
-void skip_and_log_empty_or_illegal_lines(parsing_state_t *ps, int max_lines, int max_parsable_lines, int max_line_length){
+// salta le linee vuote
+// ritorna false se trova una linea illegale, altrimenti true
+bool skip_and_log_empty_or_illegal_lines(parsing_state_t *ps, int max_lines, int max_parsable_lines, int max_line_length){
     while(go_to_next_line(ps)){
-        log_and_fail_if_file_line_cant_be_processed(ps, max_lines, max_parsable_lines, max_line_length);
-        if(!check_and_log_if_line_is_empty(ps)) return;
+        if (!check_if_line_can_be_processed_logging(ps, max_lines, max_parsable_lines, max_line_length))
+			return false;
+        if (!line_is_empty_logging(ps)) 
+			break;
     }
+	return true;
 }

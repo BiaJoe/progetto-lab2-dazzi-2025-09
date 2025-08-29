@@ -11,11 +11,15 @@ environment_t *parse_env(char *filename){
 
 	cleanup_queue_name(env->queue_name);
 
-    if (environment_values_are_illegal(env))
-		log_fatal_error("Valori illegali nel file di configurazione: %s", ps->filename);
+    if (environment_values_are_illegal(env)){	
+		log_parsing_error("Valori illegali nel file di configurazione: %s", ps->filename);
+		return NULL;
+	}
 
-	if(ps->parsed_so_far != number_of_lines_to_parse)
-		log_fatal_error("il file %s non è scritto correttamente, dovrebbe avere %d righe, ma ne ha %d", ps->filename, number_of_lines_to_parse, ps->parsed_so_far);
+	if(ps->parsed_so_far != number_of_lines_to_parse){
+		log_parsing_error("il file %s non è scritto correttamente, dovrebbe avere %d righe, ma ne ha %d", ps->filename, number_of_lines_to_parse, ps->parsed_so_far);
+		return NULL;
+	}	
 	
 	free_parsing_state(ps);
     return env;
@@ -24,7 +28,7 @@ environment_t *parse_env(char *filename){
 void check_and_extract_env_line_field(parsing_state_t *ps, void *variable_ptr, const char *syntax){
 	skip_and_log_empty_or_illegal_lines(ps, MAX_ENV_CONF_LINES, ENV_CONF_VALID_LINES_COUNT, MAX_ENV_CONF_LINE_LENGTH);
 	if (sscanf(ps->line, syntax, variable_ptr) != 1){
-        log_fatal_error(LINE_FILE_ERROR_STRING "linea contenente errori sintattici %s", ps->line_number, ps->filename, ps->line);
+        log_parsing_error(LINE_FILE_ERROR_STRING "linea contenente errori sintattici %s", ps->line_number, ps->filename, ps->line);
 	}
 	ps->parsed_so_far++;
 }

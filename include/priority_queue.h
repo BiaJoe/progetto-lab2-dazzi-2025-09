@@ -36,15 +36,11 @@ typedef struct pq {
 pq_t* pq_create(int levels);
 void  pq_destroy(pq_t* q);
 void  pq_close(pq_t* q);
-
-// Inserisce un item a priorità p (clamped tra 0 e levels-1).
-void pq_push(pq_t* q, void* item, int prio);
-
-// Estrae un item (il più alto in priorità disponibile)
-// - pop() blocca fino a che non c'è un item
-// - try_pop() restituisce NULL se vuota
-void* pq_pop(pq_t* q);
-void* pq_try_pop(pq_t* q);
+void  pq_push(pq_t* q, void* item, int prio); // prio = livello a cui inserire 0 - levels-1
+void* pq_pop(pq_t* q);                        // bloccata in cnd_wait finchè la coda non ha qualcosa dentro o viene chiusa
+void* pq_try_pop(pq_t* q);                    // non si blocca: NULL se non c'è niente
+void* pq_extract_first(pq_t* q, bool (*pred)(void*));
+void  pq_map(pq_t* q, void (*fn)(void*));
 
 #endif
 

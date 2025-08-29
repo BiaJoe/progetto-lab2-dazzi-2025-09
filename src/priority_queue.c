@@ -87,6 +87,7 @@ void pq_push(pq_t* q, void* item, int prio){
     mtx_unlock(&q->mtx);
 }
 
+
 void* pq_pop(pq_t* q){
     if(!q) return NULL;
     mtx_lock(&q->mtx);
@@ -125,4 +126,35 @@ void* pq_try_pop(pq_t* q){
     void* item=n->item;
     free(n);
     return item;
+}
+
+void* pq_extract_first(pq_t* q, bool (*pred)(void*)){
+    if(!q || !pred) return NULL;
+    void* item = NULL;
+    mtx_lock(&q->mtx);
+    for(int i = q->levels - 1; i >= 0; --i){ 
+        for(node_t* n = q->lists[i].head; n; n = n->next){
+            if(pred(n->item)){
+                item = n->item;
+                list_remove_node(&q->lists[i], n);
+                q->size--;
+                free(n);
+                mtx_unlock(&q->mtx);
+                return item;
+            }
+        }
+    }
+    mtx_unlock(&q->mtx);
+    return NULL;
+}
+
+void pq_map(pq_t* q, void (*fn)(void*)){
+    if(!q || !fn) return;
+    mtx_lock(&q->mtx);
+    for(int i=0; i<q->levels; ++i){
+        for(node_t* n = q->lists[i].head; n; n = n->next){
+            fn(n->item);
+        }
+    }
+    mtx_unlock(&q->mtx);
 }

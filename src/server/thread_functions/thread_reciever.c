@@ -7,11 +7,10 @@
 // le inserisce nella queue
 // sarà eseguita nel main thread del server
 int thread_reciever(void *arg){
-	server_context_t *ctx = arg;
 	log_event(NON_APPLICABLE_LOG_ID, MESSAGE_QUEUE_SERVER, "inizio della ricezione delle emergenze!");
 	char buffer[MAX_EMERGENCY_QUEUE_MESSAGE_LENGTH];
 
-	while (1) {
+	while (!atomic_load(&ctx->server_must_stop)) {
 		ssize_t nread = mq_receive(ctx->mq, buffer, sizeof(buffer), NULL);
     	check_error_mq_receive(nread);
 
@@ -25,10 +24,10 @@ int thread_reciever(void *arg){
 			continue;
 		}	
 
-		buffer[nread] = '\0';  
+		buffer[nread] = '\0'; 
 
-		if (strcmp(buffer, STOP_MESSAGE_FROM_CLIENT) == 0) {		// se è il messaggio di stop devo uscire!
-			ctx -> server_must_stop = true;
+		if (strcmp(buffer, MQ_STOP_MESSAGE) == 0) {		// se è il messaggio di stop devo uscire!
+			atomic_store(&ctx->server_must_stop, true);
 			return 0;
 		}
 
@@ -62,7 +61,7 @@ emergency_t *mallocate_emergency(int id, emergency_type_t **types, emergency_req
 	check_error_memory_allocation(rescuer_twins);			// alloca il numero necessario di rescuers (per ora tutti a NULL)
 
 	e->id = id;
-	e->priority = type->priority; 					// prendo la priorità dall'emergency_type, potrei doverla modificare in futuri
+	e->priority = type->priority; 							// prendo la priorità dall'emergency_type, potrei doverla modificare in futuri
 	e->type = type;
 	e->status = status;
 	e->x = r->x;
@@ -70,10 +69,16 @@ emergency_t *mallocate_emergency(int id, emergency_type_t **types, emergency_req
 	e->time = r->timestamp;
 	e->rescuer_count = rescuer_count;
 	e->rescuer_twins = rescuer_twins;
-	e->time_since_started_waiting = INVALID_TIME;
-	e->time_since_it_was_assigned = INVALID_TIME;
-	e->time_spent_existing = 0;
+	
+	atomic_store(&e->has_been_paused, false);
+	atomic_store(&e->rescuers_not_done_yet, e->rescuer_count);
+	atomic_store(&e->rescuers_not_arrived_yet, e->rescuer_count);
+	atomic_store(&e->tick_time, get_current_tick_count(ctx));
+	atomic_store(&e->timeout_timer, priority_to_timeout_timer(e->priority));
+	atomic_store(&e->promotion_timer, priority_to_promotion_timer(e->priority));
 
+	check_error_mtx_init(mtx_init(&e->mutex, mtx_plain));
+	check_error_cnd_init(cnd_init(&e->cond));
 	return e;
 }
 

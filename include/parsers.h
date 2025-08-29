@@ -63,6 +63,7 @@ typedef struct {
 	size_t 	len;			// per getline()
 	int 	line_number;	// il suo numero		
 	int 	parsed_so_far;	// quante entità abbiamo raccolto fin ora
+	bool 	should_continue_parsing;
 } parsing_state_t;
 
 typedef struct {
@@ -84,15 +85,15 @@ typedef struct {
 } emergency_type_fields_t;
 
 // funzioni generali
-environment_t 	*parse_env(char *filename);
-rescuers_t 		*parse_rescuers(char *filename, int x, int y);
-emergencies_t 	*parse_emergencies(char *filename, rescuers_t *rescuers, const priority_rule_t* priority_LUT, int priority_count);
-bool go_to_next_line(parsing_state_t *ps);
+environment_t* parse_env(char *filename);
+rescuers_t*    parse_rescuers(char *filename, int x, int y);
+emergencies_t* parse_emergencies(char *filename, rescuers_t *rescuers, const priority_rule_t* priority_LUT, int priority_count);
 
 // parsing utils
-bool check_and_log_if_line_is_empty(parsing_state_t *ps);
-void log_and_fail_if_file_line_cant_be_processed(parsing_state_t *ps, int max_lines, int max_parsable_lines, int max_line_length);
-void skip_and_log_empty_or_illegal_lines(parsing_state_t *ps, int max_lines, int max_parsable_lines, int max_line_length);
+bool line_is_empty_logging(parsing_state_t *ps);
+bool check_if_line_can_be_processed_logging(parsing_state_t *ps, int max_lines, int max_parsable_lines, int max_line_length);
+bool skip_and_log_empty_or_illegal_lines(parsing_state_t *ps, int max_lines, int max_parsable_lines, int max_line_length);
+bool go_to_next_line(parsing_state_t *ps);
 
 // funzioni di checking errori ed estrazione valori
 bool rescuer_type_values_are_illegal(rescuer_type_fields_t *fields);
@@ -104,16 +105,14 @@ bool environment_values_are_illegal(environment_t *e);
 bool check_and_extract_rescuer_type_fields_from_line(parsing_state_t *ps, rescuer_type_t **rescuer_types, rescuer_type_fields_t *fields);
 bool check_and_log_if_rescuer_type_already_parsed(parsing_state_t *ps, rescuer_type_t **types, char* name);
 
-// emergenze
+// emergenze & richieste di emergenza
 bool check_and_log_if_rescuer_request_already_parsed(parsing_state_t *ps, rescuer_request_t **requests, char* name);
 bool check_and_log_if_emergency_type_already_parsed(parsing_state_t *ps, emergency_type_t**types, emergency_type_fields_t* fields);
-void check_if_rescuer_requested_is_available(parsing_state_t *ps, rescuer_type_t **types, char *name, int count);
+bool check_if_rescuer_requested_is_available(parsing_state_t *ps, rescuer_type_t **types, char *name, int count);
 bool check_and_extract_emergency_type_fields_from_line(parsing_state_t *ps, emergency_type_t **emergency_types, rescuer_type_t **rescuer_types, emergency_type_fields_t *fields);
-void check_and_extract_simple_emergency_type_fields_from_line(parsing_state_t *ps, emergency_type_fields_t *fields);
-void check_and_extract_rescuer_requests_from_string(parsing_state_t *ps, rescuer_type_t **rescuer_types, emergency_type_fields_t *fields);
-void check_and_extract_rescuer_request_fields_from_token(parsing_state_t *ps, int requests_parsed_so_far, char*token, char *name, int *count, int *time);
-
-// richieste di emergenza
+bool check_and_extract_simple_emergency_type_fields_from_line(parsing_state_t *ps, emergency_type_fields_t *fields);
+bool check_and_extract_rescuer_requests_from_string(parsing_state_t *ps, rescuer_type_t **rescuer_types, emergency_type_fields_t *fields);
+bool check_and_extract_rescuer_request_fields_from_token(parsing_state_t *ps, int requests_parsed_so_far, char*token, char *name, int *count, int *time);
 
 emergency_request_t *parse_emergency_request(char *message, emergency_type_t **types, int envh, int envw);
 bool emergency_request_values_are_illegal(emergency_type_t **types, int envh, int envw, char* name, int x, int y);

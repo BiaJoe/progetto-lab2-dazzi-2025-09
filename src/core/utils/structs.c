@@ -35,6 +35,12 @@ rescuer_request_t * get_rescuer_request_by_name(char *name, rescuer_request_t **
 
 // funzioni per liberare strutture importanti
 
+void free_rescuers(rescuers_t *rescuers){
+	free_rescuer_types(rescuers->types);
+	rescuers->types = NULL;
+	free(rescuers);
+}
+
 void free_rescuer_types(rescuer_type_t **rescuer_types){
 	for(int i = 0; rescuer_types[i] != NULL; i++){
 		free(rescuer_types[i]->rescuer_type_name);			    //libero il puntatore al nome 
@@ -46,6 +52,13 @@ void free_rescuer_types(rescuer_type_t **rescuer_types){
 		free(rescuer_types[i]);								    // libero il puntatore al rescuer_type_t 
 	}	
 	free(rescuer_types);								        // libero l'array di puntatori ai rescuer_types
+}
+
+
+void free_emergencies(emergencies_t *emergencies){
+	free_emergency_types(emergencies->types);
+	emergencies->types = NULL;
+	free(emergencies);
 }
 
 void free_rescuer_requests(rescuer_request_t **rescuer_requests){

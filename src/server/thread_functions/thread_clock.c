@@ -3,20 +3,28 @@
 // ----------- funzioni per il thread clock e chi deve avere accesso ai tick del server ----------- 
 
 int thread_clock(void *arg){
-	server_context_t *ctx = arg;
-	while(!ctx->server_must_stop){
+	while(!atomic_load(&ctx->server_must_stop)){
 		thrd_sleep(&(ctx->clock->tick_time), NULL); 	// attendo un tick di tempo del server
-		lock_server_clock(ctx);					// blocco il mutex per il tempo del server
-		tick(ctx); 								// il sterver ha tickato
-		cnd_broadcast(&ctx->clock->updated);	// segnalo al thread updater che il tempo è stato aggiornato
+		lock_server_clock(ctx);							// blocco il mutex per il tempo del server
+		tick(ctx); 										// il sterver ha tickato
+		cnd_broadcast(&ctx->clock->updated);			// segnalo al thread updater che il tempo è stato aggiornato
 		unlock_server_clock(ctx);
 	}
+	// un ultimo tick prima di morire
+	lock_server_clock(ctx);					
+	tick(ctx); 								
+	cnd_broadcast(&ctx->clock->updated);	
+	unlock_server_clock(ctx);
 	return 0;
+}
+
+int get_current_tick_count(server_context_t *ctx) {
+	return (int) atomic_load(&ctx->clock->tick_count_since_start);
 }
  
 void tick(server_context_t *ctx){
-	ctx->clock->tick = true; 						
-	ctx->clock->tick_count_since_start++; 	// incremento il contatore dei tick del server perchè è appena avvenuto un tick														
+	ctx->clock->tick = true; 				
+	atomic_fetch_add(&ctx->clock->tick_count_since_start, 1);
 }
 
 void untick(server_context_t *ctx){

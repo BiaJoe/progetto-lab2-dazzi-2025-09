@@ -7,18 +7,27 @@ rescuers_t *parse_rescuers(char *filename, int x, int y){
 	rescuer_type_t **rescuer_types = callocate_rescuer_types();		
 	rescuer_type_fields_t fields = {0};		
 
-	rescuers_t *rescuers = (rescuers_t *)malloc(sizeof(rescuers_t));
+	rescuers_t *rescuers = (rescuers_t *)calloc(1, sizeof(rescuers_t));
 	check_error_memory_allocation(rescuers);
 
 	fields.max_x_coordinate = x;
 	fields.max_y_coordinate = y;	
 	
-	while (go_to_next_line(ps)) {						// Leggo ogni riga del file e processo le informazioni contenute
-		log_and_fail_if_file_line_cant_be_processed(ps, MAX_RESCUER_CONF_LINES, MAX_RESCUER_TYPES_COUNT, MAX_RESCUER_CONF_LINE_LENGTH);
-		if(check_and_log_if_line_is_empty(ps)) 
-			continue;
-		if(!check_and_extract_rescuer_type_fields_from_line(ps, rescuer_types, &fields))
-			continue;
+	// Leggo ogni riga del file e processo le informazioni contenute
+	while (go_to_next_line(ps)) {	
+
+		if(!check_if_line_can_be_processed_logging(ps, MAX_RESCUER_CONF_LINES, MAX_RESCUER_TYPES_COUNT, MAX_RESCUER_CONF_LINE_LENGTH)){
+			if (ps->should_continue_parsing) continue;		
+			free_parsing_state(ps);	
+			return NULL;
+		}
+		
+		if(!check_and_extract_rescuer_type_fields_from_line(ps, rescuer_types, &fields)){
+			if (ps->should_continue_parsing) continue;
+			free_parsing_state(ps);	
+			return NULL;
+		}
+
 		rescuer_types[ps->parsed_so_far++] = mallocate_and_populate_rescuer_type(&fields); 							// i campi sono validi e il nome non è presente, alloco il rescuer 
 		log_event(ps->line_number, RESCUER_TYPE_PARSED, "🚨  Rescuer (%d, %d) %s e %d gemelli digitali aggiunto!", fields.x, fields.y, fields.name, fields.amount);
 	}
@@ -29,12 +38,20 @@ rescuers_t *parse_rescuers(char *filename, int x, int y){
 }
 
 bool check_and_extract_rescuer_type_fields_from_line(parsing_state_t *ps, rescuer_type_t **rescuer_types, rescuer_type_fields_t *fields){
-	if (sscanf(ps->line, RESCUERS_SYNTAX, fields->name, &(fields->amount), &(fields->speed), &(fields->x), &(fields->y)) != 5)																													
-		log_fatal_error(LINE_FILE_ERROR_STRING "sintassi. %s", ps->line_number, ps->filename, ps->line);
-	if (rescuer_type_values_are_illegal(fields))
-		log_fatal_error(LINE_FILE_ERROR_STRING "valori illegali. %s", ps->line_number, ps->filename, ps->line);
-	if(check_and_log_if_rescuer_type_already_parsed(ps, rescuer_types, fields->name))
+	if (sscanf(ps->line, RESCUERS_SYNTAX, fields->name, &(fields->amount), &(fields->speed), &(fields->x), &(fields->y)) != 5){																													
+		log_parsing_error(LINE_FILE_ERROR_STRING "sintassi. %s", ps->line_number, ps->filename, ps->line);
+		ps->should_continue_parsing = false;
 		return false;
+	}
+	if (rescuer_type_values_are_illegal(fields)){
+		log_parsing_error(LINE_FILE_ERROR_STRING "valori illegali. %s", ps->line_number, ps->filename, ps->line);
+		ps->should_continue_parsing = false;
+		return false;
+	}
+	if(get_rescuer_type_by_name(fields->name, rescuer_types)){ 																																					// Controllo che non ci siano duplicati, se ci sono ignoro la riga
+		log_event(ps->line_number, DUPLICATE_RESCUER_TYPE_IGNORED, "Linea %d file %s: il rescuer %s è gìa stato aggiunto, ignorato", ps->line_number, ps->filename, fields->name);
+		return false;
+	}
 	return true;
 }
 
@@ -94,18 +111,16 @@ rescuer_digital_twin_t **callocate_and_populate_rescuer_digital_twins(rescuer_ty
 rescuer_digital_twin_t *mallocate_rescuer_digital_twin(rescuer_type_t* r){
 	rescuer_digital_twin_t *t = (rescuer_digital_twin_t *)malloc(sizeof(rescuer_digital_twin_t));
 	check_error_memory_allocation(t);
-	t->id 				= rescuer_digital_twins_total_count++;	// in questo modo ogni gemello è unico
+	t->id 				= rescuer_digital_twins_total_count++;		// in questo modo ogni gemello è unico
 	t->x 				= r->x;
 	t->y 				= r->y;
 	t->rescuer 			= r;
 	t->status 			= IDLE;
 	t->trajectory		= mallocate_bresenham_trajectory(); 		// non inizializzato perchè nessun valore è sensato prima di aver dato una destinazione reale
-	t->emergency_node 	= NULL; 
-	t->is_travelling 	= false;
-	t->has_arrived		= true;																	// il gemello viene messo nella base all'inizio, quindi in effetti è arrivato
+	t->emergency 		= NULL; 																// il gemello viene messo nella base all'inizio, quindi in effetti è arrivato
 	t->time_to_manage	= INVALID_TIME;
 	t->time_left_before_leaving = INVALID_TIME;
-
+	check_error_mtx_init(mtx_init(&t->mutex, mtx_plain));
 	return t;
 }
 

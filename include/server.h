@@ -25,27 +25,10 @@
 #include "log.h"
 #include "parsers.h"
 
-#define THREAD_POOL_SIZE 10
+#define WORKER_THREADS_NUMBER 5
 
 #define LOG_IGNORE_EMERGENCY_REQUEST(m) log_event(NO_ID, WRONG_EMERGENCY_REQUEST_IGNORED_SERVER, m)
 #define LOG_EMERGENCY_REQUEST_RECIVED() log_event(NO_ID, EMERGENCY_REQUEST_RECEIVED, "emergenza ricevuta e messa in attesa di essere processata!")
-
-// STRUTTURE PER LE RICHIESTE DI EMERGENZA
-
-typedef struct {
-	emergency_type_t *type;
-	int id;
-	short priority;
-	emergency_status_t status;
-	int x;
-	int y;
-	time_t time;
-	int rescuer_count;
-	rescuer_digital_twin_t **rescuer_twins;
-	int time_since_started_waiting;
-	int time_since_it_was_assigned;
-	int time_spent_existing;
-} emergency_t;
 
 // server
 
@@ -54,39 +37,56 @@ typedef struct {
 	int valid_count;
 } requests_t;
 
+typedef struct {
+	emergency_t* array[WORKER_THREADS_NUMBER];
+	atomic_int next_tw_index;
+	mtx_t mutex;
+} active_emergencies_array_t;
+
 typedef struct server_clock {
 	struct timespec tick_time;
-	bool tick;						// tick del server, per sincronizzare i thread
-	int tick_count_since_start;		// contatore dei tick del server, per tenere traccia di quanti tick sono stati fatti
-	mtx_t mutex;					// mutex per proteggere l'accesso al tick del server
-	cnd_t updated;					// condizione per comunicare al therad updater di fare l'update
+	bool tick;								// tick del server, per sincronizzare i thread
+	atomic_int tick_count_since_start;		// contatore dei tick del server, per tenere traccia di quanti tick sono stati fatti
+	mtx_t mutex;							// mutex per proteggere l'accesso al tick del server
+	cnd_t updated;							// condizione per comunicare al therad updater di fare l'update
 } server_clock_t;
 
 typedef struct {
 	environment_t *enviroment;
-	rescuers_t *rescuers;		    // struttura che contiene i tipi di rescuer e altri interi utili
-	emergencies_t *emergencies;	    // struttura che contiene i tipi di emergenza
-	requests_t *requests;           // struttura che contiene il numero di richieste di emergenza totali e valide
-	// mtx_t rescuers_mutex;		// mutex per proteggere l'accesso ai rescuer types
-	pq_t* emergency_queue;			// coda per contenere le emergenze da processare
-	pq_t* completed_emergencies;	// lista per tenere traccia di tutte le emergenze completate
-	pq_t* canceled_emergencies; 	// lista delle emergenze cancellate
-	server_clock_t *clock;			// struttura per gestire il clock del server
-	atomic_bool server_must_stop;	// flag che segnala ai thread di fermarsi
-	mqd_t mq;						// message queue per ricevere le emergenze dai client	
-    int shm_fd;                	 	// file descriptior della SHM
+	rescuers_t *rescuers;		    		// struttura che contiene i tipi di rescuer e altri interi utili
+	emergencies_t *emergencies;	    		// struttura che contiene i tipi di emergenza
+	requests_t *requests;           		// struttura che contiene il numero di richieste di emergenza totali e valide
+	active_emergencies_array_t *active_emergencies;
+	pq_t* emergency_queue;					// coda per contenere le emergenze da processare
+	pq_t* completed_emergencies;			// lista per tenere traccia di tutte le emergenze completate
+	pq_t* canceled_emergencies; 			// lista delle emergenze cancellate
+	server_clock_t *clock;					// struttura per gestire il clock del server
+	atomic_bool server_must_stop;			// flag che segnala ai thread di fermarsi
+	mqd_t mq;								// message queue per ricevere le emergenze dai client	
+    int shm_fd;                	 			// file descriptior della SHM
     client_server_shm_t *shm;    	
     sem_t *sem_ready;            	
 } server_context_t;
 
-
 // server.c
 
-void server_ipc_setup(server_context_t *ctx);
-void close_server(server_context_t *ctx);
-server_context_t *mallocate_server_context();
-void cleanup_server_context(server_context_t *ctx);
+
+// questa variabile viene usata dai thread sempre
+// contiene lo stato del server
+extern server_context_t *ctx;
+
+void server_ipc_setup();
+void close_server(int exit_code);
+void init_server_context();
+void cleanup_server_context();
 int get_time_before_emergency_timeout_from_priority(int p);
+
+int get_priority_level(short priority_number, const priority_rule_t *table, int priority_count);
+int priority_to_level(short priority);
+short level_to_priority(int level);
+int priority_to_timeout_timer(short priority);
+int priority_to_promotion_timer(short priority);
+short get_next_priority(short p);
 
 // thread_clock.c
 
@@ -106,22 +106,24 @@ void free_emergency(emergency_t* e);
 
 // thread_worker.c
 
-#define RESCUER_SEARCHING_FAIR_MODE 'f'
-#define RESCUER_SEARCHING_STEAL_MODE 's'
-#define TIME_INTERVAL_BETWEEN_RESCUERS_SEARCH_ATTEMPTS_SECONDS 3
-
+#define INDEX_NOT_FOUND -1
 int thread_worker(void *arg);
+void timeout_active_emergency_logging_blocking(emergency_t *e);
+bool find_rescuers_logging_blocking(emergency_t *e);
 
 // thread_updater.c
 
 int thread_updater(void *arg);
-void update_rescuers_states_and_positions_on_the_map_logging(server_context_t *ctx);
-bool update_rescuer_digital_twin_state_and_position_logging(rescuer_digital_twin_t *t, int minx, int miny, int height, int width);
-void send_rescuer_digital_twin_back_to_base_logging(rescuer_digital_twin_t *t);
-void change_rescuer_digital_twin_destination(rescuer_digital_twin_t *t, int new_x, int new_y);
-int get_priority_level(short priority_number, const priority_rule_t *table, int priority_count);
-int priority_to_level(short priority);
-short level_to_priority(int level);
-
-
+void update_rescuers_states_logging();
+bool update_rescuer_digital_twin_state_logging_blocking(rescuer_digital_twin_t *t, int minx, int miny, int height, int width);
+void send_rescuer_digital_twin_back_to_base_logging_blocked(rescuer_digital_twin_t *t);
+void change_rescuer_digital_twin_destination_blocked(rescuer_digital_twin_t *t, int new_x, int new_y);
+void update_active_emergencies_states_logging();
+void update_active_emergency_state_logging_blocking(emergency_t *e);
+void update_waiting_emergencies_states();
+void update_waiting_emergency_state(emergency_t *e);
+bool emergency_has_expired(emergency_t *e);
+void remove_expired_waiting_emergencies_logging();
+bool emergency_is_to_promote(emergency_t *e);
+void promote_needing_emergencies();
 #endif

@@ -29,17 +29,17 @@
 
 #define PRINT_CLIENT_USAGE(argv0)  \
 	do { \
-		printf("Utilizzo: \n"); \
-		printf("%s <nome_emergenza> <coord_x> <coord_y> <delay_in_secs> (inserimento diretto) \n", argv0); \
-		printf("%s -f <nome_file>                                       (leggi da file)       \n", argv0); \
+		printf("\nUtilizzo: \n"); \
+		printf("%s <nome_emergenza> <coord_x> <coord_y> <delay_in_secs> \t\t (inserimento diretto) \n", argv0); \
+		printf("%s -f <nome_file>                                       \t\t (leggi da file)       \n\n", argv0); \
 	} while(0)
 
 // scorciatoria solo per il main() di client.c
-#define DIE(argv0, last_words) \
+#define DIE(argv0, last_words, close_function_call) \
 	do { \
 		LOG_IGNORING_ERROR(last_words); \
 		PRINT_CLIENT_USAGE(argv0); \
-		exit(EXIT_FAILURE); \
+		close_function_call; \
 	} while(0)
 
 // modalità del client

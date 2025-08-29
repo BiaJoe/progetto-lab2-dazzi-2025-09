@@ -6,6 +6,24 @@
 mqd_t mq;
 char requests_argument_separator;
 
+static void close_client(int exit_code){
+	switch (exit_code) {
+		case EXIT_SUCCESS:
+			log_event(AUTOMATIC_LOG_ID, MESSAGE_QUEUE_CLIENT, "Il lavoro del client è finito. Il processo si chiude");
+			break;
+		case EXIT_FAILURE:
+			log_event(AUTOMATIC_LOG_ID, MESSAGE_QUEUE_CLIENT, "Un errore ha interrotto il lavore del Client. Il processo si chiude");
+			break;
+		default:
+			log_event(AUTOMATIC_LOG_ID, MESSAGE_QUEUE_CLIENT, "Il CLient si chiude con codice sconosciuto");
+			exit_code = EXIT_FAILURE;
+			break;
+	}
+	mq_close(mq);
+	log_close();
+	exit(exit_code);
+}
+
 int main(int argc, char* argv[]){
 	// inizio a loggare lato client
 	log_init(LOG_ROLE_CLIENT, client_logging_config);
@@ -13,7 +31,7 @@ int main(int argc, char* argv[]){
 
 	// controllo il numero di argomenti
 	if(argc != 3 && argc != 5 && argc != 2) 
-		DIE(argv[0], "numero di argomenti dati al programma sbagliato");
+		DIE(argv[0], "numero di argomenti dati al programma sbagliato", close_client(EXIT_FAILURE));
 
 	// capisco in quale modalità mi trovo
 	// in questo caso le modalità sono 2 + undefined, 
@@ -32,8 +50,8 @@ int main(int argc, char* argv[]){
 			if (strcmp(argv[1], STOP_MODE_STRING) == 0) mode = STOP_JUST_CLIENT_MODE;
 			break; // espandibile
 		default: 
-			DIE(argv[0], "modalità di inserimento dati non riconosciuta");
-			break; // non dovrebbe mai arrivarci
+			DIE(argv[0], "modalità di inserimento dati non riconosciuta", close_client(EXIT_FAILURE));
+			break; 
 	}
 
 
@@ -57,19 +75,17 @@ int main(int argc, char* argv[]){
 		case FILE_MODE:  					handle_file_mode_input(argv); break;
 		case STOP_CLIENT_AND_SERVER_MODE: 	handle_stop_mode_client_server(); break;
 		case STOP_JUST_CLIENT_MODE:			break; // il client non ha niente da fare
-		default: 		  					DIE(argv[0], "modalità di inserimento dati non valida"); break;
+		default: 		  					DIE(argv[0], "modalità di inserimento dati non valida", close_client(EXIT_FAILURE)); break;
 	}
 
 	// a questo punto l'emergenza o le emergenze sono state inviate.
 	// oppure il client ha detto al server di fermarsi
-	log_event(AUTOMATIC_LOG_ID, MESSAGE_QUEUE_CLIENT, "il lavoro del client è finito. Il processo si chiude");
-	mq_close(mq);
-	log_close();
+	close_client(EXIT_SUCCESS);
 	return 0;
 }
 
 void handle_stop_mode_client_server(){
-	char *buffer = STOP_MESSAGE_FROM_CLIENT;
+	char *buffer = MQ_STOP_MESSAGE;
 	SYSC(mq_send(mq, buffer, strlen(buffer) + 1, 0), "mq_send");
 	log_event(AUTOMATIC_LOG_ID, MESSAGE_QUEUE_CLIENT, "inviato messaggio di stop dal client");
 }
@@ -96,14 +112,14 @@ void handle_normal_mode_input(char* args[]){
 	log_event(AUTOMATIC_LOG_ID, MESSAGE_QUEUE_CLIENT, "avvio della modalità di inserimento diretta");
 
 	if(strlen(args[1]) + strlen(args[2]) + strlen(args[3]) + strlen(args[4]) + 3 > MAX_EMERGENCY_REQUEST_LENGTH){ // considero anche i 3 spazi
-		DIE(args[0], "Richiesta di emergenza troppo lunga");
+		DIE(args[0], "Richiesta di emergenza troppo lunga", close_client(EXIT_FAILURE));
 		return;
 	}
 
 	char string[MAX_EMERGENCY_REQUEST_LENGTH + 1];
 	int n = snprintf(string, sizeof(string), "%s %s %s %s", args[1], args[2], args[3], args[4]);
 	if (n < 0 || n >= (int)sizeof(string)) { 
-		DIE(args[0], "Formato richiesta non valido"); 
+		DIE(args[0], "Formato richiesta non valido", close_client(EXIT_FAILURE)); 
 		return; 
 	}
 
@@ -114,7 +130,7 @@ void handle_normal_mode_input(char* args[]){
 void handle_file_mode_input(char* args[]){
 	log_event(AUTOMATIC_LOG_ID, MESSAGE_QUEUE_CLIENT, "avvio della modalità di inserimento da file");
 	FILE* emergency_requests_file = fopen(args[2], "r");
-	if(!emergency_requests_file) DIE(args[0], "file non trovato! :(");
+	if(!emergency_requests_file) DIE(args[0], "file non trovato! :(", close_client(EXIT_FAILURE));
 
 	check_error_fopen(emergency_requests_file);
 
@@ -127,9 +143,9 @@ void handle_file_mode_input(char* args[]){
 		line_count++;
 
 		if(line_count > MAX_CLIENT_INPUT_FILE_LINES)
-			log_fatal_error("linee massime superate nel client. Interruzione della lettura emergenze");
+			log_error_and_exit(close_client, "linee massime superate nel client. Interruzione della lettura emergenze");
 		if(emergency_count > MAX_EMERGENCY_REQUEST_COUNT)
-			log_fatal_error("numero di emergenze richieste massime superate nel client. Interruzione della lettura emergenze");
+			log_error_and_exit(close_client,"numero di emergenze richieste massime superate nel client. Interruzione della lettura emergenze");
 
 		strncpy(buf, line, sizeof(buf)); 
 		buf[sizeof(buf) - 1] = '\0';

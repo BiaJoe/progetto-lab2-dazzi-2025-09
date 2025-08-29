@@ -2,63 +2,59 @@
 #include "config_server.h"
 
 static int priority_count = (int)(sizeof(priority_lookup_table)/sizeof(priority_lookup_table[0]));
+server_context_t *ctx = NULL;
 
-// divido in due processi: logger e server
 int main(void){
 	log_init(LOG_ROLE_SERVER, server_logging_config);
-
-	server_context_t *ctx;
-	ctx = mallocate_server_context();		
+	init_server_context();		
 
 	log_event(NON_APPLICABLE_LOG_ID, PARSING_STARTED, "Inizio parsing dei file di configurazione");
 	ctx -> enviroment  = parse_env(ENV_CONF);														// ottengo l'ambiente
 	ctx -> rescuers    = parse_rescuers(RESCUERS_CONF, ctx->enviroment->width, ctx->enviroment->height);	// ottengo i rescuers (mi servono max X e max Y)
 	ctx -> emergencies = parse_emergencies(EMERGENCY_TYPES_CONF, ctx->rescuers, priority_lookup_table, priority_count);									// ottengo le emergenze (mi servono i rescuers per le richieste di rescuer)
+	if(ctx->enviroment == NULL || ctx->rescuers == NULL || ctx->emergencies == NULL)
+		log_error_and_exit(close_server, "Il parsing dei config file è fallito!");
+	
 	log_event(NON_APPLICABLE_LOG_ID, PARSING_ENDED, "Il parsing è terminato con successo!");
 	
 	server_ipc_setup(ctx); 
 	log_event(NON_APPLICABLE_LOG_ID, SERVER, "IPC setup completato: coda MQ, SHM e semaforo pronti");
 	log_event(NON_APPLICABLE_LOG_ID, SERVER, "tutte le variabili sono state ottenute dal server: adesso il sistema è a regime!");
 
-	thrd_t clock_thread;
-	thrd_t updater_thread;
-	thrd_t reciever_thread;
-	// thrd_t worker_threads[THREAD_POOL_SIZE];
+	thrd_t clock_thread, updater_thread, receiver_thread, worker_threads[WORKER_THREADS_NUMBER];
 
-	if (thrd_create(&clock_thread, thread_clock, ctx) != thrd_success) {
-		log_fatal_error("errore durante la creazione di del clock nel server");
-		return 1;
+    if (thrd_create(&clock_thread, thread_clock, NULL) != thrd_success)
+        log_error_and_exit(close_server, "errore creazione clock");
+    if (thrd_create(&updater_thread, thread_updater, NULL) != thrd_success)
+        log_error_and_exit(close_server, "errore creazione updater");
+    if (thrd_create(&receiver_thread, thread_reciever, NULL) != thrd_success)
+        log_error_and_exit(close_server, "errore creazione receiver");
+	for(int i = 0; i < WORKER_THREADS_NUMBER; i++) {
+		if (thrd_create(&worker_threads[i], thread_worker, NULL) != thrd_success)
+        	log_error_and_exit(close_server, "errore creazione receiver");
 	}
-
-	if (thrd_create(&updater_thread, thread_updater, ctx) != thrd_success) {
-		log_fatal_error("errore durante la creazione di dell'updater nel server");
-		return 1;
-	}
-
-	if (thrd_create(&reciever_thread, thread_reciever, ctx) != thrd_success) {
-		log_fatal_error("errore durante la creazione di dell'reciever nel server");
-		return 1;
-	}
-
 	thrd_join(clock_thread, NULL);
 	thrd_join(updater_thread, NULL);
-	thrd_join(reciever_thread, NULL);
+	thrd_join(receiver_thread, NULL);
+	
+	for (int i = 0; i < WORKER_THREADS_NUMBER; i++) {
+		thrd_join(worker_threads[i], NULL);
+	}
 
-	// for (int i = 0; i < THREAD_POOL_SIZE; i++) {
-	// 	thrd_join(worker_threads[i], NULL);
-	// }
-
-	close_server(ctx);
+	close_server(EXIT_SUCCESS);
 	return 0;
 }
 
-server_context_t *mallocate_server_context(){
-	server_context_t *ctx = (server_context_t *)malloc(sizeof(server_context_t));	
+void init_server_context() {
+	ctx = (server_context_t *)malloc(sizeof(server_context_t));	
 	check_error_memory_allocation(ctx);
 	ctx -> requests = (requests_t *)malloc(sizeof(requests_t));
 	check_error_memory_allocation(ctx -> requests);
 	ctx -> clock = (server_clock_t *)malloc(sizeof(server_clock_t));
 	check_error_memory_allocation(ctx -> clock);
+	ctx -> active_emergencies = (active_emergencies_array_t *)calloc(1, sizeof(active_emergencies_array_t));
+	check_error_memory_allocation(ctx -> clock);
+	
 
 	// popolo ctx
 	ctx -> requests -> count = 0; 		// all'inizio non ci sono state ancora richieste
@@ -69,6 +65,7 @@ server_context_t *mallocate_server_context(){
 	ctx -> clock -> tick_count_since_start = 0; 			// il server non ha ancora fatto nessun tick
 	check_error_cnd_init(cnd_init(&(ctx->clock->updated)));
 	check_error_mtx_init(mtx_init(&(ctx->clock->mutex), mtx_plain));
+	check_error_mtx_init(mtx_init(&(ctx->active_emergencies->mutex), mtx_plain));
 	
 	ctx -> emergency_queue = pq_create(priority_count);
 	ctx -> completed_emergencies = pq_create(priority_count);
@@ -80,13 +77,16 @@ server_context_t *mallocate_server_context(){
     ctx->shm     = NULL;
     ctx->sem_ready = SEM_FAILED;
 
-	// check_error_mtx_init(mtx_init(&(ctx->rescuers_mutex), mtx_plain));
+	for (int i = 0; i < WORKER_THREADS_NUMBER; i++){
+		ctx->active_emergencies->array[i] = NULL;
+	}
 
-    return ctx;
+	atomic_store(&ctx->active_emergencies->next_tw_index, 0);
+	atomic_store(&ctx->server_must_stop, false);
 }
 
-void server_ipc_setup(server_context_t *ctx){
-    // sicurezza: niente residui
+void server_ipc_setup(){
+    // niente residui
     shm_unlink(SHM_NAME);
     sem_unlink(SEM_NAME);
 
@@ -101,7 +101,7 @@ void server_ipc_setup(server_context_t *ctx){
     ERR_CHECK(qname == NULL || qname[0] != '/', "queue_name deve iniziare con '/'");
 
     mq_unlink(qname); // inoffensivo se non esiste
-	SYSV(ctx->mq = mq_open(qname, O_CREAT | O_RDONLY, 0644, &attr), MQ_FAILED, "mq_open");
+	SYSV(ctx->mq = mq_open(qname, O_CREAT | O_RDWR, 0644, &attr), MQ_FAILED, "mq_open");
 	log_event(AUTOMATIC_LOG_ID, MESSAGE_QUEUE_SERVER, "coda emergenze pronta: %s", qname);
 
     // 2) SHM con il nome della coda
@@ -117,7 +117,15 @@ void server_ipc_setup(server_context_t *ctx){
 }
 
 // libera tutto ciò che è contenuto nel server context e il server context stesso
-void cleanup_server_context(server_context_t *ctx){
+void cleanup_server_context(){
+	// segnalo ai threads di interrompersi
+	atomic_store(&ctx->server_must_stop, true);
+	// se il thread reciever fosse bloccato su mq_recieve, gli mando anche un messaggio di stop
+	char *buffer = MQ_STOP_MESSAGE;
+	SYSC(mq_send(ctx->mq, buffer, strlen(buffer) + 1, 0), "mq_send");
+
+	// inizio lo smontaggio
+
 	if (ctx->shm && ctx->shm != MAP_FAILED) SYSC(munmap(ctx->shm, sizeof(*ctx->shm)), "munmap");
     ctx->shm = NULL;
     if (ctx->shm_fd != -1) SYSC(close(ctx->shm_fd), "close");
@@ -127,10 +135,11 @@ void cleanup_server_context(server_context_t *ctx){
     shm_unlink(SHM_NAME);
     sem_unlink(SEM_NAME);
 
-	free_rescuer_types(ctx->rescuers->types);
-	free(ctx->rescuers);
-	free_emergency_types(ctx->emergencies->types);
-	free(ctx->emergencies);
+	free_rescuers(ctx->rescuers);
+	ctx->rescuers = NULL;
+
+	free_emergencies(ctx->emergencies);
+	ctx->emergencies = NULL;
 
 	pq_destroy(ctx->emergency_queue);
 	pq_destroy(ctx->completed_emergencies);
@@ -138,23 +147,39 @@ void cleanup_server_context(server_context_t *ctx){
 
 	mq_close(ctx->mq);
 	mq_unlink(ctx->enviroment->queue_name);
+
 	free(ctx->enviroment);
 	mtx_destroy(&(ctx->clock->mutex));
-	// mtx_destroy(&(ctx->rescuers_mutex));
 	cnd_destroy(&(ctx->clock->updated));
+	free(ctx->clock);
+	free(ctx->requests);
+	free(ctx->active_emergencies);
 
 	free(ctx);
 }
 
-
-void close_server(server_context_t *ctx){
-	log_event(AUTOMATIC_LOG_ID, SERVER, "🏁  dopo %d updates, il serve si chiude  🏁", ctx->clock->tick_count_since_start);
+// funzione di uscita, deve fare log_close()
+void close_server(int exit_code){
+	switch (exit_code) {
+		case EXIT_SUCCESS:
+			log_event(AUTOMATIC_LOG_ID, SERVER, "🏁  dopo %d updates, il serve si chiude  🏁", ctx->clock->tick_count_since_start);
+			break;
+		case EXIT_FAILURE:
+			log_event(AUTOMATIC_LOG_ID, SERVER, "💀  dopo %d updates, qualcosa ha chiuso il server  💀", ctx->clock->tick_count_since_start);
+			break;
+		default:
+			log_event(AUTOMATIC_LOG_ID, SERVER, "💀  dopo %d updates, qualcosa ha chiuso il server con messaggio sconosciuto 💀", ctx->clock->tick_count_since_start);
+			exit_code = EXIT_FAILURE;
+			break;
+	}
 	log_event(AUTOMATIC_LOG_ID, SERVER, "📋  Emergenze elaborate:  %d", ctx->requests->valid_count);
 	log_event(AUTOMATIC_LOG_ID, SERVER, "✅  Emergenze completate: %d", ctx->completed_emergencies->size);
 	log_close();
-	cleanup_server_context(ctx);
-	exit(EXIT_SUCCESS);
+	cleanup_server_context();
+	ctx = NULL;
+	exit(exit_code);
 }
+
 
 int get_time_before_emergency_timeout_from_priority(int p){
 	for (int i = 0; i < priority_count; i++){
@@ -188,7 +213,25 @@ int priority_to_level(short priority){
 }
 
 short level_to_priority(int level){
-	int index = level >= priority_count ? level : 0;
-	return priority_lookup_table[index].number;
+	int index;
+	if (level < 0) index = 0;
+	if (level >= priority_count) index = priority_count-1;
+	return (short) priority_lookup_table[index].number;
+}
+
+int priority_to_timeout_timer(short priority) {
+	int index = priority_to_level(priority);
+	return (int) priority_lookup_table[index].time_before_timeout;
+}
+
+int priority_to_promotion_timer(short priority) {
+	int index = priority_to_level(priority);
+	return (int) priority_lookup_table[index].time_before_promotion;
+}
+
+short get_next_priority(short p) {
+	int level = priority_to_level(p);
+	if (level == priority_count-1) return p;
+	return level_to_priority(level+1);
 }
 
