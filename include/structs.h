@@ -47,9 +47,6 @@ typedef struct {
 } emergency_request_t;
 
 
-
-
-
 typedef struct {
 	short priority;
 	char *emergency_desc;

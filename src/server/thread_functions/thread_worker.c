@@ -64,5 +64,8 @@ void timeout_active_emergency_logging_blocking(emergency_t *e){
 }
 
 bool find_rescuers_logging_blocking(emergency_t *e) {
-
+	rescuer_digital_twin_t *candidates[e->rescuer_count];
+	mtx_lock(&e->mutex);
+	
+	mtx_unlock(&e->mutex);
 }
