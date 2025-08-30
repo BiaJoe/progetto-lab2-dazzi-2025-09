@@ -29,6 +29,12 @@
 #define NO_PROMOTION -10
 #define INVALID_TIME -1
 
+// Foreward declarations
+
+typedef struct rescuer_digital_twin rescuer_digital_twin_t;
+typedef struct emergency emergency_t;
+
+
 // sgtruttura per la priorità delle emergenze
 
 typedef struct {
@@ -36,8 +42,6 @@ typedef struct {
     int time_before_promotion; 
     int time_before_timeout;
 } priority_rule_t;
-
-
 
 typedef struct {
 	char emergency_name[MAX_EMERGENCY_NAME_LENGTH];
@@ -47,58 +51,12 @@ typedef struct {
 } emergency_request_t;
 
 
-typedef struct {
-	short priority;
-	char *emergency_desc;
-	rescuer_request_t **rescuers;
-	int rescuers_req_number;
-} emergency_type_t;
-
-typedef enum {
-	WAITING,
-	ASSIGNED,
-	ASKING_FOR_RESCUERS,
-	WAITING_FOR_RESCUERS,
-	IN_PROGRESS,
-	PAUSED,
-	COMPLETED,
-	CANCELED,
-	TIMEOUT
-} emergency_status_t;
-
-typedef struct {
-	emergency_type_t *type;
-	int id;
-	short priority;							// la priorità è anche qui perché potrebbe cambiare, non basta quindi emergency_type
-	emergency_status_t status;
-	int x;
-	int y;
-	time_t time;							// momento in cui viene registrata
-	int rescuer_count;
-	rescuer_digital_twin_t **rescuer_twins;
-	atomic_bool has_been_paused;
-	atomic_int rescuers_not_arrived_yet;
-	atomic_int rescuers_not_done_yet;		// numero atomico necessario per controllare lo stato dell'emergenza senza fare il lock ogni volta
-	atomic_int tick_time;					// il tick in cui è stata registrata
-	atomic_int timeout_timer;				// timeout che conta i tick prima di essere messa in timeout
-	atomic_int promotion_timer;
-	mtx_t mutex;
-	cnd_t cond;
-} emergency_t;
-
-
-
-typedef enum {
+typedef enum rescuer_status {
 	IDLE,
 	EN_ROUTE_TO_SCENE,
 	ON_SCENE,
 	RETURNING_TO_BASE
 } rescuer_status_t;
-
-
-// Foreward declaration per rescuer_digital_twin
-
-typedef struct rescuer_digital_twin rescuer_digital_twin_t;
 
 typedef struct {
 	char *rescuer_type_name;
@@ -121,10 +79,8 @@ struct rescuer_digital_twin {
 	bool has_arrived;
 	int time_to_manage;
 	int time_left_before_leaving;
-	mtx_t mutex;
+	bool is_a_candidate;
 };
-
-// STRUTTURE PER LE EMERGENZE
 
 typedef struct {
 	rescuer_type_t *type;
@@ -132,6 +88,46 @@ typedef struct {
 	int time_to_manage;
 } rescuer_request_t;
 
+typedef struct {
+	short priority;
+	char *emergency_desc;
+	rescuer_request_t **rescuers;
+	int rescuers_req_number;
+} emergency_type_t;
+
+typedef enum {
+	WAITING,
+	ASSIGNED,
+	ASKING_FOR_RESCUERS,
+	WAITING_FOR_RESCUERS,
+	IN_PROGRESS,
+	PAUSED,
+	COMPLETED,
+	CANCELED,
+	TIMEOUT
+} emergency_status_t;
+
+
+
+typedef struct emergency {
+	emergency_type_t *type;
+	int id;
+	short priority;							// la priorità è anche qui perché potrebbe cambiare, non basta quindi emergency_type
+	emergency_status_t status;
+	int x;
+	int y;
+	time_t time;							// momento in cui viene registrata
+	int rescuer_count;
+	rescuer_request_t **rescuers_missing;
+	rescuer_digital_twin_t **rescuer_twins;
+	atomic_bool has_been_paused;
+	atomic_int rescuers_not_arrived_yet;	// quanti rescuers non sono ancora arrivati
+	atomic_int rescuers_not_done_yet;		// quanti rescuers non hanno ancora finito
+	atomic_int tick_time;					// il tick in cui è stata registrata
+	atomic_int timeout_timer;				// timeout che conta i tick prima di essere messa in timeout
+	atomic_int promotion_timer;
+	cnd_t cond;
+};
 
 
 
@@ -146,6 +142,7 @@ typedef struct {
 typedef struct {
 	rescuer_type_t **types;
 	int count;
+	mtx_t mutex;
 } rescuers_t;
 
 typedef struct {
@@ -168,6 +165,7 @@ rescuer_type_t * get_rescuer_type_by_name(char *name, rescuer_type_t **rescuer_t
 emergency_type_t * get_emergency_type_by_name(char *name, emergency_type_t **emergency_types);
 rescuer_request_t * get_rescuer_request_by_name(char *name, rescuer_request_t **rescuers);
 char* get_name_of_rescuer_requested(rescuer_request_t *rescuer_request);
+int get_twin_index_by_id(int id, rescuer_digital_twin_t **list, int amount);
 
 // funzioni per liberare strutture allocate dinamicamente che non sono ad uso specifico del processo in cui sono allocate
 // esempio: i rescuer types sono allocati dal parser ma liberati dal server

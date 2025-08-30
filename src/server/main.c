@@ -66,6 +66,7 @@ void init_server_context() {
 	check_error_cnd_init(cnd_init(&(ctx->clock->updated)));
 	check_error_mtx_init(mtx_init(&(ctx->clock->mutex), mtx_plain));
 	check_error_mtx_init(mtx_init(&(ctx->active_emergencies->mutex), mtx_plain));
+	check_error_mtx_init(mtx_init(&(ctx->rescuers->mutex), mtx_plain));
 	
 	ctx -> emergency_queue = pq_create(priority_count);
 	ctx -> completed_emergencies = pq_create(priority_count);
@@ -151,6 +152,8 @@ void cleanup_server_context(){
 	free(ctx->enviroment);
 	mtx_destroy(&(ctx->clock->mutex));
 	cnd_destroy(&(ctx->clock->updated));
+	mtx_destroy(&(ctx->active_emergencies->mutex));
+	mtx_destroy(&(ctx->rescuers->mutex));
 	free(ctx->clock);
 	free(ctx->requests);
 	free(ctx->active_emergencies);
@@ -189,6 +192,10 @@ int get_time_before_emergency_timeout_from_priority(int p){
 	return INVALID_TIME;
 }
 
+// cerca tra le priorità e ritorna il loro livello nella tabella
+// se non le trova ritorna la priorità minima 
+// è una funzione interna, 
+// lascia la responsabilità di fare il checking delle priorità a quelle di parsing
 int get_priority_level(short priority_number, const priority_rule_t *table, int how_many_levels){
     if (!table || how_many_levels == 0) 
 		return how_many_levels;
@@ -200,7 +207,7 @@ int get_priority_level(short priority_number, const priority_rule_t *table, int 
         }
     }
     if (!found) 
-		return how_many_levels; 
+		return 0; 
 	int level = 0;
     for (int i = 0; i < how_many_levels; ++i)
         if (table[i].number < priority_number) level++;
@@ -213,9 +220,10 @@ int priority_to_level(short priority){
 }
 
 short level_to_priority(int level){
-	int index;
+	int index = 0;
 	if (level < 0) index = 0;
-	if (level >= priority_count) index = priority_count-1;
+	else if (level >= priority_count) index = priority_count-1;
+	else index = level;
 	return (short) priority_lookup_table[index].number;
 }
 
@@ -235,3 +243,11 @@ short get_next_priority(short p) {
 	return level_to_priority(level+1);
 }
 
+// ritorna > 0 se la prima è più grande
+// ritorna < 0 se la seconda è più grande
+// ritorna = 0 se sono uguali
+int compare_priorities(short a, short b) {
+	int aL = priority_to_level(a);
+	int bL = priority_to_level(b);
+	return aL - bL;
+}

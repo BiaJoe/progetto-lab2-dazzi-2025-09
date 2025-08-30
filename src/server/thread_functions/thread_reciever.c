@@ -48,6 +48,18 @@ int thread_reciever(void *arg){
 	return 0;
 }
 
+static rescuer_request_t **allocate_and_copy_rescuer_requests_from_type(emergency_type_t *type){
+	rescuer_request_t **rs = callocate_rescuer_requests();
+	check_error_memory_allocation(rs);
+	for (int i = 0; i < type->rescuers_req_number; i++) {
+		rs[i] = mallocate_and_populate_rescuer_request(
+			type->rescuers[i]->required_count,
+			type->rescuers[i]->time_to_manage,
+			type->rescuers[i]->type
+		);
+	}
+	return rs;
+}
 
 emergency_t *mallocate_emergency(int id, emergency_type_t **types, emergency_request_t *r){
 	emergency_t *e = (emergency_t *)malloc(sizeof(emergency_t));
@@ -68,6 +80,9 @@ emergency_t *mallocate_emergency(int id, emergency_type_t **types, emergency_req
 	e->y = r->y;
 	e->time = r->timestamp;
 	e->rescuer_count = rescuer_count;
+
+	// copio i rescuers richiesti nell'emergenza stessa perchè sono soggetti a cambiare
+	e->rescuers_missing = allocate_and_copy_rescuer_requests_from_type(e->type);
 	e->rescuer_twins = rescuer_twins;
 	
 	atomic_store(&e->has_been_paused, false);
@@ -76,8 +91,6 @@ emergency_t *mallocate_emergency(int id, emergency_type_t **types, emergency_req
 	atomic_store(&e->tick_time, get_current_tick_count(ctx));
 	atomic_store(&e->timeout_timer, priority_to_timeout_timer(e->priority));
 	atomic_store(&e->promotion_timer, priority_to_promotion_timer(e->priority));
-
-	check_error_mtx_init(mtx_init(&e->mutex, mtx_plain));
 	check_error_cnd_init(cnd_init(&e->cond));
 	return e;
 }

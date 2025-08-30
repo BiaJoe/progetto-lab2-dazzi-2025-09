@@ -120,7 +120,7 @@ rescuer_digital_twin_t *mallocate_rescuer_digital_twin(rescuer_type_t* r){
 	t->emergency 		= NULL; 																// il gemello viene messo nella base all'inizio, quindi in effetti è arrivato
 	t->time_to_manage	= INVALID_TIME;
 	t->time_left_before_leaving = INVALID_TIME;
-	check_error_mtx_init(mtx_init(&t->mutex, mtx_plain));
+	t->is_a_candidate  = false;
 	return t;
 }
 
