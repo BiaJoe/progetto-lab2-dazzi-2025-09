@@ -85,13 +85,14 @@ emergency_t *mallocate_emergency(int id, emergency_type_t **types, emergency_req
 	e->rescuers_missing = allocate_and_copy_rescuer_requests_from_type(e->type);
 	e->rescuer_twins = rescuer_twins;
 	
-	atomic_store(&e->has_been_paused, false);
-	atomic_store(&e->rescuers_not_done_yet, e->rescuer_count);
-	atomic_store(&e->rescuers_not_arrived_yet, e->rescuer_count);
-	atomic_store(&e->tick_time, get_current_tick_count(ctx));
-	atomic_store(&e->timeout_timer, priority_to_timeout_timer(e->priority));
-	atomic_store(&e->promotion_timer, priority_to_promotion_timer(e->priority));
+	e->rescuers_not_done_yet 	= e->rescuer_count;
+	e->rescuers_not_arrived_yet = e->rescuer_count;
+	e->tick_time 				= get_current_tick_count(ctx);
+	e->timeout_timer 			= priority_to_timeout_timer(e->priority);
+	e->promotion_timer 			= priority_to_promotion_timer(e->priority);
+	
 	check_error_cnd_init(cnd_init(&e->cond));
+
 	return e;
 }
 

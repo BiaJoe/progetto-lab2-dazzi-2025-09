@@ -13,6 +13,8 @@ bresenham_trajectory_t *mallocate_bresenham_trajectory(){
 // ritorna se siamo arrivati a destinazione o no
 bool compute_bresenham_step(int x, int y, bresenham_trajectory_t *trajectory, int cells_per_step, int *x_step, int *y_step){
 	if(!trajectory) return false;										// senza traiettoria non si fa nulla
+	*x_step = 0;
+	*y_step = 0;
 	if(cells_per_step < 0) return true; 		
 	
 	*x_step = 0;
@@ -22,11 +24,11 @@ bool compute_bresenham_step(int x, int y, bresenham_trajectory_t *trajectory, in
 	int distance_y = ABS(y - trajectory->y_target);
 	int manhattan_distance = distance_x + distance_y;
 
-	if(manhattan_distance <= cells_per_step){			// caso in cui in un passo o meno siamo arrivati
-		*x_step = distance_x;
-		*y_step = distance_y;
-		return true;
-	}
+	if (manhattan_distance <= cells_per_step){		// caso in cui si arriva in meno di un passo
+    *x_step = ABS(x - trajectory->x_target) * trajectory->sx;
+    *y_step = ABS(y - trajectory->y_target) * trajectory->sy;
+    return true;
+	}	
 
 	int xA = x;
 	int yA = y;
@@ -39,7 +41,6 @@ bool compute_bresenham_step(int x, int y, bresenham_trajectory_t *trajectory, in
 	int i = 0;
 
 	while (i < cells_per_step) {			// faccio un passo alla volta percorrendo la linea di Bresenham 
-		log_event(69, DEBUG, "step = (%d, %d)", *x_step, *y_step);
 		if (xA == xB && yA == yB) 			// siamo arrivati
 			return true;				
 		int e2 = 2 * trajectory->err;		// l'errore serve a dirci se siamo più lontani sulla x o sulla y 

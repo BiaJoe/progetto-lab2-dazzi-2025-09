@@ -108,7 +108,6 @@ typedef enum {
 } emergency_status_t;
 
 
-
 typedef struct emergency {
 	emergency_type_t *type;
 	int id;
@@ -117,15 +116,14 @@ typedef struct emergency {
 	int x;
 	int y;
 	time_t time;							// momento in cui viene registrata
+	int tick_time;							// il tick in cui è stata registrata
 	int rescuer_count;
 	rescuer_request_t **rescuers_missing;
 	rescuer_digital_twin_t **rescuer_twins;
-	atomic_bool has_been_paused;
-	atomic_int rescuers_not_arrived_yet;	// quanti rescuers non sono ancora arrivati
-	atomic_int rescuers_not_done_yet;		// quanti rescuers non hanno ancora finito
-	atomic_int tick_time;					// il tick in cui è stata registrata
-	atomic_int timeout_timer;				// timeout che conta i tick prima di essere messa in timeout
-	atomic_int promotion_timer;
+	int rescuers_not_arrived_yet;			// quanti rescuers non sono ancora arrivati
+	int rescuers_not_done_yet;				// quanti rescuers non hanno ancora finito
+	int timeout_timer;						// timeout che conta i tick prima di essere messa in timeout
+	int promotion_timer;
 	cnd_t cond;
 };
 

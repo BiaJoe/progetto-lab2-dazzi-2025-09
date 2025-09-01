@@ -183,15 +183,6 @@ void close_server(int exit_code){
 	exit(exit_code);
 }
 
-
-int get_time_before_emergency_timeout_from_priority(int p){
-	for (int i = 0; i < priority_count; i++){
-		if(priority_lookup_table[i].number == p)
-			return priority_lookup_table[i].time_before_timeout;
-	}
-	return INVALID_TIME;
-}
-
 // cerca tra le priorità e ritorna il loro livello nella tabella
 // se non le trova ritorna la priorità minima 
 // è una funzione interna, 
@@ -241,13 +232,4 @@ short get_next_priority(short p) {
 	int level = priority_to_level(p);
 	if (level == priority_count-1) return p;
 	return level_to_priority(level+1);
-}
-
-// ritorna > 0 se la prima è più grande
-// ritorna < 0 se la seconda è più grande
-// ritorna = 0 se sono uguali
-int compare_priorities(short a, short b) {
-	int aL = priority_to_level(a);
-	int bL = priority_to_level(b);
-	return aL - bL;
 }

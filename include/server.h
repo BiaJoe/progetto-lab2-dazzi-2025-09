@@ -68,8 +68,20 @@ typedef struct {
     sem_t *sem_ready;            	
 } server_context_t;
 
-// server.c
+// server_helpers.c
 
+int compare_priorities(short a, short b);
+void change_rescuer_digital_twin_destination_blocked(rescuer_digital_twin_t *t, int new_x, int new_y);
+void remove_twin_from_its_emergency(rescuer_digital_twin_t *t);
+
+void lock_emergencies();
+void unlock_emergencies();
+void lock_rescuers();
+void unlock_rescuers();
+void lock_system();
+void unlock_system();
+
+// main.c
 
 // questa variabile viene usata dai thread sempre
 // contiene lo stato del server
@@ -79,7 +91,6 @@ void server_ipc_setup();
 void close_server(int exit_code);
 void init_server_context();
 void cleanup_server_context();
-int get_time_before_emergency_timeout_from_priority(int p);
 
 int get_priority_level(short priority_number, const priority_rule_t *table, int priority_count);
 int priority_to_level(short priority);
@@ -87,8 +98,6 @@ short level_to_priority(int level);
 int priority_to_timeout_timer(short priority);
 int priority_to_promotion_timer(short priority);
 short get_next_priority(short p);
-int compare_priorities(short a, short b);
-
 
 // thread_clock.c
 
@@ -110,7 +119,7 @@ void free_emergency(emergency_t* e);
 
 #define INDEX_NOT_FOUND -1
 int thread_worker(void *arg);
-void timeout_trash_close_logging_blocking(emergency_t *e);
+void timeout_trash_close_logging_blocking(int i, emergency_t *e);
 bool find_rescuers_logging_blocking(emergency_t *e);
 void send_rescuer_digital_twin_to_scene_logging_blocked(rescuer_digital_twin_t *t, emergency_t *e);
 
@@ -119,10 +128,8 @@ void send_rescuer_digital_twin_to_scene_logging_blocked(rescuer_digital_twin_t *
 
 int thread_updater(void *arg);
 void update_rescuers_states_logging_blocking();
-void remove_twin_from_its_emergency(rescuer_digital_twin_t *t);
 bool update_rescuer_digital_twin_state_logging_blocked(rescuer_digital_twin_t *t, int minx, int miny, int height, int width);
 void send_rescuer_digital_twin_back_to_base_logging_blocked(rescuer_digital_twin_t *t);
-void change_rescuer_digital_twin_destination_blocked(rescuer_digital_twin_t *t, int new_x, int new_y);
 void update_active_emergencies_states_logging_blocking();
 void update_active_emergency_state_logging_blocked(emergency_t *e);
 void update_waiting_emergencies_states();
