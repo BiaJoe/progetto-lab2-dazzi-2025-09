@@ -34,6 +34,7 @@ rescuers_t *parse_rescuers(char *filename, int x, int y){
 	rescuers -> count = ps->parsed_so_far;
 	rescuers -> types = rescuer_types;
 	free_parsing_state(ps);
+	check_error_mtx_init(mtx_init(&(rescuers->mutex), mtx_plain));
 	return rescuers;
 }
 

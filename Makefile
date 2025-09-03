@@ -31,6 +31,7 @@ COMMON_SRCS := \
 # ---- Server
 SERVER_SRCS := \
   src/server/main.c \
+  src/server/server_helpers.c \
   src/server/thread_functions/thread_updater.c \
   src/server/thread_functions/thread_clock.c \
   src/server/thread_functions/thread_reciever.c \

@@ -1,12 +1,13 @@
 #include "server.h"
 
-// ----------- funzioni per il thread reciever -----------
+extern server_context_t *ctx;
 
 // thread function che riceve le emergenze
 // le scarta se sbagliate
 // le inserisce nella queue
 // sarà eseguita nel main thread del server
 int thread_reciever(void *arg){
+    log_register_this_thread("RECEIVER");  
 	log_event(NON_APPLICABLE_LOG_ID, MESSAGE_QUEUE_SERVER, "inizio della ricezione delle emergenze!");
 	char buffer[MAX_EMERGENCY_QUEUE_MESSAGE_LENGTH];
 
@@ -28,6 +29,14 @@ int thread_reciever(void *arg){
 
 		if (strcmp(buffer, MQ_STOP_MESSAGE) == 0) {		// se è il messaggio di stop devo uscire!
 			atomic_store(&ctx->server_must_stop, true);
+			pq_close(ctx->emergency_queue); 
+			cnd_broadcast(&ctx->clock->updated);
+			lock_emergencies();
+			for (int i = 0; i < WORKER_THREADS_NUMBER; ++i) {
+				emergency_t *e = ctx->active_emergencies->array[i];
+				if (e) cnd_broadcast(&e->cond);
+			}
+			unlock_emergencies();
 			return 0;
 		}
 
@@ -90,7 +99,7 @@ emergency_t *mallocate_emergency(int id, emergency_type_t **types, emergency_req
 	e->tick_time 				= get_current_tick_count(ctx);
 	e->timeout_timer 			= priority_to_timeout_timer(e->priority);
 	e->promotion_timer 			= priority_to_promotion_timer(e->priority);
-	
+
 	check_error_cnd_init(cnd_init(&e->cond));
 
 	return e;

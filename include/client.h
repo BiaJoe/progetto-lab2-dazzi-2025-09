@@ -16,7 +16,8 @@
 #include <errno.h>
 #include <stdlib.h>
 
-
+#include "errors.h"
+#include "structs.h"
 #include "log.h"
 #include "utils.h"
 
@@ -29,9 +30,12 @@
 
 #define PRINT_CLIENT_USAGE(argv0)  \
 	do { \
-		printf("\nUtilizzo: \n"); \
-		printf("%s <nome_emergenza> <coord_x> <coord_y> <delay_in_secs> \t\t (inserimento diretto) \n", argv0); \
-		printf("%s -f <nome_file>                                       \t\t (leggi da file)       \n\n", argv0); \
+		printf("\n########## COME USARE QUESTO PROGRAMMA ##########  \n\n"); \
+		printf("%s -h                          # tutorial				\n", argv0); \
+		printf("%s -z                          # esci immediatamente	\n", argv0); \
+		printf("%s -S                          # chiudi server ed esci	\n", argv0); \
+		printf("%s <nome> <x> <y> <delay>      # inserimento diretto 	\n", argv0); \
+		printf("%s -f <nome_file>              # leggi da file    	 	\n\n", argv0); \
 	} while(0)
 
 // scorciatoria solo per il main() di client.c
@@ -46,6 +50,7 @@
 
 typedef enum {
 	UNDEFINED_MODE,
+	HELP_MODE,
 	NORMAL_MODE,
 	FILE_MODE,
 	STOP_JUST_CLIENT_MODE,
@@ -53,9 +58,11 @@ typedef enum {
 	NUMBER_OF_CLIENT_MODES,
 } client_mode_t;
 
+
 void handle_normal_mode_input(char* args[]);
 void handle_file_mode_input(char* args[]);
 void send_emergency_request_message(char string[MAX_EMERGENCY_REQUEST_LENGTH + 1]);
 void handle_stop_mode_client_server(void);
+void print_help_info(char* argv[], config_files_names_t config);
 
 #endif

@@ -14,13 +14,20 @@
 
 #include "bresenham.h"
 
+#define FILENAME_BUFF 256
+
 #define MAX_EMERGENCY_QUEUE_NAME_LENGTH 32
 #define MAX_EMERGENCY_QUEUE_MESSAGE_LENGTH 512
 
+#define MAX_RESCUER_CONF_LINES 128
+#define MAX_RESCUER_CONF_LINE_LENGTH 512
+#define MAX_EMERGENCY_CONF_LINES 256
+#define MAX_EMERGENCY_CONF_LINE_LENGTH 512
+#define MAX_ENV_CONF_LINES 12
+#define MAX_ENV_CONF_LINE_LENGTH 128
+
 #define MQ_STOP_MESSAGE "-stop"
-
 #define MAX_EMERGENCY_NAME_LENGTH 64
-
 
 #define STR_HELPER(x) #x    
 #define STR(x) STR_HELPER(x)
@@ -108,7 +115,7 @@ typedef enum {
 } emergency_status_t;
 
 
-typedef struct emergency {
+struct emergency {
 	emergency_type_t *type;
 	int id;
 	short priority;							// la priorità è anche qui perché potrebbe cambiare, non basta quindi emergency_type
@@ -154,8 +161,15 @@ typedef struct {
 #define SEM_NAME "/emergency_shm_ready" 
 
 typedef struct {
+	char env[FILENAME_BUFF];
+	char rescuer_types[FILENAME_BUFF];
+	char emergency_types[FILENAME_BUFF];
+} config_files_names_t; 
+
+typedef struct {
     char queue_name[MAX_EMERGENCY_QUEUE_NAME_LENGTH];
 	char requests_argument_separator;
+	config_files_names_t config;
 } client_server_shm_t;
 
 // funzioni di accesso a strutture

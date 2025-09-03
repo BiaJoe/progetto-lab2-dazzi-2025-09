@@ -2,7 +2,7 @@
 #include "config_server.h"
 
 static int priority_count = (int)(sizeof(priority_lookup_table)/sizeof(priority_lookup_table[0]));
-server_context_t *ctx = NULL;
+server_context_t *ctx;
 
 int main(void){
 	log_init(LOG_ROLE_SERVER, server_logging_config);
@@ -23,19 +23,29 @@ int main(void){
 
 	thrd_t clock_thread, updater_thread, receiver_thread, worker_threads[WORKER_THREADS_NUMBER];
 
-    if (thrd_create(&clock_thread, thread_clock, NULL) != thrd_success)
-        log_error_and_exit(close_server, "errore creazione clock");
-    if (thrd_create(&updater_thread, thread_updater, NULL) != thrd_success)
-        log_error_and_exit(close_server, "errore creazione updater");
-    if (thrd_create(&receiver_thread, thread_reciever, NULL) != thrd_success)
-        log_error_and_exit(close_server, "errore creazione receiver");
+	if (thrd_create(&clock_thread, thread_clock, NULL) != thrd_success) log_error_and_exit(close_server, "errore creazione clock");
+    if (thrd_create(&updater_thread, thread_updater, NULL) != thrd_success) log_error_and_exit(close_server, "errore creazione updater");
+    if (thrd_create(&receiver_thread, thread_reciever, NULL) != thrd_success) log_error_and_exit(close_server, "errore creazione receiver");
+	
 	for(int i = 0; i < WORKER_THREADS_NUMBER; i++) {
 		if (thrd_create(&worker_threads[i], thread_worker, NULL) != thrd_success)
         	log_error_and_exit(close_server, "errore creazione receiver");
 	}
+	
+	thrd_join(receiver_thread, NULL);
+
+	atomic_store(&ctx->server_must_stop, true);
+	cnd_broadcast(&ctx->clock->updated);
+	lock_emergencies();
+	for (int i = 0; i < WORKER_THREADS_NUMBER; ++i) {
+		emergency_t *e = ctx->active_emergencies->array[i];
+		if (e) cnd_broadcast(&e->cond);
+	}
+	unlock_emergencies();
+
+
 	thrd_join(clock_thread, NULL);
 	thrd_join(updater_thread, NULL);
-	thrd_join(receiver_thread, NULL);
 	
 	for (int i = 0; i < WORKER_THREADS_NUMBER; i++) {
 		thrd_join(worker_threads[i], NULL);
@@ -49,25 +59,24 @@ void init_server_context() {
 	ctx = (server_context_t *)malloc(sizeof(server_context_t));	
 	check_error_memory_allocation(ctx);
 	ctx -> requests = (requests_t *)malloc(sizeof(requests_t));
-	check_error_memory_allocation(ctx -> requests);
+	check_error_memory_allocation(ctx->requests);
 	ctx -> clock = (server_clock_t *)malloc(sizeof(server_clock_t));
-	check_error_memory_allocation(ctx -> clock);
+	check_error_memory_allocation(ctx->clock);
 	ctx -> active_emergencies = (active_emergencies_array_t *)calloc(1, sizeof(active_emergencies_array_t));
-	check_error_memory_allocation(ctx -> clock);
-	
+	check_error_memory_allocation(ctx->active_emergencies);
 
 	// popolo ctx
 	ctx -> requests -> count = 0; 		// all'inizio non ci sono state ancora richieste
 	ctx -> requests -> valid_count = 0;
 
 	ctx -> clock -> tick_time = server_tick_time;	// prendo il tempo di un tick da config.h
-	ctx -> clock -> tick = false;											
-	ctx -> clock -> tick_count_since_start = 0; 			// il server non ha ancora fatto nessun tick
+	ctx -> clock -> tick = false;		
+	
+	atomic_store(&ctx->clock->tick_count_since_start, 0); 			// il server non ha ancora fatto nessun tick
 	check_error_cnd_init(cnd_init(&(ctx->clock->updated)));
 	check_error_mtx_init(mtx_init(&(ctx->clock->mutex), mtx_plain));
 	check_error_mtx_init(mtx_init(&(ctx->active_emergencies->mutex), mtx_plain));
-	check_error_mtx_init(mtx_init(&(ctx->rescuers->mutex), mtx_plain));
-	
+
 	ctx -> emergency_queue = pq_create(priority_count);
 	ctx -> completed_emergencies = pq_create(priority_count);
 	ctx -> canceled_emergencies = pq_create(priority_count);
@@ -113,6 +122,9 @@ void server_ipc_setup(){
     memset(ctx->shm->queue_name, 0, sizeof(ctx->shm->queue_name));
     snprintf(ctx->shm->queue_name, sizeof(ctx->shm->queue_name), "%s", qname);
 	ctx->shm->requests_argument_separator = EMERGENCY_REQUESTS_ARGUMENT_SEPARATOR_CHAR;
+	snprintf(ctx->shm->config.env, FILENAME_BUFF, "%s", ENV_CONF);
+	snprintf(ctx->shm->config.rescuer_types, FILENAME_BUFF, "%s", RESCUERS_CONF);
+	snprintf(ctx->shm->config.emergency_types, FILENAME_BUFF, "%s", EMERGENCY_TYPES_CONF);
     SYSV(ctx->sem_ready = sem_open(SEM_NAME, O_CREAT | O_EXCL, 0600, 0), SEM_FAILED, "sem_open");
 	SYSC(sem_post(ctx->sem_ready), "sem_post");
 }
@@ -121,9 +133,10 @@ void server_ipc_setup(){
 void cleanup_server_context(){
 	// segnalo ai threads di interrompersi
 	atomic_store(&ctx->server_must_stop, true);
+
 	// se il thread reciever fosse bloccato su mq_recieve, gli mando anche un messaggio di stop
-	char *buffer = MQ_STOP_MESSAGE;
-	SYSC(mq_send(ctx->mq, buffer, strlen(buffer) + 1, 0), "mq_send");
+	// char *buffer = MQ_STOP_MESSAGE;
+	// SYSC(mq_send(ctx->mq, buffer, strlen(buffer) + 1, 0), "mq_send");
 
 	// inizio lo smontaggio
 
@@ -136,12 +149,6 @@ void cleanup_server_context(){
     shm_unlink(SHM_NAME);
     sem_unlink(SEM_NAME);
 
-	free_rescuers(ctx->rescuers);
-	ctx->rescuers = NULL;
-
-	free_emergencies(ctx->emergencies);
-	ctx->emergencies = NULL;
-
 	pq_destroy(ctx->emergency_queue);
 	pq_destroy(ctx->completed_emergencies);
 	pq_destroy(ctx->canceled_emergencies);
@@ -149,16 +156,25 @@ void cleanup_server_context(){
 	mq_close(ctx->mq);
 	mq_unlink(ctx->enviroment->queue_name);
 
-	free(ctx->enviroment);
 	mtx_destroy(&(ctx->clock->mutex));
 	cnd_destroy(&(ctx->clock->updated));
 	mtx_destroy(&(ctx->active_emergencies->mutex));
-	mtx_destroy(&(ctx->rescuers->mutex));
-	free(ctx->clock);
-	free(ctx->requests);
-	free(ctx->active_emergencies);
+
+	free(ctx->enviroment); 
+	ctx->enviroment = NULL;
+	free_emergencies(ctx->emergencies); 
+	ctx->emergencies = NULL;
+	free_rescuers(ctx->rescuers); 
+	ctx->rescuers = NULL;
+	free(ctx->clock); 
+	ctx->clock = NULL;
+	free(ctx->requests); 
+	ctx->requests = NULL;
+	free(ctx->active_emergencies); 
+	ctx->active_emergencies = NULL;
 
 	free(ctx);
+	ctx = NULL;
 }
 
 // funzione di uscita, deve fare log_close()
@@ -178,6 +194,16 @@ void close_server(int exit_code){
 	log_event(AUTOMATIC_LOG_ID, SERVER, "📋  Emergenze elaborate:  %d", ctx->requests->valid_count);
 	log_event(AUTOMATIC_LOG_ID, SERVER, "✅  Emergenze completate: %d", ctx->completed_emergencies->size);
 	log_close();
+
+	atomic_store(&ctx->server_must_stop, true);
+
+	lock_emergencies();
+    for (int i = 0; i < WORKER_THREADS_NUMBER; ++i) {
+        emergency_t *e = ctx->active_emergencies->array[i];
+        if (e) cnd_broadcast(&e->cond);   // sveglia qualunque worker in attesa
+    }
+    unlock_emergencies();
+
 	cleanup_server_context();
 	ctx = NULL;
 	exit(exit_code);

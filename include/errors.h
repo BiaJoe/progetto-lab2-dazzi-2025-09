@@ -23,12 +23,11 @@
 	} while(0)
  
 // controllo di errore comune
-#define ERR_CHECK(cond, msg) do { if (cond) DEATH_BY_ERROR(msg, "ERROR"); } while (0)
+#define ERR_CHECK(cond, msg) do { if ((cond)) DEATH_BY_ERROR(msg, "ERROR"); } while (0)
 // macro wrap delle chiamate di sistema
 #define SYSV(call, illegal_value, error_message) do { if ((call) == illegal_value) DEATH_BY_ERROR(error_message, "ERROR (SYS)"); } while (0)
 // macro wrap delle chiamate di sistema che come errore ritornano -1
 #define SYSC(call, error_message) SYSV((call), -1, error_message)
-
 
 #define check_error_fopen(fp) 						ERR_CHECK((fp) == NULL, "fopen")
 #define check_error_memory_allocation(p) 			ERR_CHECK(!(p), "memory allocation")

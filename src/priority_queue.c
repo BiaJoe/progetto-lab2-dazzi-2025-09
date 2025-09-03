@@ -1,6 +1,14 @@
 #include "priority_queue.h"
 #include <stdlib.h>
 
+// rimuove un nodo arbitrario dalla lista (O(1))
+static void list_remove_node(list_t* list, node_t* n){
+    if (!list || !n) return;
+    if (n->prev) n->prev->next = n->next; else list->head = n->next;
+    if (n->next) n->next->prev = n->prev; else list->tail = n->prev;
+    list->count--;
+}
+
 // inserisce un nodo in fondo alla lista
 static void list_push_back(list_t* list, node_t* n){
     n->prev = list->tail;

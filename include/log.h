@@ -34,6 +34,8 @@
 #define MAX_LOG_EVENT_TIMESTAMP_STRING_LENGTH  32
 #define MAX_LOG_EVENT_ID_STRING_LENGTH         16
 #define MAX_LOG_EVENT_FORMATTED_MESSAGE_LENGTH 300
+#define MAX_LOG_THREADS                        256
+#define MAX_THREAD_NAME_LENGTH                 32
 
 // ID speciali
 enum { AUTOMATIC_LOG_ID = -1, NON_APPLICABLE_LOG_ID = -2 };
@@ -41,10 +43,14 @@ enum { AUTOMATIC_LOG_ID = -1, NON_APPLICABLE_LOG_ID = -2 };
 typedef struct {
 	char name[LOG_EVENT_NAME_LENGTH];	// versione stringa del tipo
 	char code[LOG_EVENT_CODE_LENGTH];	// versione codice del tipo
-	bool is_terminating;					// se loggarlo vuol dire terminare il programma		
+	bool is_terminating;				// se loggarlo vuol dire terminare il programma		
 	bool is_to_log;						// se va scritto o no nel file di log
 } log_event_info_t;
 
+typedef struct thread_name {
+    char name[MAX_THREAD_NAME_LENGTH];
+    thrd_t tid; 
+} thread_name_t;
 
 typedef struct logging_config {
     char *log_file;
@@ -54,6 +60,7 @@ typedef struct logging_config {
     bool log_to_file;
     bool log_to_stdout;
     int  flush_every_n;
+    thread_name_t *threads;
 } logging_config_t;
 
 // una macro per standardizzare il formato degli errori in linee di file
@@ -97,6 +104,7 @@ typedef enum {
 
     SERVER_UPDATE,
     SERVER,
+    SERVER_CLOCK,
     CLIENT,
 
     // eventi di gestione richieste emergenza
@@ -126,6 +134,7 @@ typedef enum {
 typedef struct {
     log_role_t role; 
     char timestamp[MAX_LOG_EVENT_TIMESTAMP_STRING_LENGTH];
+    char thread_name[MAX_THREAD_NAME_LENGTH];
     int id;
     log_event_type_t event_type;            
     char formatted_message[MAX_LOG_EVENT_FORMATTED_MESSAGE_LENGTH];            
@@ -141,7 +150,8 @@ void log_event(int id, log_event_type_t event_type, char *format, ...);
 void log_error_and_exit(void (*exit_function)(int), const char *format, ...);
 void log_fatal_error(char *format, ...);
 void log_parsing_error(char *format, ...);
-
+void log_register_this_thread(const char *name);
+const char *log_get_current_thread_name(void);
 
 const log_event_info_t* get_log_event_info(log_event_type_t event_type);
 

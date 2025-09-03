@@ -6,14 +6,17 @@
 #include "config_log.h"
 #include "log.h"
 
-static log_role_t  log_role;
-static mqd_t       log_mq_reader = (mqd_t)-1;   // server: riceve
-static mqd_t       log_mq_writer = (mqd_t)-1;   // client/server/altro: scrive
-static thrd_t      logger_thread_id;
-static atomic_bool logger_running = false;
-static atomic_int  flushed_stdout_n_times = 0;
-static bool        queue_was_opened = false; 
-static mtx_t       stdout_flush_mutex;
+static log_role_t    log_role;
+static mqd_t         log_mq_reader = (mqd_t)-1;   // server: riceve
+static mqd_t         log_mq_writer = (mqd_t)-1;   // client/server/altro: scrive
+static thrd_t        logger_thread_id;
+static atomic_bool   logger_running = false;
+static atomic_int    flushed_stdout_n_times = 0;
+static bool          queue_was_opened = false; 
+static mtx_t         stdout_flush_mutex;
+static mtx_t         thread_names_mutex;
+static thread_name_t thread_names[MAX_LOG_THREADS];
+
 
 
 static logging_config_t config;
@@ -91,29 +94,43 @@ static int logger_thread(void *arg) {
 // e anche di creare il thread che li scriverà nel logfile o in stdout
 // altrimenti solo di scrivere
 int log_init(log_role_t role, logging_config_t logging_config){
+    
     log_role = role;
     config = logging_config;
     flushed_stdout_n_times = 0;
+
     check_error_mtx_init(mtx_init(&stdout_flush_mutex, mtx_plain));
+    check_error_mtx_init(mtx_init(&thread_names_mutex, mtx_plain));   // 👈 mutex per tabella
+
+    // azzera tabella thread_name
+    for (int i = 0; i < MAX_LOG_THREADS; i++) {
+        thread_names[i].tid = 0;          // valore sentinella = slot vuoto
+        thread_names[i].name[0] = '\0';
+    }
+
     atomic_store(&logger_running, (role == LOG_ROLE_SERVER ? true : false));  // logger_running serve solo al thread logger dentro al server
 
 
     if (role == LOG_ROLE_SERVER) {
-        struct mq_attr attr = { 0 };
-        attr.mq_flags       = 0;
-        attr.mq_maxmsg      = MAX_LOG_QUEUE_MESSAGES;
-        attr.mq_msgsize     = sizeof(log_message_t);
+        if (config.log_to_file) {                 
+            struct mq_attr attr = {0};
+            attr.mq_flags   = 0;
+            attr.mq_maxmsg  = MAX_LOG_QUEUE_MESSAGES;
+            attr.mq_msgsize = sizeof(log_message_t);
 
-        mq_unlink(LOG_QUEUE_NAME);
-        log_mq_reader = mq_open(LOG_QUEUE_NAME, O_CREAT | O_RDONLY, 0644, &attr);
-        check_error_mq_open(log_mq_reader);
+            mq_unlink(LOG_QUEUE_NAME);
+            log_mq_reader = mq_open(LOG_QUEUE_NAME, O_CREAT | O_RDONLY, 0644, &attr);
+            check_error_mq_open(log_mq_reader);
 
-        log_mq_writer = mq_open(LOG_QUEUE_NAME, O_WRONLY);
-        check_error_mq_open(log_mq_writer);
+            log_mq_writer = mq_open(LOG_QUEUE_NAME, O_WRONLY);
+            check_error_mq_open(log_mq_writer);
 
-        queue_was_opened = true;
+            queue_was_opened = true;
 
-        check_error_thread_create(thrd_create(&logger_thread_id, logger_thread, NULL));
+            check_error_thread_create(thrd_create(&logger_thread_id, logger_thread, NULL));
+        } else  queue_was_opened = false;
+
+        log_register_this_thread("SERVER");
         log_event(NON_APPLICABLE_LOG_ID, LOGGING_STARTED, "(SERVER) Inizio del Logging!");
 
     } else {
@@ -129,6 +146,7 @@ int log_init(log_role_t role, logging_config_t logging_config){
         if (!(log_mq_writer == (mqd_t)-1)){
             queue_was_opened = true;
         }
+         log_register_this_thread("CLIENT");
         log_event(NON_APPLICABLE_LOG_ID, LOGGING_STARTED, "(CLIENT) Inizio del Logging!");
 
     }
@@ -150,22 +168,18 @@ void log_close(void) {
         return;
     }
 
+    // siamo nel server
     log_event(NON_APPLICABLE_LOG_ID, LOGGING_ENDED, "(SERVER) Logging terminato :)");
 
-    // nel server
-    thrd_join(logger_thread_id, NULL);       // aspetto che il logger abbia finito
-    atomic_store(&logger_running, false);   
+    
+    if (config.log_to_file && queue_was_opened) {
+        thrd_join(logger_thread_id, NULL);
+        atomic_store(&logger_running, false);
 
-    if (log_mq_writer != (mqd_t)-1) { 
-        mq_close(log_mq_writer); 
-        log_mq_writer = (mqd_t)-1; 
+        if (log_mq_writer != (mqd_t)-1) { mq_close(log_mq_writer); log_mq_writer = (mqd_t)-1; }
+        if (log_mq_reader != (mqd_t)-1) { mq_close(log_mq_reader); mq_unlink(LOG_QUEUE_NAME); log_mq_reader = (mqd_t)-1; }
+        queue_was_opened = false;
     }
-    if (log_mq_reader != (mqd_t)-1) {
-        mq_close(log_mq_reader);
-        mq_unlink(LOG_QUEUE_NAME);
-        log_mq_reader = (mqd_t)-1;
-    }
-    queue_was_opened = false;
 
     if (config.log_to_stdout) fflush(stdout);
     mtx_destroy(&stdout_flush_mutex);
@@ -191,7 +205,13 @@ void assemble_log_text(char destination_string[LOG_EVENT_TOTAL_LENGTH], log_mess
             snprintf(out_id, sizeof(out_id), "%d", m.id);
             break;
     }
-    snprintf(destination_string, LOG_EVENT_TOTAL_LENGTH, config.logging_syntax, m.timestamp, out_id, event_name, m.formatted_message);
+    snprintf(destination_string, LOG_EVENT_TOTAL_LENGTH, 
+        config.logging_syntax, 
+        m.timestamp, out_id, 
+        event_name, 
+        m.thread_name, 
+        m.formatted_message
+    );
 }
 
 // ho imparato come usare variable argument lists sul libro: The C Programming Language, 2nd Edition
@@ -222,6 +242,9 @@ void log_event(int id, log_event_type_t event_type, char *format, ...) {
     msg.id = id;
     msg.event_type = event_type;
     snprintf(msg.formatted_message, sizeof(msg.formatted_message), "%s", message);
+    const char *tname = log_get_current_thread_name();
+    snprintf(msg.thread_name, sizeof(msg.thread_name), "%s", tname);
+    msg.thread_name[sizeof(msg.thread_name) - 1] = '\0';
 
     assemble_log_text(msg.text, msg);
 
@@ -234,8 +257,7 @@ void log_event(int id, log_event_type_t event_type, char *format, ...) {
             fflush(stdout);
         }
     }
-    if (!config.log_to_file || !queue_was_opened) 
-        return;
+    if (!config.log_to_file || !queue_was_opened) return;
     SYSV(mq_send(log_mq_writer, (const char*)&msg, sizeof(msg), 0), MQ_FAILED, "mq_send");
 }
 
@@ -283,4 +305,44 @@ void log_parsing_error(char *format, ...) {
     vsnprintf(buf, sizeof(buf), format, ap);
     va_end(ap);
     log_event(NON_APPLICABLE_LOG_ID, PARSING_ERROR, "%s", buf);
+}
+
+void log_register_this_thread(const char *name) {
+    if (!name) name = "unnamed thread";
+    thrd_t me = thrd_current();
+    mtx_lock(&thread_names_mutex);
+
+    // ignoro se già registrato
+    for (int i = 0; i < MAX_LOG_THREADS; i++) {
+        if (thread_names[i].tid != 0 && thrd_equal(thread_names[i].tid, me)) {
+            mtx_unlock(&thread_names_mutex);
+            return; // non aggiorna, non fa nulla
+        }
+    }
+
+    // trovo slot libero
+    for (int i = 0; i < MAX_LOG_THREADS; i++) {
+        if (thread_names[i].tid == 0) {
+            thread_names[i].tid = me;
+            snprintf(thread_names[i].name, MAX_THREAD_NAME_LENGTH, "%s", name);
+            thread_names[i].name[MAX_THREAD_NAME_LENGTH - 1] = '\0';
+            break;
+        }
+    }
+
+    mtx_unlock(&thread_names_mutex);
+}
+
+const char *log_get_current_thread_name(void) {
+    thrd_t me = thrd_current();
+    mtx_lock(&thread_names_mutex);
+    for (int i = 0; i < MAX_LOG_THREADS; i++) {
+        if (thread_names[i].tid != 0 && thrd_equal(thread_names[i].tid, me)) {
+            const char *res = thread_names[i].name;
+            mtx_unlock(&thread_names_mutex);
+            return res;
+        }
+    }
+    mtx_unlock(&thread_names_mutex);
+    return "unnamed thread";
 }

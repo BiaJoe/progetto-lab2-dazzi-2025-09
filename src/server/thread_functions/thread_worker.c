@@ -1,5 +1,7 @@
 #include "server.h"
 
+extern server_context_t *ctx;
+
 static void open_slot(int i, emergency_t *e) {
 	lock_emergencies();
 	ctx->active_emergencies->array[i] = e;
@@ -17,13 +19,34 @@ static void close_slot(int i) {
 	unlock_emergencies();
 }
 
+static void change_status_store_close_logging_blocking(int i, emergency_t *e, emergency_status_t news, pq_t *queue) {
+	if (!e || !queue) return;
+	lock_emergencies();
+	e->status = news;
+	switch (news) {
+		case TIMEOUT: 	LOG_EMERGENCY_STATUS_SHORT(e, "TIMEOUT: non abbastanza risorse"); break;
+		case CANCELED: 	LOG_EMERGENCY_STATUS_SHORT(e, "CANCELLATA"); break;
+		case COMPLETED: LOG_EMERGENCY_STATUS_SHORT(e, "COMPLETATA!! :)"); break;
+		default:		break;
+	}
+	pq_push(queue, e, priority_to_level(e->priority));
+	close_slot_blocked(i, e);
+	unlock_emergencies();
+}
+
 int thread_worker(void *arg){
 	// l'indice personal del worker, è quello con cui accede alla sua casella di emergenza
-	const int index = atomic_fetch_add(&ctx->active_emergencies->next_tw_index, 1);
-	if (index >= WORKER_THREADS_NUMBER) {
-		log_error_and_exit(close_server, "non abbastanza slot di emergenze per i thread workers");
-	}
-	
+    const int index = atomic_fetch_add(&ctx->active_emergencies->next_tw_index, 1);
+    if (index >= WORKER_THREADS_NUMBER) {
+        log_error_and_exit(close_server, "non abbastanza slot di emergenze per i thread workers");
+    }
+
+	char tname[MAX_THREAD_NAME_LENGTH];
+    snprintf(tname, sizeof(tname), "WORKER #%d", index);
+    log_register_this_thread(tname);  
+
+	log_event(index, DEBUG, "THREAD WORKER #%d CREATO", index);
+
 	// variabili per dare nomi più semplici alle cose
 	pq_t *queue = ctx->emergency_queue;
 
@@ -31,13 +54,13 @@ int thread_worker(void *arg){
 	while(!atomic_load(&ctx->server_must_stop)){	
 		emergency_t *e = (emergency_t *)pq_pop(queue);
 		if (!e) break;
-		log_event(e->id, EMERGENCY_STATUS, "(%d, %d) %s ASSEGNATA", e->x, e->y, e->type->emergency_desc);
+		LOG_EMERGENCY_STATUS(e, "ASSEGNATA");
 		open_slot(index, e);
 
 		// ciclo che gira finchè l'emergenza non ha trovato i rescuers ed è stata completata o cancellata
 		while(!atomic_load(&ctx->server_must_stop)){ 
 			if (!find_rescuers_logging_blocking(e)) {
-				timeout_trash_close_logging_blocking(index, e);
+				change_status_store_close_logging_blocking(index, e, TIMEOUT, ctx->canceled_emergencies);
 				break;
 			}
 
@@ -49,37 +72,27 @@ int thread_worker(void *arg){
 				!atomic_load(&ctx->server_must_stop)
 			) { cnd_wait(&e->cond, &ctx->active_emergencies->mutex); }
 			unlock_emergencies();
-
-			// se il server si è fermato
-			if (atomic_load(&ctx->server_must_stop)) 
-				break;
 			
-			// se l'emergenza è stata messa in pausa (devo ricercare alcuni o tutti i rescuers)
-			if(e->status == PAUSED) 
-				continue;
 			
-			// se è stata finalmente completata
-			if(e->status == COMPLETED) {
-
-			}
+			if (atomic_load(&ctx->server_must_stop)) break;
+			if (e->status == PAUSED) continue;				// riprendo la ricerca dei rescuers rubati
+			if (e->status == COMPLETED) change_status_store_close_logging_blocking(index, e, e->status, ctx->completed_emergencies);
+			if (e->status == CANCELED) 	change_status_store_close_logging_blocking(index, e, e->status, ctx->canceled_emergencies);
 			
+			break;
 			// in base a che stato ha e prendiamo provvedimenti
 		}
+		if (atomic_load(&ctx->server_must_stop)) {
+			change_status_store_close_logging_blocking(index, e, CANCELED, ctx->canceled_emergencies);
+			close_slot(index);
+			break;
+		}
 		close_slot(index);
-
 	}		
-
 	return 0;
 }
 
-void timeout_trash_close_logging_blocking(int i, emergency_t *e){
-	lock_emergencies();
-	e->status = TIMEOUT;
-	log_event(e->id, EMERGENCY_STATUS, "(%d, %d) %s è stata messa in TIMEOUT perchè non abbastanza rescuers arriveranno in tempo!", e->x, e->y, e->type->emergency_desc);
-	pq_push(ctx->canceled_emergencies, e, priority_to_level(e->priority));
-	close_slot_blocked(i, e);
-	unlock_emergencies();
-}
+
 
 static int estimated_arrival_time(emergency_t *e, rescuer_digital_twin_t *t) {
 	int s = MANHATTAN(e->x, e->y, t->x, t->y);
@@ -125,17 +138,20 @@ static int compare_twins(emergency_t *e, rescuer_digital_twin_t *a, rescuer_digi
 
 
 static rescuer_digital_twin_t* find_best_twin_blocked(emergency_t *e, rescuer_type_t *r) {
+	log_event(AUTOMATIC_LOG_ID, DEBUG, "sto cercando un twin");
 	rescuer_digital_twin_t* best_so_far = NULL;
-	// cerco prima tra i rescuers liberi, che sono preferibili
 	for (int i = 0; i < r->amount; i++) {
 		rescuer_digital_twin_t* t = r->twins[i];
-		if(!t) continue;
+		log_event(AUTOMATIC_LOG_ID, DEBUG, "Analizzo (%d, %d) v=%d %s %d",t->x, t->y, t->rescuer->speed, t->rescuer->rescuer_type_name, t->id);
+		if (!t) continue;
 		if (t->is_a_candidate) continue;
 		if (!is_preemptable_or_available(t, e->priority)) continue;
 		if (t->emergency && t->emergency->id == e->id) continue; 
 		int eat = estimated_arrival_time(e, t);
-		if (e->timeout_timer != NO_TIMEOUT && eat > e->timeout_timer)
-    		continue;
+    	log_event(AUTOMATIC_LOG_ID, DEBUG, "ETA: %d, TBT: %d", eat, e->timeout_timer);
+		if (e->timeout_timer != NO_TIMEOUT && eat > e->timeout_timer) {
+			continue;
+		}
 		if (best_so_far == NULL) {
 			best_so_far = t;
 			continue;
@@ -236,22 +252,17 @@ bool find_rescuers_logging_blocking(emergency_t *e) {
 
 void send_rescuer_digital_twin_to_scene_logging_blocked(rescuer_digital_twin_t *t, emergency_t *e){
 	switch (t->status) {
-		case IDLE: 
-			log_event(t->id, RESCUER_STATUS, "➡️ %s [%d] : 🏠 [%d, %d] ... [%d, %d] ⚠️ - il rescuer parte dalla base verso l'emergenza", t->rescuer->rescuer_type_name, t->id, t->x, t-> y, e->x, e->y);
-			break;									
-		case RETURNING_TO_BASE: 
-			log_event(t->id, RESCUER_STATUS, "➡️ %s [%d] : 🚶‍♂️ [%d, %d] ... [%d, %d] ⚠️ - il rescuer stava andando alla base ma ora va verso un'emergenza", t->rescuer->rescuer_type_name, t->id, t->x, t-> y, e->x, e->y);
-			break;
+		case IDLE: 				LOG_RESCUER_SENT_NAME(t, e->x, e->y, e->type->emergency_desc, "inizia il viaggio base -> emergenza"); break;
+		case RETURNING_TO_BASE: LOG_RESCUER_SENT_NAME(t, e->x, e->y, e->type->emergency_desc, "andava alla base ma ora da emergenza"); break;
 		case ON_SCENE: 
 			if(t->emergency->id == e->id) return; // siamo già su quella scena!
-			log_event(t->id, RESCUER_STATUS, "➡️ %s [%d] : ⚠️ [%d, %d] ... [%d, %d] ⚠️ - il rescuer parte dalla scena dell'emergenza per andare su un'altra scena", t->rescuer->rescuer_type_name, t->id, t->x, t-> y, e->x, e->y);
+			LOG_RESCUER_SENT_NAME(t, e->x, e->y, e->type->emergency_desc, "parte da una scena per andare da un'altra");
 			break;
 		case EN_ROUTE_TO_SCENE:
 			if(t->emergency->id == e->id) return; // stiamo già andando su quella scena!
-			log_event(t->id, RESCUER_STATUS, "➡️ %s [%d] : 🚀 [%d, %d] ... [%d, %d] ⚠️ - il rescuer stava andando su una scena ma ora va ad un'altra", t->rescuer->rescuer_type_name, t->id, t->x, t-> y, e->x, e->y);
+			LOG_RESCUER_SENT_NAME(t, e->x, e->y, e->type->emergency_desc, "andava in una scena ma cambia e va da un'altra");
 			break;
-		default: 
-			log_event(t->id, RESCUER_STATUS, "➡️ %s [%d] : 📍 [%d, %d] ... [%d, %d] ⚠️- il rescuer va verso la scena di emergenza", t->rescuer->rescuer_type_name, t->id, t->x, t-> y, e->x, e->y);
+		default: LOG_RESCUER_SENT_NAME(t, e->x, e->y, e->type->emergency_desc, "parte verso la scena dell'emergenza"); break;
 	}
 	t->status = EN_ROUTE_TO_SCENE; // cambio lo stato del twin
 	t->emergency = e;

@@ -19,7 +19,7 @@ static void close_client(int exit_code){
 			exit_code = EXIT_FAILURE;
 			break;
 	}
-	mq_close(mq);
+	if(mq != (mqd_t)-1) mq_close(mq);
 	log_close();
 	exit(exit_code);
 }
@@ -28,10 +28,6 @@ int main(int argc, char* argv[]){
 	// inizio a loggare lato client
 	log_init(LOG_ROLE_CLIENT, client_logging_config);
 	log_event(NON_APPLICABLE_LOG_ID, CLIENT, "inizia il processo del client");
-
-	// controllo il numero di argomenti
-	if(argc != 3 && argc != 5 && argc != 2) 
-		DIE(argv[0], "numero di argomenti dati al programma sbagliato", close_client(EXIT_FAILURE));
 
 	// capisco in quale modalità mi trovo
 	// in questo caso le modalità sono 2 + undefined, 
@@ -48,29 +44,37 @@ int main(int argc, char* argv[]){
 		case 2: 
 			if (strcmp(argv[1], STOP_SERVER_AND_CLIENT_MODE_STRING) == 0) mode = STOP_CLIENT_AND_SERVER_MODE;
 			if (strcmp(argv[1], STOP_MODE_STRING) == 0) mode = STOP_JUST_CLIENT_MODE;
+			if (strcmp(argv[1], HELP_MODE_STRING) == 0) mode = HELP_MODE;
 			break; // espandibile
 		default: 
 			DIE(argv[0], "modalità di inserimento dati non riconosciuta", close_client(EXIT_FAILURE));
 			break; 
 	}
 
-
-	
 	sem_t *sem;
 	int shared_memory_fd;
 	client_server_shm_t *shm_data;
+	config_files_names_t config;
+
 	SYSV(sem = sem_open(SEM_NAME, 0), SEM_FAILED, "sem_open");
     SYSC(sem_wait(sem), "sem_wait");
 	SYSC(sem_post(sem), "sem_post"); // ripostoi il semaforo per altri client ipotetici
     SYSC(sem_close(sem), "sem_close");
+
     SYSC(shared_memory_fd = shm_open(SHM_NAME, O_RDONLY, 0), "shm_open");
     SYSV(shm_data = mmap(NULL, sizeof(*shm_data), PROT_READ, MAP_SHARED, shared_memory_fd, 0), MAP_FAILED, "mmap");
 	SYSC(close(shared_memory_fd), "close");
+
 	SYSV(mq = mq_open(shm_data->queue_name, O_WRONLY), MQ_FAILED, "mq_open");
     requests_argument_separator = shm_data->requests_argument_separator;
+	snprintf(config.env, FILENAME_BUFF, "%s", shm_data->config.env);
+	snprintf(config.rescuer_types, FILENAME_BUFF, "%s", shm_data->config.rescuer_types);
+	snprintf(config.emergency_types, FILENAME_BUFF, "%s", shm_data->config.emergency_types);
+
 	SYSC(munmap(shm_data, sizeof(*shm_data)), "munmap");
 
 	switch (mode) {
+		case HELP_MODE:						print_help_info(argv, config); break;
 		case NORMAL_MODE: 					handle_normal_mode_input(argv); break;
 		case FILE_MODE:  					handle_file_mode_input(argv); break;
 		case STOP_CLIENT_AND_SERVER_MODE: 	handle_stop_mode_client_server(); break;
@@ -82,6 +86,44 @@ int main(int argc, char* argv[]){
 	// oppure il client ha detto al server di fermarsi
 	close_client(EXIT_SUCCESS);
 	return 0;
+}
+
+static void cat_file(FILE *f, int max_file_lines, int max_file_line_length) {
+    if (!f) return;
+
+    char buffer[max_file_line_length];
+    int line_count = 0;
+
+    while (line_count < max_file_lines && fgets(buffer, sizeof(buffer), f)) {
+        fputs(buffer, stdout); 
+        line_count++;
+    }
+	printf("\n\n");
+	fflush(stdout);
+}
+
+void print_help_info(char* argv[], config_files_names_t config) {
+	FILE *envp, *resp, *emep;
+	
+	envp = fopen(config.env, "r");
+	resp = fopen(config.rescuer_types, "r");
+	emep = fopen(config.emergency_types, "r");
+
+	check_error_fopen(envp);
+	check_error_fopen(resp);
+	check_error_fopen(emep);
+
+	PRINT_CLIENT_USAGE(argv[0]);
+
+	printf("\n##########    FILE DI CONFIGURAZIONE   ##########  \n\n"); 
+
+	cat_file(envp, MAX_ENV_CONF_LINES, MAX_ENV_CONF_LINE_LENGTH);
+	cat_file(resp, MAX_RESCUER_CONF_LINES, MAX_RESCUER_CONF_LINE_LENGTH);
+	cat_file(emep, MAX_EMERGENCY_CONF_LINES, MAX_EMERGENCY_CONF_LINE_LENGTH);
+
+	if (envp) fclose(envp);
+    if (resp) fclose(resp);
+    if (emep) fclose(emep);
 }
 
 void handle_stop_mode_client_server(){

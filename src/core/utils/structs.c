@@ -45,6 +45,7 @@ int get_twin_index_by_id(int id, rescuer_digital_twin_t **list, int amount) {
 // funzioni per liberare strutture importanti
 
 void free_rescuers(rescuers_t *rescuers){
+	mtx_destroy(&(rescuers->mutex));
 	free_rescuer_types(rescuers->types);
 	rescuers->types = NULL;
 	free(rescuers);

@@ -10,7 +10,7 @@
 const log_event_info_t LOG_EVENT_LOOKUP_TABLE[LOG_EVENT_TYPES_COUNT] = {
 //  TYPE											// STRING										// CODICE			//TERMINA?		// DA LOGGARE?
     [NON_APPLICABLE]                    		= { "NON_APPLICABLE",                   			" ",    			false, 			true },
-    [DEBUG]                             		= { "DEBUG",                            			"DEH ",  			false, 			true },
+    [DEBUG]                             		= { "DEBUG",                            			"DEH ",  			false, 			false },
     [FATAL_ERROR]                       		= { "FATAL_ERROR",                      			"ferr",  			true, 			true },
     [FATAL_ERROR_CLIENT]                       	= { "FATAL_ERROR_CLIENT",                      		"ferc",  			false, 			true },
 	[FATAL_ERROR_PARSING]               		= { "FATAL_ERROR_PARSING",              			"fepa",  			true, 			true },
@@ -35,6 +35,7 @@ const log_event_info_t LOG_EVENT_LOOKUP_TABLE[LOG_EVENT_TYPES_COUNT] = {
     [RESCUER_REQUEST_ADDED]             		= { "RESCUER_REQUEST_ADDED",            			"rrad",  			false,  		true },
     [SERVER_UPDATE]                     		= { "SERVER_UPDATE",                    			"seup",  			false,  		true },
     [SERVER]                            		= { "SERVER",                           			"srvr",  			false,  		true },
+    [SERVER_CLOCK]                            	= { "SERVER_CLOCK",                           		"srvc",  			false,  		false },
     [CLIENT]                            		= { "CLIENT",                           			"clnt",  			false,  		true },
     [EMERGENCY_REQUEST_RECEIVED]        		= { "EMERGENCY_REQUEST_RECEIVED",       			"errr",  			false,  		true },
     [EMERGENCY_REQUEST_PROCESSED]       		= { "EMERGENCY_REQUEST_PROCESSED",      			"erpr",  			false,  		true },

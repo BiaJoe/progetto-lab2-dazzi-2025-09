@@ -1,5 +1,7 @@
 #include "server.h"
 
+extern server_context_t *ctx;
+
 void lock_emergencies() {
 	mtx_lock(&ctx->active_emergencies->mutex);
 }

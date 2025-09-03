@@ -21,6 +21,7 @@
 #include <stdio.h>
 #include <errno.h>
 
+#include "structs.h"
 #include "priority_queue.h"
 #include "log.h"
 #include "parsers.h"
@@ -83,10 +84,6 @@ void unlock_system();
 
 // main.c
 
-// questa variabile viene usata dai thread sempre
-// contiene lo stato del server
-extern server_context_t *ctx;
-
 void server_ipc_setup();
 void close_server(int exit_code);
 void init_server_context();
@@ -102,12 +99,13 @@ short get_next_priority(short p);
 // thread_clock.c
 
 int thread_clock(void *arg);
-void tick(server_context_t *ctx);
-void untick(server_context_t *ctx);
-void wait_for_a_tick(server_context_t *ctx);
-int server_is_ticking(server_context_t *ctx);
-void lock_server_clock(server_context_t *ctx);
-void unlock_server_clock(server_context_t *ctx);
+void tick();
+void untick();
+void wait_for_a_tick();
+int server_is_ticking();
+void lock_server_clock();
+void unlock_server_clock();
+int get_current_tick_count();
 
 // thread_reciever.c
 
@@ -125,6 +123,39 @@ void send_rescuer_digital_twin_to_scene_logging_blocked(rescuer_digital_twin_t *
 
 
 // thread_updater.c
+#define RESCUER_STATUS_FORMAT(t, message) \
+	"%s #%d (%d, %d) v=%d " message, \
+	t->rescuer->rescuer_type_name, \
+	t->id, t->x, t->y, \
+	t->rescuer->speed
+
+#define EMERGENCY_STATUS_FORMAT(e, message) \
+	"%s #%id (%d, %d) p=%d rna=%d rnd=%d tbt=%d tbp=%d " message, \
+	e->type->emergency_desc, \
+	e->id, e->x, e->y, e->priority, \
+	e->rescuers_not_arrived_yet, \
+	e->rescuers_not_done_yet, \
+	e->timeout_timer, \
+	e->promotion_timer
+
+#define EMERGENCY_STATUS_SHORT_FORMAT(e, message) \
+	"%s #%id (%d, %d) p=%d  " message, \
+	e->type->emergency_desc, \
+	e->id, e->x, e->y, e->priority
+
+
+#define LOG_RESCUER_STATUS_DEBUG(t, message)					do { log_event(t->id, DEBUG, 			RESCUER_STATUS_FORMAT(t, message)); } while(0)
+#define LOG_RESCUER_STATUS(t, message)  						do { log_event(t->id, RESCUER_STATUS, 	RESCUER_STATUS_FORMAT(t, message)); } while(0)
+#define LOG_RESCUER_ARRIVED(t, message) 						do { log_event(t->id, RESCUER_STATUS, 			 "%s #%d -> (%d, %d) " message, t->rescuer->rescuer_type_name, t->id, t->x, t->y); } while(0)
+#define LOG_RESCUER_MOVED(t, xA, yA)							do { log_event(t->id, RESCUER_TRAVELLING_STATUS, "%s #%d : (%d, %d) -> (%d, %d) il rescuer si è spostato", t->rescuer->rescuer_type_name, t->id, xA, yA, t->x, t->y); } while(0)
+#define LOG_RESCUER_SENT(t, newx, newy, message)				do { log_event(t->id, RESCUER_STATUS, 			 "%s #%d : (%d, %d) .. (%d, %d) " message, t->rescuer->rescuer_type_name, t->id, t->x, t-> y, newx, newy); } while(0)
+#define LOG_RESCUER_SENT_NAME(t, newx, newy, newname, message)	do { log_event(t->id, RESCUER_STATUS, 			 "%s #%d : (%d, %d) .. (%d, %d) %s" message, t->rescuer->rescuer_type_name, t->id, t->x, t-> y, newx, newy, newname); } while(0)
+
+
+#define LOG_EMERGENCY_STATUS_DEBUG(e, message) 		do { log_event(e->id, DEBUG, 			EMERGENCY_STATUS_FORMAT(e, message)); } while(0)
+#define LOG_EMERGENCY_STATUS(e, message) 			do { log_event(e->id, EMERGENCY_STATUS, EMERGENCY_STATUS_FORMAT(e, message)); } while(0)
+#define LOG_EMERGENCY_STATUS_SHORT(e, message) 		do { log_event(e->id, EMERGENCY_STATUS, EMERGENCY_STATUS_SHORT_FORMAT(e, message)); } while(0)
+
 
 int thread_updater(void *arg);
 void update_rescuers_states_logging_blocking();
@@ -133,9 +164,10 @@ void send_rescuer_digital_twin_back_to_base_logging_blocked(rescuer_digital_twin
 void update_active_emergencies_states_logging_blocking();
 void update_active_emergency_state_logging_blocked(emergency_t *e);
 void update_waiting_emergencies_states();
-void update_waiting_emergency_state(emergency_t *e);
-bool emergency_has_expired(emergency_t *e);
+void update_waiting_emergency_state(void *arg);
+bool emergency_has_expired(void *arg);
 void remove_expired_waiting_emergencies_logging();
-bool emergency_is_to_promote(emergency_t *e);
-void promote_needing_emergencies();
+bool emergency_is_to_promote(void *arg);
+void promote_needing_waiting_emergencies();
+
 #endif

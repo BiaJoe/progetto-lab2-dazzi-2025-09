@@ -1,0 +1,340 @@
+1756914502307 N/A  LOGGING_STARTED                SERVER       (SERVER) Inizio del Logging!
+1756914502307 N/A  PARSING_STARTED                SERVER       Inizio parsing dei file di configurazione
+1756914502307 0    EMPTY_CONF_LINE_IGNORED        SERVER       linea commentata ignorata (1) conf/env.conf
+1756914502307 1    EMPTY_CONF_LINE_IGNORED        SERVER       linea commentata ignorata (1) conf/rescuers.conf
+1756914502307 2    EMPTY_CONF_LINE_IGNORED        SERVER       linea commentata ignorata (2) conf/rescuers.conf
+1756914502307 0    RESCUER_DIGITAL_TWIN_ADDED     SERVER       ⛑️  Gemello [100, 200] (ID:0) Pompieri creato 
+1756914502307 1    RESCUER_DIGITAL_TWIN_ADDED     SERVER       ⛑️  Gemello [100, 200] (ID:1) Pompieri creato 
+1756914502307 2    RESCUER_DIGITAL_TWIN_ADDED     SERVER       ⛑️  Gemello [100, 200] (ID:2) Pompieri creato 
+1756914502307 3    RESCUER_DIGITAL_TWIN_ADDED     SERVER       ⛑️  Gemello [100, 200] (ID:3) Pompieri creato 
+1756914502307 4    RESCUER_DIGITAL_TWIN_ADDED     SERVER       ⛑️  Gemello [100, 200] (ID:4) Pompieri creato 
+1756914502307 3    RESCUER_TYPE_PARSED            SERVER       🚨  Rescuer (100, 200) Pompieri e 5 gemelli digitali aggiunto!
+1756914502307 5    RESCUER_DIGITAL_TWIN_ADDED     SERVER       ⛑️  Gemello [101, 200] (ID:5) Ambulanza creato 
+1756914502307 6    RESCUER_DIGITAL_TWIN_ADDED     SERVER       ⛑️  Gemello [101, 200] (ID:6) Ambulanza creato 
+1756914502307 7    RESCUER_DIGITAL_TWIN_ADDED     SERVER       ⛑️  Gemello [101, 200] (ID:7) Ambulanza creato 
+1756914502307 8    RESCUER_DIGITAL_TWIN_ADDED     SERVER       ⛑️  Gemello [101, 200] (ID:8) Ambulanza creato 
+1756914502307 9    RESCUER_DIGITAL_TWIN_ADDED     SERVER       ⛑️  Gemello [101, 200] (ID:9) Ambulanza creato 
+1756914502307 4    RESCUER_TYPE_PARSED            SERVER       🚨  Rescuer (101, 200) Ambulanza e 5 gemelli digitali aggiunto!
+1756914502307 10   RESCUER_DIGITAL_TWIN_ADDED     SERVER       ⛑️  Gemello [102, 200] (ID:10) Polizia creato 
+1756914502307 11   RESCUER_DIGITAL_TWIN_ADDED     SERVER       ⛑️  Gemello [102, 200] (ID:11) Polizia creato 
+1756914502307 12   RESCUER_DIGITAL_TWIN_ADDED     SERVER       ⛑️  Gemello [102, 200] (ID:12) Polizia creato 
+1756914502307 13   RESCUER_DIGITAL_TWIN_ADDED     SERVER       ⛑️  Gemello [102, 200] (ID:13) Polizia creato 
+1756914502307 14   RESCUER_DIGITAL_TWIN_ADDED     SERVER       ⛑️  Gemello [102, 200] (ID:14) Polizia creato 
+1756914502307 5    RESCUER_TYPE_PARSED            SERVER       🚨  Rescuer (102, 200) Polizia e 5 gemelli digitali aggiunto!
+1756914502308 15   RESCUER_DIGITAL_TWIN_ADDED     SERVER       ⛑️  Gemello [103, 200] (ID:15) Marta creato 
+1756914502308 16   RESCUER_DIGITAL_TWIN_ADDED     SERVER       ⛑️  Gemello [103, 200] (ID:16) Marta creato 
+1756914502308 17   RESCUER_DIGITAL_TWIN_ADDED     SERVER       ⛑️  Gemello [103, 200] (ID:17) Marta creato 
+1756914502308 18   RESCUER_DIGITAL_TWIN_ADDED     SERVER       ⛑️  Gemello [103, 200] (ID:18) Marta creato 
+1756914502308 19   RESCUER_DIGITAL_TWIN_ADDED     SERVER       ⛑️  Gemello [103, 200] (ID:19) Marta creato 
+1756914502308 6    RESCUER_TYPE_PARSED            SERVER       🚨  Rescuer (103, 200) Marta e 5 gemelli digitali aggiunto!
+1756914502308 20   RESCUER_DIGITAL_TWIN_ADDED     SERVER       ⛑️  Gemello [9, 10] (ID:20) Batman creato 
+1756914502308 7    RESCUER_TYPE_PARSED            SERVER       🚨  Rescuer (9, 10) Batman e 1 gemelli digitali aggiunto!
+1756914502308 3    EMPTY_CONF_LINE_IGNORED        SERVER       linea commentata ignorata (1) conf/emergency_types.conf
+1756914502308 4    EMPTY_CONF_LINE_IGNORED        SERVER       linea commentata ignorata (2) conf/emergency_types.conf
+1756914502308 0    RESCUER_REQUEST_ADDED          SERVER       ⛑️  Richiesta di 2 unità di Pompieri per Incendio registrata
+1756914502308 1    EMERGENCY_PARSED               SERVER       ⚠️  Emergenza Incendio P:2 R:1 registrata
+1756914502308 1    RESCUER_REQUEST_ADDED          SERVER       ⛑️  Richiesta di 2 unità di Pompieri per Sommossa registrata
+1756914502308 2    RESCUER_REQUEST_ADDED          SERVER       ⛑️  Richiesta di 3 unità di Polizia per Sommossa registrata
+1756914502308 2    EMERGENCY_PARSED               SERVER       ⚠️  Emergenza Sommossa P:2 R:2 registrata
+1756914502308 3    RESCUER_REQUEST_ADDED          SERVER       ⛑️  Richiesta di 1 unità di Ambulanza per Infarto registrata
+1756914502308 3    EMERGENCY_PARSED               SERVER       ⚠️  Emergenza Infarto P:2 R:1 registrata
+1756914502308 4    RESCUER_REQUEST_ADDED          SERVER       ⛑️  Richiesta di 1 unità di Marta per Paolo deve andare in bagno registrata
+1756914502308 4    EMERGENCY_PARSED               SERVER       ⚠️  Emergenza Paolo deve andare in bagno P:0 R:1 registrata
+1756914502308 5    RESCUER_REQUEST_ADDED          SERVER       ⛑️  Richiesta di 1 unità di Batman per Gotham rischia la distruzione registrata
+1756914502308 5    EMERGENCY_PARSED               SERVER       ⚠️  Emergenza Gotham rischia la distruzione P:2 R:1 registrata
+1756914502308 5    EMPTY_CONF_LINE_IGNORED        SERVER       linea vuota ignorata (8) conf/emergency_types.conf
+1756914502308 6    EMPTY_CONF_LINE_IGNORED        SERVER       linea vuota ignorata (9) conf/emergency_types.conf
+1756914502308 N/A  PARSING_ENDED                  SERVER       Il parsing è terminato con successo!
+1756914502308 0    MESSAGE_QUEUE_SERVER           SERVER       coda emergenze pronta: /emergenze67672
+1756914502308 N/A  SERVER                         SERVER       IPC setup completato: coda MQ, SHM e semaforo pronti
+1756914502308 N/A  SERVER                         SERVER       tutte le variabili sono state ottenute dal server: adesso il sistema è a regime!
+1756914502308 N/A  MESSAGE_QUEUE_SERVER           RECEIVER     inizio della ricezione delle emergenze!
+1756914502811 0    SERVER_UPDATE                  UPDATER      Aggiornamento #1 del server
+1756914503314 1    SERVER_UPDATE                  UPDATER      Aggiornamento #2 del server
+1756914503354 N/A  LOGGING_STARTED                CLIENT       (CLIENT) Inizio del Logging!
+1756914503354 N/A  CLIENT                         CLIENT       inizia il processo del client
+1756914503356 0    MESSAGE_QUEUE_CLIENT           CLIENT       Il lavoro del client è finito. Il processo si chiude
+1756914503356 N/A  LOGGING_ENDED                  CLIENT       (CLIENT) Logging terminato :)
+1756914503815 2    SERVER_UPDATE                  UPDATER      Aggiornamento #3 del server
+1756914504321 3    SERVER_UPDATE                  UPDATER      Aggiornamento #4 del server
+1756914504827 4    SERVER_UPDATE                  UPDATER      Aggiornamento #5 del server
+1756914505328 5    SERVER_UPDATE                  UPDATER      Aggiornamento #6 del server
+1756914505834 6    SERVER_UPDATE                  UPDATER      Aggiornamento #7 del server
+1756914506335 7    SERVER_UPDATE                  UPDATER      Aggiornamento #8 del server
+1756914506837 8    SERVER_UPDATE                  UPDATER      Aggiornamento #9 del server
+1756914507342 9    SERVER_UPDATE                  UPDATER      Aggiornamento #10 del server
+1756914507845 10   SERVER_UPDATE                  UPDATER      Aggiornamento #11 del server
+1756914508351 11   SERVER_UPDATE                  UPDATER      Aggiornamento #12 del server
+1756914508853 12   SERVER_UPDATE                  UPDATER      Aggiornamento #13 del server
+1756914509358 13   SERVER_UPDATE                  UPDATER      Aggiornamento #14 del server
+1756914509863 14   SERVER_UPDATE                  UPDATER      Aggiornamento #15 del server
+1756914510369 15   SERVER_UPDATE                  UPDATER      Aggiornamento #16 del server
+1756914510875 16   SERVER_UPDATE                  UPDATER      Aggiornamento #17 del server
+1756914511380 17   SERVER_UPDATE                  UPDATER      Aggiornamento #18 del server
+1756914511886 18   SERVER_UPDATE                  UPDATER      Aggiornamento #19 del server
+1756914512392 19   SERVER_UPDATE                  UPDATER      Aggiornamento #20 del server
+1756914512898 20   SERVER_UPDATE                  UPDATER      Aggiornamento #21 del server
+1756914513404 21   SERVER_UPDATE                  UPDATER      Aggiornamento #22 del server
+1756914513910 22   SERVER_UPDATE                  UPDATER      Aggiornamento #23 del server
+1756914514415 23   SERVER_UPDATE                  UPDATER      Aggiornamento #24 del server
+1756914514921 24   SERVER_UPDATE                  UPDATER      Aggiornamento #25 del server
+1756914515422 25   SERVER_UPDATE                  UPDATER      Aggiornamento #26 del server
+1756914515928 26   SERVER_UPDATE                  UPDATER      Aggiornamento #27 del server
+1756914516431 27   SERVER_UPDATE                  UPDATER      Aggiornamento #28 del server
+1756914516933 28   SERVER_UPDATE                  UPDATER      Aggiornamento #29 del server
+1756914517439 29   SERVER_UPDATE                  UPDATER      Aggiornamento #30 del server
+1756914517942 30   SERVER_UPDATE                  UPDATER      Aggiornamento #31 del server
+1756914518448 31   SERVER_UPDATE                  UPDATER      Aggiornamento #32 del server
+1756914518954 32   SERVER_UPDATE                  UPDATER      Aggiornamento #33 del server
+1756914519457 33   SERVER_UPDATE                  UPDATER      Aggiornamento #34 del server
+1756914519963 34   SERVER_UPDATE                  UPDATER      Aggiornamento #35 del server
+1756914520466 35   SERVER_UPDATE                  UPDATER      Aggiornamento #36 del server
+1756914520972 36   SERVER_UPDATE                  UPDATER      Aggiornamento #37 del server
+1756914521475 37   SERVER_UPDATE                  UPDATER      Aggiornamento #38 del server
+1756914521981 38   SERVER_UPDATE                  UPDATER      Aggiornamento #39 del server
+1756914522483 39   SERVER_UPDATE                  UPDATER      Aggiornamento #40 del server
+1756914522985 40   SERVER_UPDATE                  UPDATER      Aggiornamento #41 del server
+1756914523491 41   SERVER_UPDATE                  UPDATER      Aggiornamento #42 del server
+1756914523997 42   SERVER_UPDATE                  UPDATER      Aggiornamento #43 del server
+1756914524498 43   SERVER_UPDATE                  UPDATER      Aggiornamento #44 del server
+1756914525004 44   SERVER_UPDATE                  UPDATER      Aggiornamento #45 del server
+1756914525507 45   SERVER_UPDATE                  UPDATER      Aggiornamento #46 del server
+1756914526013 46   SERVER_UPDATE                  UPDATER      Aggiornamento #47 del server
+1756914526519 47   SERVER_UPDATE                  UPDATER      Aggiornamento #48 del server
+1756914527025 48   SERVER_UPDATE                  UPDATER      Aggiornamento #49 del server
+1756914527531 49   SERVER_UPDATE                  UPDATER      Aggiornamento #50 del server
+1756914528034 50   SERVER_UPDATE                  UPDATER      Aggiornamento #51 del server
+1756914528536 51   SERVER_UPDATE                  UPDATER      Aggiornamento #52 del server
+1756914529040 52   SERVER_UPDATE                  UPDATER      Aggiornamento #53 del server
+1756914529544 53   SERVER_UPDATE                  UPDATER      Aggiornamento #54 del server
+1756914530050 54   SERVER_UPDATE                  UPDATER      Aggiornamento #55 del server
+1756914530552 55   SERVER_UPDATE                  UPDATER      Aggiornamento #56 del server
+1756914531055 56   SERVER_UPDATE                  UPDATER      Aggiornamento #57 del server
+1756914531557 57   SERVER_UPDATE                  UPDATER      Aggiornamento #58 del server
+1756914532062 58   SERVER_UPDATE                  UPDATER      Aggiornamento #59 del server
+1756914532568 59   SERVER_UPDATE                  UPDATER      Aggiornamento #60 del server
+1756914533071 60   SERVER_UPDATE                  UPDATER      Aggiornamento #61 del server
+1756914533577 61   SERVER_UPDATE                  UPDATER      Aggiornamento #62 del server
+1756914534080 62   SERVER_UPDATE                  UPDATER      Aggiornamento #63 del server
+1756914534583 63   SERVER_UPDATE                  UPDATER      Aggiornamento #64 del server
+1756914535084 64   SERVER_UPDATE                  UPDATER      Aggiornamento #65 del server
+1756914535589 65   SERVER_UPDATE                  UPDATER      Aggiornamento #66 del server
+1756914536091 66   SERVER_UPDATE                  UPDATER      Aggiornamento #67 del server
+1756914536593 67   SERVER_UPDATE                  UPDATER      Aggiornamento #68 del server
+1756914537094 68   SERVER_UPDATE                  UPDATER      Aggiornamento #69 del server
+1756914537600 69   SERVER_UPDATE                  UPDATER      Aggiornamento #70 del server
+1756914538101 70   SERVER_UPDATE                  UPDATER      Aggiornamento #71 del server
+1756914538602 71   SERVER_UPDATE                  UPDATER      Aggiornamento #72 del server
+1756914539108 72   SERVER_UPDATE                  UPDATER      Aggiornamento #73 del server
+1756914539609 73   SERVER_UPDATE                  UPDATER      Aggiornamento #74 del server
+1756914540114 74   SERVER_UPDATE                  UPDATER      Aggiornamento #75 del server
+1756914540617 75   SERVER_UPDATE                  UPDATER      Aggiornamento #76 del server
+1756914541118 76   SERVER_UPDATE                  UPDATER      Aggiornamento #77 del server
+1756914541619 77   SERVER_UPDATE                  UPDATER      Aggiornamento #78 del server
+1756914542125 78   SERVER_UPDATE                  UPDATER      Aggiornamento #79 del server
+1756914542629 79   SERVER_UPDATE                  UPDATER      Aggiornamento #80 del server
+1756914543134 80   SERVER_UPDATE                  UPDATER      Aggiornamento #81 del server
+1756914543640 81   SERVER_UPDATE                  UPDATER      Aggiornamento #82 del server
+1756914544143 82   SERVER_UPDATE                  UPDATER      Aggiornamento #83 del server
+1756914544647 83   SERVER_UPDATE                  UPDATER      Aggiornamento #84 del server
+1756914545149 84   SERVER_UPDATE                  UPDATER      Aggiornamento #85 del server
+1756914545655 85   SERVER_UPDATE                  UPDATER      Aggiornamento #86 del server
+1756914546157 86   SERVER_UPDATE                  UPDATER      Aggiornamento #87 del server
+1756914546662 87   SERVER_UPDATE                  UPDATER      Aggiornamento #88 del server
+1756914547164 88   SERVER_UPDATE                  UPDATER      Aggiornamento #89 del server
+1756914547668 89   SERVER_UPDATE                  UPDATER      Aggiornamento #90 del server
+1756914548171 90   SERVER_UPDATE                  UPDATER      Aggiornamento #91 del server
+1756914548672 91   SERVER_UPDATE                  UPDATER      Aggiornamento #92 del server
+1756914549174 92   SERVER_UPDATE                  UPDATER      Aggiornamento #93 del server
+1756914549678 93   SERVER_UPDATE                  UPDATER      Aggiornamento #94 del server
+1756914550180 94   SERVER_UPDATE                  UPDATER      Aggiornamento #95 del server
+1756914550684 95   SERVER_UPDATE                  UPDATER      Aggiornamento #96 del server
+1756914551187 96   SERVER_UPDATE                  UPDATER      Aggiornamento #97 del server
+1756914551690 97   SERVER_UPDATE                  UPDATER      Aggiornamento #98 del server
+1756914552193 98   SERVER_UPDATE                  UPDATER      Aggiornamento #99 del server
+1756914552699 99   SERVER_UPDATE                  UPDATER      Aggiornamento #100 del server
+1756914553202 100  SERVER_UPDATE                  UPDATER      Aggiornamento #101 del server
+1756914553708 101  SERVER_UPDATE                  UPDATER      Aggiornamento #102 del server
+1756914554211 102  SERVER_UPDATE                  UPDATER      Aggiornamento #103 del server
+1756914554715 103  SERVER_UPDATE                  UPDATER      Aggiornamento #104 del server
+1756914555219 104  SERVER_UPDATE                  UPDATER      Aggiornamento #105 del server
+1756914555724 105  SERVER_UPDATE                  UPDATER      Aggiornamento #106 del server
+1756914556226 106  SERVER_UPDATE                  UPDATER      Aggiornamento #107 del server
+1756914556730 107  SERVER_UPDATE                  UPDATER      Aggiornamento #108 del server
+1756914557235 108  SERVER_UPDATE                  UPDATER      Aggiornamento #109 del server
+1756914557740 109  SERVER_UPDATE                  UPDATER      Aggiornamento #110 del server
+1756914558242 110  SERVER_UPDATE                  UPDATER      Aggiornamento #111 del server
+1756914558743 111  SERVER_UPDATE                  UPDATER      Aggiornamento #112 del server
+1756914559246 112  SERVER_UPDATE                  UPDATER      Aggiornamento #113 del server
+1756914559750 113  SERVER_UPDATE                  UPDATER      Aggiornamento #114 del server
+1756914560253 114  SERVER_UPDATE                  UPDATER      Aggiornamento #115 del server
+1756914560759 115  SERVER_UPDATE                  UPDATER      Aggiornamento #116 del server
+1756914561264 116  SERVER_UPDATE                  UPDATER      Aggiornamento #117 del server
+1756914561768 117  SERVER_UPDATE                  UPDATER      Aggiornamento #118 del server
+1756914562274 118  SERVER_UPDATE                  UPDATER      Aggiornamento #119 del server
+1756914562778 119  SERVER_UPDATE                  UPDATER      Aggiornamento #120 del server
+1756914563284 120  SERVER_UPDATE                  UPDATER      Aggiornamento #121 del server
+1756914563790 121  SERVER_UPDATE                  UPDATER      Aggiornamento #122 del server
+1756914564296 122  SERVER_UPDATE                  UPDATER      Aggiornamento #123 del server
+1756914564801 123  SERVER_UPDATE                  UPDATER      Aggiornamento #124 del server
+1756914565302 124  SERVER_UPDATE                  UPDATER      Aggiornamento #125 del server
+1756914565803 125  SERVER_UPDATE                  UPDATER      Aggiornamento #126 del server
+1756914566309 126  SERVER_UPDATE                  UPDATER      Aggiornamento #127 del server
+1756914566812 127  SERVER_UPDATE                  UPDATER      Aggiornamento #128 del server
+1756914567317 128  SERVER_UPDATE                  UPDATER      Aggiornamento #129 del server
+1756914567822 129  SERVER_UPDATE                  UPDATER      Aggiornamento #130 del server
+1756914568328 130  SERVER_UPDATE                  UPDATER      Aggiornamento #131 del server
+1756914568834 131  SERVER_UPDATE                  UPDATER      Aggiornamento #132 del server
+1756914569339 132  SERVER_UPDATE                  UPDATER      Aggiornamento #133 del server
+1756914569842 133  SERVER_UPDATE                  UPDATER      Aggiornamento #134 del server
+1756914570347 134  SERVER_UPDATE                  UPDATER      Aggiornamento #135 del server
+1756914570848 135  SERVER_UPDATE                  UPDATER      Aggiornamento #136 del server
+1756914571351 136  SERVER_UPDATE                  UPDATER      Aggiornamento #137 del server
+1756914571855 137  SERVER_UPDATE                  UPDATER      Aggiornamento #138 del server
+1756914572357 138  SERVER_UPDATE                  UPDATER      Aggiornamento #139 del server
+1756914572859 139  SERVER_UPDATE                  UPDATER      Aggiornamento #140 del server
+1756914573365 140  SERVER_UPDATE                  UPDATER      Aggiornamento #141 del server
+1756914573871 141  SERVER_UPDATE                  UPDATER      Aggiornamento #142 del server
+1756914574371 142  SERVER_UPDATE                  UPDATER      Aggiornamento #143 del server
+1756914574877 143  SERVER_UPDATE                  UPDATER      Aggiornamento #144 del server
+1756914575380 144  SERVER_UPDATE                  UPDATER      Aggiornamento #145 del server
+1756914575882 145  SERVER_UPDATE                  UPDATER      Aggiornamento #146 del server
+1756914576388 146  SERVER_UPDATE                  UPDATER      Aggiornamento #147 del server
+1756914576894 147  SERVER_UPDATE                  UPDATER      Aggiornamento #148 del server
+1756914577398 148  SERVER_UPDATE                  UPDATER      Aggiornamento #149 del server
+1756914577901 149  SERVER_UPDATE                  UPDATER      Aggiornamento #150 del server
+1756914578407 150  SERVER_UPDATE                  UPDATER      Aggiornamento #151 del server
+1756914578913 151  SERVER_UPDATE                  UPDATER      Aggiornamento #152 del server
+1756914579414 152  SERVER_UPDATE                  UPDATER      Aggiornamento #153 del server
+1756914579919 153  SERVER_UPDATE                  UPDATER      Aggiornamento #154 del server
+1756914580425 154  SERVER_UPDATE                  UPDATER      Aggiornamento #155 del server
+1756914580928 155  SERVER_UPDATE                  UPDATER      Aggiornamento #156 del server
+1756914581430 156  SERVER_UPDATE                  UPDATER      Aggiornamento #157 del server
+1756914581937 157  SERVER_UPDATE                  UPDATER      Aggiornamento #158 del server
+1756914582443 158  SERVER_UPDATE                  UPDATER      Aggiornamento #159 del server
+1756914582949 159  SERVER_UPDATE                  UPDATER      Aggiornamento #160 del server
+1756914583453 160  SERVER_UPDATE                  UPDATER      Aggiornamento #161 del server
+1756914583959 161  SERVER_UPDATE                  UPDATER      Aggiornamento #162 del server
+1756914584462 162  SERVER_UPDATE                  UPDATER      Aggiornamento #163 del server
+1756914584963 163  SERVER_UPDATE                  UPDATER      Aggiornamento #164 del server
+1756914585464 164  SERVER_UPDATE                  UPDATER      Aggiornamento #165 del server
+1756914585969 165  SERVER_UPDATE                  UPDATER      Aggiornamento #166 del server
+1756914586472 166  SERVER_UPDATE                  UPDATER      Aggiornamento #167 del server
+1756914586978 167  SERVER_UPDATE                  UPDATER      Aggiornamento #168 del server
+1756914587481 168  SERVER_UPDATE                  UPDATER      Aggiornamento #169 del server
+1756914587982 169  SERVER_UPDATE                  UPDATER      Aggiornamento #170 del server
+1756914588483 170  SERVER_UPDATE                  UPDATER      Aggiornamento #171 del server
+1756914588986 171  SERVER_UPDATE                  UPDATER      Aggiornamento #172 del server
+1756914589490 172  SERVER_UPDATE                  UPDATER      Aggiornamento #173 del server
+1756914589991 173  SERVER_UPDATE                  UPDATER      Aggiornamento #174 del server
+1756914590497 174  SERVER_UPDATE                  UPDATER      Aggiornamento #175 del server
+1756914590999 175  SERVER_UPDATE                  UPDATER      Aggiornamento #176 del server
+1756914591500 176  SERVER_UPDATE                  UPDATER      Aggiornamento #177 del server
+1756914592001 177  SERVER_UPDATE                  UPDATER      Aggiornamento #178 del server
+1756914592502 178  SERVER_UPDATE                  UPDATER      Aggiornamento #179 del server
+1756914593007 179  SERVER_UPDATE                  UPDATER      Aggiornamento #180 del server
+1756914593513 180  SERVER_UPDATE                  UPDATER      Aggiornamento #181 del server
+1756914594016 181  SERVER_UPDATE                  UPDATER      Aggiornamento #182 del server
+1756914594520 182  SERVER_UPDATE                  UPDATER      Aggiornamento #183 del server
+1756914595021 183  SERVER_UPDATE                  UPDATER      Aggiornamento #184 del server
+1756914595527 184  SERVER_UPDATE                  UPDATER      Aggiornamento #185 del server
+1756914596028 185  SERVER_UPDATE                  UPDATER      Aggiornamento #186 del server
+1756914596531 186  SERVER_UPDATE                  UPDATER      Aggiornamento #187 del server
+1756914597036 187  SERVER_UPDATE                  UPDATER      Aggiornamento #188 del server
+1756914597537 188  SERVER_UPDATE                  UPDATER      Aggiornamento #189 del server
+1756914598042 189  SERVER_UPDATE                  UPDATER      Aggiornamento #190 del server
+1756914598548 190  SERVER_UPDATE                  UPDATER      Aggiornamento #191 del server
+1756914599054 191  SERVER_UPDATE                  UPDATER      Aggiornamento #192 del server
+1756914599555 192  SERVER_UPDATE                  UPDATER      Aggiornamento #193 del server
+1756914600060 193  SERVER_UPDATE                  UPDATER      Aggiornamento #194 del server
+1756914600565 194  SERVER_UPDATE                  UPDATER      Aggiornamento #195 del server
+1756914601065 195  SERVER_UPDATE                  UPDATER      Aggiornamento #196 del server
+1756914601571 196  SERVER_UPDATE                  UPDATER      Aggiornamento #197 del server
+1756914602074 197  SERVER_UPDATE                  UPDATER      Aggiornamento #198 del server
+1756914602580 198  SERVER_UPDATE                  UPDATER      Aggiornamento #199 del server
+1756914603085 199  SERVER_UPDATE                  UPDATER      Aggiornamento #200 del server
+1756914603586 200  SERVER_UPDATE                  UPDATER      Aggiornamento #201 del server
+1756914604088 201  SERVER_UPDATE                  UPDATER      Aggiornamento #202 del server
+1756914604594 202  SERVER_UPDATE                  UPDATER      Aggiornamento #203 del server
+1756914605095 203  SERVER_UPDATE                  UPDATER      Aggiornamento #204 del server
+1756914605601 204  SERVER_UPDATE                  UPDATER      Aggiornamento #205 del server
+1756914606102 205  SERVER_UPDATE                  UPDATER      Aggiornamento #206 del server
+1756914606608 206  SERVER_UPDATE                  UPDATER      Aggiornamento #207 del server
+1756914607111 207  SERVER_UPDATE                  UPDATER      Aggiornamento #208 del server
+1756914607611 208  SERVER_UPDATE                  UPDATER      Aggiornamento #209 del server
+1756914608117 209  SERVER_UPDATE                  UPDATER      Aggiornamento #210 del server
+1756914608623 210  SERVER_UPDATE                  UPDATER      Aggiornamento #211 del server
+1756914609124 211  SERVER_UPDATE                  UPDATER      Aggiornamento #212 del server
+1756914609630 212  SERVER_UPDATE                  UPDATER      Aggiornamento #213 del server
+1756914610134 213  SERVER_UPDATE                  UPDATER      Aggiornamento #214 del server
+1756914610640 214  SERVER_UPDATE                  UPDATER      Aggiornamento #215 del server
+1756914611143 215  SERVER_UPDATE                  UPDATER      Aggiornamento #216 del server
+1756914611643 216  SERVER_UPDATE                  UPDATER      Aggiornamento #217 del server
+1756914612147 217  SERVER_UPDATE                  UPDATER      Aggiornamento #218 del server
+1756914612653 218  SERVER_UPDATE                  UPDATER      Aggiornamento #219 del server
+1756914613154 219  SERVER_UPDATE                  UPDATER      Aggiornamento #220 del server
+1756914613660 220  SERVER_UPDATE                  UPDATER      Aggiornamento #221 del server
+1756914614166 221  SERVER_UPDATE                  UPDATER      Aggiornamento #222 del server
+1756914614667 222  SERVER_UPDATE                  UPDATER      Aggiornamento #223 del server
+1756914615172 223  SERVER_UPDATE                  UPDATER      Aggiornamento #224 del server
+1756914615675 224  SERVER_UPDATE                  UPDATER      Aggiornamento #225 del server
+1756914616176 225  SERVER_UPDATE                  UPDATER      Aggiornamento #226 del server
+1756914616677 226  SERVER_UPDATE                  UPDATER      Aggiornamento #227 del server
+1756914617178 227  SERVER_UPDATE                  UPDATER      Aggiornamento #228 del server
+1756914617684 228  SERVER_UPDATE                  UPDATER      Aggiornamento #229 del server
+1756914618190 229  SERVER_UPDATE                  UPDATER      Aggiornamento #230 del server
+1756914618696 230  SERVER_UPDATE                  UPDATER      Aggiornamento #231 del server
+1756914619198 231  SERVER_UPDATE                  UPDATER      Aggiornamento #232 del server
+1756914619704 232  SERVER_UPDATE                  UPDATER      Aggiornamento #233 del server
+1756914620206 233  SERVER_UPDATE                  UPDATER      Aggiornamento #234 del server
+1756914620712 234  SERVER_UPDATE                  UPDATER      Aggiornamento #235 del server
+1756914621218 235  SERVER_UPDATE                  UPDATER      Aggiornamento #236 del server
+1756914621722 236  SERVER_UPDATE                  UPDATER      Aggiornamento #237 del server
+1756914622224 237  SERVER_UPDATE                  UPDATER      Aggiornamento #238 del server
+1756914622730 238  SERVER_UPDATE                  UPDATER      Aggiornamento #239 del server
+1756914623232 239  SERVER_UPDATE                  UPDATER      Aggiornamento #240 del server
+1756914623734 240  SERVER_UPDATE                  UPDATER      Aggiornamento #241 del server
+1756914624235 241  SERVER_UPDATE                  UPDATER      Aggiornamento #242 del server
+1756914624736 242  SERVER_UPDATE                  UPDATER      Aggiornamento #243 del server
+1756914625237 243  SERVER_UPDATE                  UPDATER      Aggiornamento #244 del server
+1756914625740 244  SERVER_UPDATE                  UPDATER      Aggiornamento #245 del server
+1756914626246 245  SERVER_UPDATE                  UPDATER      Aggiornamento #246 del server
+1756914626752 246  SERVER_UPDATE                  UPDATER      Aggiornamento #247 del server
+1756914627258 247  SERVER_UPDATE                  UPDATER      Aggiornamento #248 del server
+1756914627759 248  SERVER_UPDATE                  UPDATER      Aggiornamento #249 del server
+1756914628264 249  SERVER_UPDATE                  UPDATER      Aggiornamento #250 del server
+1756914628765 250  SERVER_UPDATE                  UPDATER      Aggiornamento #251 del server
+1756914629268 251  SERVER_UPDATE                  UPDATER      Aggiornamento #252 del server
+1756914629771 252  SERVER_UPDATE                  UPDATER      Aggiornamento #253 del server
+1756914630272 253  SERVER_UPDATE                  UPDATER      Aggiornamento #254 del server
+1756914630774 254  SERVER_UPDATE                  UPDATER      Aggiornamento #255 del server
+1756914631275 255  SERVER_UPDATE                  UPDATER      Aggiornamento #256 del server
+1756914631780 256  SERVER_UPDATE                  UPDATER      Aggiornamento #257 del server
+1756914632286 257  SERVER_UPDATE                  UPDATER      Aggiornamento #258 del server
+1756914632792 258  SERVER_UPDATE                  UPDATER      Aggiornamento #259 del server
+1756914633296 259  SERVER_UPDATE                  UPDATER      Aggiornamento #260 del server
+1756914633802 260  SERVER_UPDATE                  UPDATER      Aggiornamento #261 del server
+1756914634303 261  SERVER_UPDATE                  UPDATER      Aggiornamento #262 del server
+1756914634806 262  SERVER_UPDATE                  UPDATER      Aggiornamento #263 del server
+1756914635310 263  SERVER_UPDATE                  UPDATER      Aggiornamento #264 del server
+1756914635816 264  SERVER_UPDATE                  UPDATER      Aggiornamento #265 del server
+1756914636322 265  SERVER_UPDATE                  UPDATER      Aggiornamento #266 del server
+1756914636824 266  SERVER_UPDATE                  UPDATER      Aggiornamento #267 del server
+1756914637326 267  SERVER_UPDATE                  UPDATER      Aggiornamento #268 del server
+1756914637831 268  SERVER_UPDATE                  UPDATER      Aggiornamento #269 del server
+1756914638335 269  SERVER_UPDATE                  UPDATER      Aggiornamento #270 del server
+1756914638841 270  SERVER_UPDATE                  UPDATER      Aggiornamento #271 del server
+1756914639343 271  SERVER_UPDATE                  UPDATER      Aggiornamento #272 del server
+1756914639849 272  SERVER_UPDATE                  UPDATER      Aggiornamento #273 del server
+1756914640352 273  SERVER_UPDATE                  UPDATER      Aggiornamento #274 del server
+1756914640857 274  SERVER_UPDATE                  UPDATER      Aggiornamento #275 del server
+1756914641360 275  SERVER_UPDATE                  UPDATER      Aggiornamento #276 del server
+1756914641865 276  SERVER_UPDATE                  UPDATER      Aggiornamento #277 del server
+1756914642368 277  SERVER_UPDATE                  UPDATER      Aggiornamento #278 del server
+1756914642869 278  SERVER_UPDATE                  UPDATER      Aggiornamento #279 del server
+1756914643375 279  SERVER_UPDATE                  UPDATER      Aggiornamento #280 del server
+1756914643880 280  SERVER_UPDATE                  UPDATER      Aggiornamento #281 del server
+1756914644382 281  SERVER_UPDATE                  UPDATER      Aggiornamento #282 del server
+1756914644885 282  SERVER_UPDATE                  UPDATER      Aggiornamento #283 del server
+1756914645390 283  SERVER_UPDATE                  UPDATER      Aggiornamento #284 del server
+1756914645894 284  SERVER_UPDATE                  UPDATER      Aggiornamento #285 del server

@@ -46,6 +46,15 @@ bool line_is_empty_logging(parsing_state_t *ps){
 	return false;
 }
 
+static bool line_is_comment(char *line) {
+	if (!line) return false;
+    char *s = line;
+    while (*s == ' ' || *s == '\t') s++;
+
+    if (*s == COMMENT_CHAR) return true;
+	return false;
+}
+
 // logga e ritorna false se la riga analizzata è illegale secondo i criteri passati da input
 bool check_if_line_can_be_processed_logging(parsing_state_t *ps, int max_lines, int max_parsable_lines, int max_line_length){
 	if(ps->line_number > max_lines) { 				
@@ -66,6 +75,11 @@ bool check_if_line_can_be_processed_logging(parsing_state_t *ps, int max_lines, 
 		return false;
 	}
 
+	if (line_is_comment(ps->line)){
+		log_event(AUTOMATIC_LOG_ID, EMPTY_CONF_LINE_IGNORED, "linea commentata ignorata (%d) %s", ps->line_number, ps->filename);
+		return false;
+	}
+
 	if (is_line_empty(ps->line)){
 		log_event(AUTOMATIC_LOG_ID, EMPTY_CONF_LINE_IGNORED, "linea vuota ignorata (%d) %s", ps->line_number, ps->filename);
 		return false;
@@ -74,14 +88,14 @@ bool check_if_line_can_be_processed_logging(parsing_state_t *ps, int max_lines, 
 	return true;
 }
 
-// salta le linee vuote
+// salta le linee vuote o commentate 
 // ritorna false se trova una linea illegale, altrimenti true
 bool skip_and_log_empty_or_illegal_lines(parsing_state_t *ps, int max_lines, int max_parsable_lines, int max_line_length){
-    while(go_to_next_line(ps)){
+    while (go_to_next_line(ps)) {
         if (!check_if_line_can_be_processed_logging(ps, max_lines, max_parsable_lines, max_line_length))
-			return false;
-        if (!line_is_empty_logging(ps)) 
-			break;
+			continue;
+        // se arrivo qui, la riga è processabile
+        return true;
     }
-	return true;
+    return false;
 }
