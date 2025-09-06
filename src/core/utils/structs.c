@@ -34,12 +34,13 @@ rescuer_request_t * get_rescuer_request_by_name(char *name, rescuer_request_t **
 }
 
 int get_twin_index_by_id(int id, rescuer_digital_twin_t **list, int amount) {
-	for (int i = 0; i < amount; i++) {
-		if (list[i]->id == id) {
-			return i;
-		}
-	}
-	return -1;
+	if (!list || amount <= 0) return -1;
+    for (int i = 0; i < amount; i++) {
+        rescuer_digital_twin_t *t = list[i];
+        if (!t) continue;            
+        if (t->id == id) return i;
+    }
+    return -1;
 }
 
 // funzioni per liberare strutture importanti

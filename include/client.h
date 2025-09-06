@@ -3,6 +3,7 @@
 
 #define _GNU_SOURCE // per usare getline
 
+#include <signal.h>
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <sys/stat.h>

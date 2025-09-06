@@ -11,10 +11,16 @@
 #define EMERGENCY_TYPES_CONF "conf/emergency_types.conf"
 #define ENV_CONF             "conf/env.conf"
 
+// file per facilitare il dibugging
+#define SIMULATION_JSON  "out/simulation.json"
+#define POSITIONS_JSON   "out/positions.json"
+#define POSITIONS_TXT    "out/positions.txt"
+
 static const logging_config_t server_logging_config = {
     .log_file                       = "log.txt",
     .log_file_ptr                   = NULL,
-    .logging_syntax                 = "%-13s %-4s %-30s %-12s %s\n",
+    // .logging_syntax                 = "[%s] [%s] [%s] (thread %s) %s\n", //timestamp, id, event_name, thread_name, event_string
+    .logging_syntax                 = "%-13s %-4s %-30s %-12s %s\n",  //timestamp, id, event_name, thread_name, event_string
     .non_applicable_log_id_string   = "N/A",
     .log_to_file                    = true,
     .log_to_stdout                  = true,
@@ -30,14 +36,14 @@ static const logging_config_t server_logging_config = {
 
 static const struct timespec server_tick_time = {
 	.tv_sec = 0,
-	.tv_nsec = ZERO_POINT_50_SECONDS
+	.tv_nsec = ZERO_POINT_25_SECONDS
 };
 
 static const priority_rule_t priority_lookup_table[] = {
 //   priority number        tempo prima della promozione,       tempo prima di andare in timeout
-    {0,                     30,                                NO_TIMEOUT  },
-    {1,                     NO_PROMOTION,                       30          },
-    {2,                     NO_PROMOTION,                       10          }
+    {0,                     60,                                NO_TIMEOUT  },
+    {1,                     NO_PROMOTION,                       60          },
+    {2,                     NO_PROMOTION,                       30          }
 };
 
 #endif

@@ -17,8 +17,6 @@ static mtx_t         stdout_flush_mutex;
 static mtx_t         thread_names_mutex;
 static thread_name_t thread_names[MAX_LOG_THREADS];
 
-
-
 static logging_config_t config;
 static atomic_int log_event_counters[LOG_EVENT_TYPES_COUNT];
 
@@ -53,7 +51,7 @@ static int logger_thread(void *arg) {
     (void)arg;
 
     if (config.log_to_file && !config.log_file_ptr) {
-        config.log_file_ptr = fopen(config.log_file, "a");
+        config.log_file_ptr = fopen(config.log_file, "w");
         check_error_fopen(config.log_file_ptr);
     }
 

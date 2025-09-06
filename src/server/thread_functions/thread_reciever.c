@@ -12,34 +12,19 @@ int thread_reciever(void *arg){
 	char buffer[MAX_EMERGENCY_QUEUE_MESSAGE_LENGTH];
 
 	while (!atomic_load(&ctx->server_must_stop)) {
-		ssize_t nread = mq_receive(ctx->mq, buffer, sizeof(buffer), NULL);
-    	check_error_mq_receive(nread);
+    	ssize_t nread = mq_receive(ctx->mq, buffer, sizeof(buffer), NULL);
+        if (nread < 0) {
+            log_event(NON_APPLICABLE_LOG_ID, MESSAGE_QUEUE_SERVER, "mq_receive: errore");
+            continue;
+        }
 
-    	if (nread < 0) { 
-			log_event(NON_APPLICABLE_LOG_ID, WRONG_EMERGENCY_REQUEST_IGNORED_SERVER, "Thread reciever non ha letto niente!");
-		}
+        if ((size_t)nread >= sizeof(buffer)) buffer[sizeof(buffer)-1] = '\0';
+        else buffer[nread] = '\0';
 
-		if ((size_t)nread >= sizeof(buffer)) {
-			buffer[sizeof(buffer) - 1] = '\0';
-			log_event(NON_APPLICABLE_LOG_ID, WRONG_EMERGENCY_REQUEST_IGNORED_SERVER, "messaggio MQ troncato: \"%s\"", buffer);
-			continue;
-		}	
-
-		buffer[nread] = '\0'; 
-
-		if (strcmp(buffer, MQ_STOP_MESSAGE) == 0) {		// se è il messaggio di stop devo uscire!
-			atomic_store(&ctx->server_must_stop, true);
-			pq_close(ctx->emergency_queue); 
-			cnd_broadcast(&ctx->clock->updated);
-			lock_emergencies();
-			for (int i = 0; i < WORKER_THREADS_NUMBER; ++i) {
-				emergency_t *e = ctx->active_emergencies->array[i];
-				if (e) cnd_broadcast(&e->cond);
-			}
-			unlock_emergencies();
-			return 0;
-		}
-
+        if (strcmp(buffer, MQ_STOP_MESSAGE) == 0) {
+            break; // esco 
+        }
+		
 		ctx->requests->count++;
 		emergency_request_t *r = parse_emergency_request(buffer, ctx->emergencies->types, ctx->enviroment->height, ctx->enviroment->width);
 		if(!r) {
@@ -100,6 +85,8 @@ emergency_t *mallocate_emergency(int id, emergency_type_t **types, emergency_req
 	e->timeout_timer 			= priority_to_timeout_timer(e->priority);
 	e->promotion_timer 			= priority_to_promotion_timer(e->priority);
 
+	e->how_many_times_was_paused = 0;
+	e->how_many_times_was_promoted = 0;
 	check_error_cnd_init(cnd_init(&e->cond));
 
 	return e;

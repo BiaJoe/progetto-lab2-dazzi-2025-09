@@ -3,18 +3,23 @@
 # ==========================
 
 # ---- Toolchain e flag
-CC      ?= gcc
-STD     ?= c11
-WARN    ?= -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wno-unused-parameter
-OPT     ?= -O2
-DBG     ?= -g
-CPPFLAGS?= -MMD -MP -Iinclude -I.       
-CFLAGS  ?= -std=$(STD) $(OPT) $(DBG) $(WARN)
-LDLIBS  ?= -pthread -lrt -lm             
+CC       ?= gcc
+STD      ?= c11
+WARN     ?= -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wno-unused-parameter
+OPT      ?= -O2
+DBG      ?= -g
+CPPFLAGS ?= -MMD -MP -Iinclude -I.
+CFLAGS   ?= -std=$(STD) $(OPT) $(DBG) $(WARN)
+LDLIBS   ?= -pthread -lrt -lm
 
-CFLAGS += -D_POSIX_C_SOURCE=200809L
+# POSIX features
+CFLAGS  += -D_POSIX_C_SOURCE=200809L
 
-BIN_DIR := bin
+# ---- Cartelle / strumenti
+BIN_DIR    := bin
+PYTHON     ?= python3
+TOOLS_DIR  := tools
+OUT_DIR    := out
 
 # ---- Sorgenti comuni (libreria di progetto)
 COMMON_SRCS := \
@@ -32,6 +37,7 @@ COMMON_SRCS := \
 SERVER_SRCS := \
   src/server/main.c \
   src/server/server_helpers.c \
+  src/server/thread_functions/json_visualizer.c \
   src/server/thread_functions/thread_updater.c \
   src/server/thread_functions/thread_clock.c \
   src/server/thread_functions/thread_reciever.c \
@@ -41,7 +47,7 @@ SERVER_SRCS := \
 CLIENT_SRCS := \
   src/client/client.c
 
-# ---- Oggetti (compilazione in-place semplice)
+# ---- Oggetti
 COMMON_OBJS := $(COMMON_SRCS:.c=.o)
 SERVER_OBJS := $(SERVER_SRCS:.c=.o)
 CLIENT_OBJS := $(CLIENT_SRCS:.c=.o)
@@ -50,8 +56,13 @@ CLIENT_OBJS := $(CLIENT_SRCS:.c=.o)
 SERVER_BIN := ./server
 CLIENT_BIN := ./client
 
+# ---- Artefatti simulazione
+SIM_JSON     := $(OUT_DIR)/sim.json
+FRAMES_DIR   := $(OUT_DIR)/frames
+FRAMES_SCRIPT:= $(TOOLS_DIR)/json2frames.py
+
 # ---- Target principali
-.PHONY: all clean distclean run tests
+.PHONY: all clean distclean run tests frames frames-clean
 
 all: $(SERVER_BIN) $(CLIENT_BIN)
 
@@ -66,27 +77,27 @@ run: $(SERVER_BIN) $(CLIENT_BIN)
 	@echo "▶ Avvio server…"
 	@$(SERVER_BIN)
 
+.PHONY: show-pos show_pos
+
+show_pos: out/positions.txt
+
+show-pos show_pos: out/positions.txt
+	@echo "==== out/positions.txt ===="
+	@cat out/positions.txt
+
+
 # ---- Compilazione .o + deps
 %.o: %.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
 # ---- Pulizia
-clean:
+clean: 
 	@$(RM) $(COMMON_OBJS) $(SERVER_OBJS) $(CLIENT_OBJS)
 	@$(RM) $(COMMON_OBJS:.o=.d) $(SERVER_OBJS:.o=.d) $(CLIENT_OBJS:.o=.d)
 	@$(RM) $(CLIENT_BIN) $(SERVER_BIN)
-	@$(RM) log.txt
 	@echo "Puliti oggetti, deps ed eseguibili."
+
 
 # ---- Dipendenze auto-generate
 DEPS := $(COMMON_OBJS:.o=.d) $(SERVER_OBJS:.o=.d) $(CLIENT_OBJS:.o=.d)
 -include $(DEPS)
-
-# ---- (Opzionale) build dei test singoli:
-# Aggiungi qui per ciascun test che vuoi (linkato con COMMON_OBJS)
-# Esempi:
-# bin/tests/log_test: src/tests/log_test.c $(COMMON_OBJS)
-# 	@mkdir -p bin/tests
-# 	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
-#
-# tests: bin/tests/log_test bin/tests/log_stress bin/tests/test_queue

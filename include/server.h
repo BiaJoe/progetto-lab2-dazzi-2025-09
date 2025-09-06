@@ -26,7 +26,14 @@
 #include "log.h"
 #include "parsers.h"
 
-#define WORKER_THREADS_NUMBER 5
+#define POS_MAX_WIDTH       70
+#define POS_EMERGENCY_CHAR  'E'
+#define POS_RESCUER_CHAR    'R'
+#define POS_MAP_BORDER_CHAR '#'
+
+
+#define WORKER_THREADS_NUMBER 10
+#define MQ_STOP_MESSAGE "-stop"
 
 #define LOG_IGNORE_EMERGENCY_REQUEST(m) log_event(NO_ID, WRONG_EMERGENCY_REQUEST_IGNORED_SERVER, m)
 #define LOG_EMERGENCY_REQUEST_RECIVED() log_event(NO_ID, EMERGENCY_REQUEST_RECEIVED, "emergenza ricevuta e messa in attesa di essere processata!")
@@ -83,8 +90,17 @@ void lock_system();
 void unlock_system();
 
 // main.c
+bool start_threads(
+    thrd_t *clock_thread,
+    thrd_t *updater_thread,
+    thrd_t *receiver_thread,
+    thrd_t worker_threads[WORKER_THREADS_NUMBER],
+    int *main_threads_started,
+    int *workers_started
+);
 
 void server_ipc_setup();
+void request_shutdown_from_thread(int code);
 void close_server(int exit_code);
 void init_server_context();
 void cleanup_server_context();
@@ -117,7 +133,6 @@ void free_emergency(emergency_t* e);
 
 #define INDEX_NOT_FOUND -1
 int thread_worker(void *arg);
-void timeout_trash_close_logging_blocking(int i, emergency_t *e);
 bool find_rescuers_logging_blocking(emergency_t *e);
 void send_rescuer_digital_twin_to_scene_logging_blocked(rescuer_digital_twin_t *t, emergency_t *e);
 
@@ -130,7 +145,7 @@ void send_rescuer_digital_twin_to_scene_logging_blocked(rescuer_digital_twin_t *
 	t->rescuer->speed
 
 #define EMERGENCY_STATUS_FORMAT(e, message) \
-	"%s #%id (%d, %d) p=%d rna=%d rnd=%d tbt=%d tbp=%d " message, \
+	"%s #%d (%d, %d) p=%d rna=%d rnd=%d tbt=%d tbp=%d " message, \
 	e->type->emergency_desc, \
 	e->id, e->x, e->y, e->priority, \
 	e->rescuers_not_arrived_yet, \
@@ -139,17 +154,17 @@ void send_rescuer_digital_twin_to_scene_logging_blocked(rescuer_digital_twin_t *
 	e->promotion_timer
 
 #define EMERGENCY_STATUS_SHORT_FORMAT(e, message) \
-	"%s #%id (%d, %d) p=%d  " message, \
+	"%s #%d (%d, %d) p=%d " message, \
 	e->type->emergency_desc, \
 	e->id, e->x, e->y, e->priority
 
 
 #define LOG_RESCUER_STATUS_DEBUG(t, message)					do { log_event(t->id, DEBUG, 			RESCUER_STATUS_FORMAT(t, message)); } while(0)
 #define LOG_RESCUER_STATUS(t, message)  						do { log_event(t->id, RESCUER_STATUS, 	RESCUER_STATUS_FORMAT(t, message)); } while(0)
-#define LOG_RESCUER_ARRIVED(t, message) 						do { log_event(t->id, RESCUER_STATUS, 			 "%s #%d -> (%d, %d) " message, t->rescuer->rescuer_type_name, t->id, t->x, t->y); } while(0)
-#define LOG_RESCUER_MOVED(t, xA, yA)							do { log_event(t->id, RESCUER_TRAVELLING_STATUS, "%s #%d : (%d, %d) -> (%d, %d) il rescuer si è spostato", t->rescuer->rescuer_type_name, t->id, xA, yA, t->x, t->y); } while(0)
-#define LOG_RESCUER_SENT(t, newx, newy, message)				do { log_event(t->id, RESCUER_STATUS, 			 "%s #%d : (%d, %d) .. (%d, %d) " message, t->rescuer->rescuer_type_name, t->id, t->x, t-> y, newx, newy); } while(0)
-#define LOG_RESCUER_SENT_NAME(t, newx, newy, newname, message)	do { log_event(t->id, RESCUER_STATUS, 			 "%s #%d : (%d, %d) .. (%d, %d) %s" message, t->rescuer->rescuer_type_name, t->id, t->x, t-> y, newx, newy, newname); } while(0)
+#define LOG_RESCUER_ARRIVED(t, message) 						do { log_event(t->id, RESCUER_STATUS, 			 "%s #%d (%d, %d) " message, t->rescuer->rescuer_type_name, t->id, t->x, t->y); } while(0)
+#define LOG_RESCUER_MOVED(t, xA, yA)							do { log_event(t->id, RESCUER_TRAVELLING_STATUS, "%s #%d (%d, %d) (%d, %d) passo fatto", t->rescuer->rescuer_type_name, t->id, xA, yA, t->x, t->y); } while(0)
+#define LOG_RESCUER_SENT(t, newx, newy, message)				do { log_event(t->id, RESCUER_STATUS, 			 "%s #%d Pos(%d, %d) Dest(%d, %d) " message, t->rescuer->rescuer_type_name, t->id, t->x, t-> y, newx, newy); } while(0)
+#define LOG_RESCUER_SENT_NAME(t, newx, newy, newname, message)	do { log_event(t->id, RESCUER_STATUS, 			 "%s #%d Pos(%d, %d) Dest(%d, %d) %s " message, t->rescuer->rescuer_type_name, t->id, t->x, t-> y, newx, newy, newname); } while(0)
 
 
 #define LOG_EMERGENCY_STATUS_DEBUG(e, message) 		do { log_event(e->id, DEBUG, 			EMERGENCY_STATUS_FORMAT(e, message)); } while(0)
@@ -158,10 +173,10 @@ void send_rescuer_digital_twin_to_scene_logging_blocked(rescuer_digital_twin_t *
 
 
 int thread_updater(void *arg);
-void update_rescuers_states_logging_blocking();
+void update_rescuers_states_logging();
 bool update_rescuer_digital_twin_state_logging_blocked(rescuer_digital_twin_t *t, int minx, int miny, int height, int width);
 void send_rescuer_digital_twin_back_to_base_logging_blocked(rescuer_digital_twin_t *t);
-void update_active_emergencies_states_logging_blocking();
+void update_active_emergencies_states_logging();
 void update_active_emergency_state_logging_blocked(emergency_t *e);
 void update_waiting_emergencies_states();
 void update_waiting_emergency_state(void *arg);
@@ -169,5 +184,11 @@ bool emergency_has_expired(void *arg);
 void remove_expired_waiting_emergencies_logging();
 bool emergency_is_to_promote(void *arg);
 void promote_needing_waiting_emergencies();
+
+// json_visualizer.c
+bool json_visualizer_begin(const char *path, int width, int height);
+bool json_visualizer_append_tick(int tick);
+bool json_visualizer_end(void);
+bool json_visualizer_positions_dump(const char *json_path, const char *txt_path);
 
 #endif

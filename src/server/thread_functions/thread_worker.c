@@ -38,7 +38,7 @@ int thread_worker(void *arg){
 	// l'indice personal del worker, è quello con cui accede alla sua casella di emergenza
     const int index = atomic_fetch_add(&ctx->active_emergencies->next_tw_index, 1);
     if (index >= WORKER_THREADS_NUMBER) {
-        log_error_and_exit(close_server, "non abbastanza slot di emergenze per i thread workers");
+        log_error_and_exit(request_shutdown_from_thread, "non abbastanza slot di emergenze per i thread workers");
     }
 
 	char tname[MAX_THREAD_NAME_LENGTH];
@@ -112,28 +112,37 @@ static bool is_preemptable_or_available(rescuer_digital_twin_t* t, short priorit
 	return true;
 }
 
-// risponde lo stato migliore
-static inline int twin_state_rank(rescuer_status_t s) {
-    switch (s) {
-        case IDLE:               return 0; // migliore
-        case EN_ROUTE_TO_SCENE:  return 1;
-        case ON_SCENE:           return 2;
-        default:                 return 4; // qualsiasi altro stato sconosciuto: peggiore
-    }
-}
-
 // Ritorna:
-//   > 0  se a è preferibile a b
-//   < 0  se b è preferibile a a
-//   = 0  se equivalenti
+// > 0  se a è preferibile a b
+// < 0  se b è preferibile a a
+// = 0  se equivalenti
 static int compare_twins(emergency_t *e, rescuer_digital_twin_t *a, rescuer_digital_twin_t *b) {
-    int sa = twin_state_rank(a->status);
-    int sb = twin_state_rank(b->status);
-    if (sa != sb) return (sa < sb) ? +1 : -1;
+    // sempre meglio un gemello IDLE di uno al lavoro
+    const bool a_idle = (a->status == IDLE);
+    const bool b_idle = (b->status == IDLE);
+    if (a_idle != b_idle) return a_idle ? +1 : -1;
 
+    // se non sono Idle allora meglio quello legato ad un'emergenza meno importante
+    if (a->emergency && b->emergency) {
+        int comp = compare_priorities(a->emergency->priority, b->emergency->priority);
+        if (comp != 0) return (comp < 0) ? +1 : -1; // meglio quella con p più bassa
+    }
+
+    // Chi arriva prima è preferibile
     int ta = estimated_arrival_time(e, a);
     int tb = estimated_arrival_time(e, b);
-    return tb - ta; // meglio chi arriva prima
+    if (ta != tb) return (tb - ta);
+
+    // EN_ROUTE_TO_SCENE preferibile a ON_SCENE
+    const bool a_route = (a->status == EN_ROUTE_TO_SCENE);
+    const bool b_route = (b->status == EN_ROUTE_TO_SCENE);
+    const bool a_scene = (a->status == ON_SCENE);
+    const bool b_scene = (b->status == ON_SCENE);
+
+    if (a_route && b_scene) return +1;
+    if (b_route && a_scene) return -1;
+
+    return 0; // completamente equivalenti
 }
 
 
@@ -181,6 +190,7 @@ static void preempt_if_needed_blocked(rescuer_digital_twin_t *t, emergency_t *ne
 	
 	// se non l'avevo già messa in pausa per un rescuer precedente, lo faccio
 	if (old->status != PAUSED) {
+		old->how_many_times_was_paused++;
         old->status = PAUSED;
         cnd_signal(&old->cond);
         log_event(old->id, EMERGENCY_STATUS, "(%d, %d) %s PAUSATA da (%d, %d) %s", old->x, old->y, old->type->emergency_desc, newe->x, newe->y, newe->type->emergency_desc);

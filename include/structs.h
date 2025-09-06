@@ -26,7 +26,6 @@
 #define MAX_ENV_CONF_LINES 12
 #define MAX_ENV_CONF_LINE_LENGTH 128
 
-#define MQ_STOP_MESSAGE "-stop"
 #define MAX_EMERGENCY_NAME_LENGTH 64
 
 #define STR_HELPER(x) #x    
@@ -131,6 +130,8 @@ struct emergency {
 	int rescuers_not_done_yet;				// quanti rescuers non hanno ancora finito
 	int timeout_timer;						// timeout che conta i tick prima di essere messa in timeout
 	int promotion_timer;
+	int how_many_times_was_paused;
+	int how_many_times_was_promoted;
 	cnd_t cond;
 };
 
@@ -170,6 +171,7 @@ typedef struct {
     char queue_name[MAX_EMERGENCY_QUEUE_NAME_LENGTH];
 	char requests_argument_separator;
 	config_files_names_t config;
+	pid_t server_pid;
 } client_server_shm_t;
 
 // funzioni di accesso a strutture

@@ -6,7 +6,8 @@
 #include "log.h"
 
 static const logging_config_t client_logging_config = {
-    .logging_syntax                 = "%-13s %-4s %-30s %-16s %s\n", //timestamp, id, event_name, thread_name, event_string
+    .logging_syntax                 = "%-13s %-4s %-30s %-12s %s\n",  //timestamp, id, event_name, thread_name, event_string
+    //.logging_syntax                 = "[%s] [%s] [%s] (thread %s) %s\n", //timestamp, id, event_name, thread_name, event_string
     .non_applicable_log_id_string   = "N/A",
     .log_to_file                    = true,
     .log_to_stdout                  = true,

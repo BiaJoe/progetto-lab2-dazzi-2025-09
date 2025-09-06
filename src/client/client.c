@@ -5,6 +5,8 @@
 // poi invia le emergenze, ma lascia al server il compito di finire il check dei valori
 mqd_t mq;
 char requests_argument_separator;
+pid_t server_pid;
+
 
 static void close_client(int exit_code){
 	switch (exit_code) {
@@ -53,7 +55,7 @@ int main(int argc, char* argv[]){
 
 	sem_t *sem;
 	int shared_memory_fd;
-	client_server_shm_t *shm_data;
+	client_server_shm_t *shm;
 	config_files_names_t config;
 
 	SYSV(sem = sem_open(SEM_NAME, 0), SEM_FAILED, "sem_open");
@@ -62,16 +64,18 @@ int main(int argc, char* argv[]){
     SYSC(sem_close(sem), "sem_close");
 
     SYSC(shared_memory_fd = shm_open(SHM_NAME, O_RDONLY, 0), "shm_open");
-    SYSV(shm_data = mmap(NULL, sizeof(*shm_data), PROT_READ, MAP_SHARED, shared_memory_fd, 0), MAP_FAILED, "mmap");
+    SYSV(shm = mmap(NULL, sizeof(*shm), PROT_READ, MAP_SHARED, shared_memory_fd, 0), MAP_FAILED, "mmap");
 	SYSC(close(shared_memory_fd), "close");
 
-	SYSV(mq = mq_open(shm_data->queue_name, O_WRONLY), MQ_FAILED, "mq_open");
-    requests_argument_separator = shm_data->requests_argument_separator;
-	snprintf(config.env, FILENAME_BUFF, "%s", shm_data->config.env);
-	snprintf(config.rescuer_types, FILENAME_BUFF, "%s", shm_data->config.rescuer_types);
-	snprintf(config.emergency_types, FILENAME_BUFF, "%s", shm_data->config.emergency_types);
+	SYSV(mq = mq_open(shm->queue_name, O_WRONLY), MQ_FAILED, "mq_open");
+    requests_argument_separator = shm->requests_argument_separator;
+	server_pid = shm->server_pid;
 
-	SYSC(munmap(shm_data, sizeof(*shm_data)), "munmap");
+	snprintf(config.env, FILENAME_BUFF, "%s", shm->config.env);
+	snprintf(config.rescuer_types, FILENAME_BUFF, "%s", shm->config.rescuer_types);
+	snprintf(config.emergency_types, FILENAME_BUFF, "%s", shm->config.emergency_types);
+
+	SYSC(munmap(shm, sizeof(*shm)), "munmap");
 
 	switch (mode) {
 		case HELP_MODE:						print_help_info(argv, config); break;
@@ -104,7 +108,7 @@ static void cat_file(FILE *f, int max_file_lines, int max_file_line_length) {
 
 void print_help_info(char* argv[], config_files_names_t config) {
 	FILE *envp, *resp, *emep;
-	
+
 	envp = fopen(config.env, "r");
 	resp = fopen(config.rescuer_types, "r");
 	emep = fopen(config.emergency_types, "r");
@@ -126,10 +130,9 @@ void print_help_info(char* argv[], config_files_names_t config) {
     if (emep) fclose(emep);
 }
 
-void handle_stop_mode_client_server(){
-	char *buffer = MQ_STOP_MESSAGE;
-	SYSC(mq_send(mq, buffer, strlen(buffer) + 1, 0), "mq_send");
-	log_event(AUTOMATIC_LOG_ID, MESSAGE_QUEUE_CLIENT, "inviato messaggio di stop dal client");
+void handle_stop_mode_client_server(void){
+    SYSC(kill(server_pid, SIGTERM), "kill(SIGTERM)");
+    log_event(AUTOMATIC_LOG_ID, MESSAGE_QUEUE_CLIENT, "inviato SIGTERM al server (pid=%d)", (int)server_pid);
 }
 
 void send_emergency_request_message(char string[MAX_EMERGENCY_REQUEST_LENGTH + 1]) {
@@ -145,8 +148,10 @@ void send_emergency_request_message(char string[MAX_EMERGENCY_REQUEST_LENGTH + 1
 		return;
 	}
 	sleep(delay); 		// aspetto il delay prima di inviare l'emergenza, in modo da poterla subito processare nel server senza dover aspettare
-	SYSC(mq_send(mq, string, strlen(string) + 1, 0), "mq_send");
-	log_event(AUTOMATIC_LOG_ID, MESSAGE_QUEUE_CLIENT, "inviata emergenza al server");
+	size_t len = strlen(string);
+	if(string[len-1] == '\n') string[len-1] = '\0';
+	SYSC(mq_send(mq, string, len + 1, 0), "mq_send");
+	log_event(AUTOMATIC_LOG_ID, MESSAGE_QUEUE_CLIENT, "Emergenza inviata: %s", string);
 }
 
 // gestisce la singola emergenza passata da terminale
