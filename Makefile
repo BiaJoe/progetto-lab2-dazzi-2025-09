@@ -8,7 +8,7 @@ STD      ?= c11
 WARN     ?= -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wno-unused-parameter
 OPT      ?= -O2
 DBG      ?= -g
-CPPFLAGS ?= -MMD -MP -Iinclude -I.
+CPPFLAGS ?= -Iinclude -I.
 CFLAGS   ?= -std=$(STD) $(OPT) $(DBG) $(WARN)
 LDLIBS   ?= -pthread -lrt -lm
 
@@ -96,8 +96,3 @@ clean:
 	@$(RM) $(COMMON_OBJS:.o=.d) $(SERVER_OBJS:.o=.d) $(CLIENT_OBJS:.o=.d)
 	@$(RM) $(CLIENT_BIN) $(SERVER_BIN)
 	@echo "Puliti oggetti, deps ed eseguibili."
-
-
-# ---- Dipendenze auto-generate
-DEPS := $(COMMON_OBJS:.o=.d) $(SERVER_OBJS:.o=.d) $(CLIENT_OBJS:.o=.d)
--include $(DEPS)

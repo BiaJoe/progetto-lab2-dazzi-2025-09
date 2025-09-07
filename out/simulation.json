@@ -113,24 +113,6 @@
     {
       "tick": 13,
       "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 14,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 15,
-      "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 50, "y": 48 },
         { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 50, "y": 48 },
         { "id": 35, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 53, "y": 50 }
@@ -140,7 +122,7 @@
       ]
     },
     {
-      "tick": 16,
+      "tick": 14,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 52, "y": 48 },
         { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 52, "y": 48 },
@@ -151,7 +133,7 @@
       ]
     },
     {
-      "tick": 17,
+      "tick": 15,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 54, "y": 48 },
         { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 54, "y": 48 },
@@ -162,7 +144,7 @@
       ]
     },
     {
-      "tick": 18,
+      "tick": 16,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 56, "y": 48 },
         { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 56, "y": 48 },
@@ -173,7 +155,7 @@
       ]
     },
     {
-      "tick": 19,
+      "tick": 17,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 57, "y": 49 },
         { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 57, "y": 49 },
@@ -188,7 +170,7 @@
       ]
     },
     {
-      "tick": 20,
+      "tick": 18,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 59, "y": 49 },
         { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 59, "y": 49 },
@@ -203,7 +185,7 @@
       ]
     },
     {
-      "tick": 21,
+      "tick": 19,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 61, "y": 49 },
         { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 61, "y": 49 },
@@ -218,7 +200,7 @@
       ]
     },
     {
-      "tick": 22,
+      "tick": 20,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 63, "y": 49 },
         { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 63, "y": 49 },
@@ -233,7 +215,7 @@
       ]
     },
     {
-      "tick": 23,
+      "tick": 21,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 65, "y": 49 },
         { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 65, "y": 49 },
@@ -252,7 +234,7 @@
       ]
     },
     {
-      "tick": 24,
+      "tick": 22,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 67, "y": 49 },
         { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 67, "y": 49 },
@@ -271,7 +253,7 @@
       ]
     },
     {
-      "tick": 25,
+      "tick": 23,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 69, "y": 49 },
         { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 69, "y": 49 },
@@ -290,7 +272,7 @@
       ]
     },
     {
-      "tick": 26,
+      "tick": 24,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 71, "y": 49 },
         { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 71, "y": 49 },
@@ -309,7 +291,7 @@
       ]
     },
     {
-      "tick": 27,
+      "tick": 25,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 73, "y": 49 },
         { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 73, "y": 49 },
@@ -332,7 +314,7 @@
       ]
     },
     {
-      "tick": 28,
+      "tick": 26,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 75, "y": 49 },
         { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 75, "y": 49 },
@@ -355,7 +337,7 @@
       ]
     },
     {
-      "tick": 29,
+      "tick": 27,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 76, "y": 50 },
         { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 76, "y": 50 },
@@ -378,7 +360,7 @@
       ]
     },
     {
-      "tick": 30,
+      "tick": 28,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 78, "y": 50 },
         { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 78, "y": 50 },
@@ -401,7 +383,7 @@
       ]
     },
     {
-      "tick": 31,
+      "tick": 29,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 80, "y": 50 },
         { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 80, "y": 50 },
@@ -428,7 +410,7 @@
       ]
     },
     {
-      "tick": 32,
+      "tick": 30,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 82, "y": 50 },
         { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 82, "y": 50 },
@@ -455,7 +437,7 @@
       ]
     },
     {
-      "tick": 33,
+      "tick": 31,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "ON_SCENE", "x": 84, "y": 50 },
         { "id": 1, "type": "Pompieri", "status": "ON_SCENE", "x": 84, "y": 50 },
@@ -482,7 +464,7 @@
       ]
     },
     {
-      "tick": 34,
+      "tick": 32,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "ON_SCENE", "x": 84, "y": 50 },
         { "id": 1, "type": "Pompieri", "status": "ON_SCENE", "x": 84, "y": 50 },
@@ -509,7 +491,7 @@
       ]
     },
     {
-      "tick": 35,
+      "tick": 33,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "ON_SCENE", "x": 84, "y": 50 },
         { "id": 1, "type": "Pompieri", "status": "ON_SCENE", "x": 84, "y": 50 },
@@ -540,7 +522,7 @@
       ]
     },
     {
-      "tick": 36,
+      "tick": 34,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "ON_SCENE", "x": 84, "y": 50 },
         { "id": 1, "type": "Pompieri", "status": "ON_SCENE", "x": 84, "y": 50 },
@@ -571,7 +553,7 @@
       ]
     },
     {
-      "tick": 37,
+      "tick": 35,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 82, "y": 50 },
         { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 82, "y": 50 },
@@ -602,7 +584,7 @@
       ]
     },
     {
-      "tick": 38,
+      "tick": 36,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 80, "y": 50 },
         { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 80, "y": 50 },
@@ -633,7 +615,7 @@
       ]
     },
     {
-      "tick": 39,
+      "tick": 37,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 78, "y": 50 },
         { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 78, "y": 50 },
@@ -671,7 +653,7 @@
       ]
     },
     {
-      "tick": 40,
+      "tick": 38,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 76, "y": 50 },
         { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 76, "y": 50 },
@@ -709,7 +691,7 @@
       ]
     },
     {
-      "tick": 41,
+      "tick": 39,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 75, "y": 49 },
         { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 75, "y": 49 },
@@ -747,7 +729,7 @@
       ]
     },
     {
-      "tick": 42,
+      "tick": 40,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 73, "y": 49 },
         { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 73, "y": 49 },
@@ -785,7 +767,7 @@
       ]
     },
     {
-      "tick": 43,
+      "tick": 41,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 71, "y": 49 },
         { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 71, "y": 49 },
@@ -831,7 +813,7 @@
       ]
     },
     {
-      "tick": 44,
+      "tick": 42,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 69, "y": 49 },
         { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 69, "y": 49 },
@@ -877,7 +859,7 @@
       ]
     },
     {
-      "tick": 45,
+      "tick": 43,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 67, "y": 49 },
         { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 67, "y": 49 },
@@ -923,7 +905,7 @@
       ]
     },
     {
-      "tick": 46,
+      "tick": 44,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 65, "y": 49 },
         { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 65, "y": 49 },
@@ -969,7 +951,7 @@
       ]
     },
     {
-      "tick": 47,
+      "tick": 45,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 63, "y": 49 },
         { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 63, "y": 49 },
@@ -1023,7 +1005,7 @@
       ]
     },
     {
-      "tick": 48,
+      "tick": 46,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 61, "y": 49 },
         { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 61, "y": 49 },
@@ -1077,7 +1059,7 @@
       ]
     },
     {
-      "tick": 49,
+      "tick": 47,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 59, "y": 49 },
         { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 59, "y": 49 },
@@ -1130,7 +1112,7 @@
       ]
     },
     {
-      "tick": 50,
+      "tick": 48,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 57, "y": 49 },
         { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 57, "y": 49 },
@@ -1182,7 +1164,7 @@
       ]
     },
     {
-      "tick": 51,
+      "tick": 49,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 56, "y": 48 },
         { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 56, "y": 48 },
@@ -1252,7 +1234,7 @@
       ]
     },
     {
-      "tick": 52,
+      "tick": 50,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 54, "y": 48 },
         { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 54, "y": 48 },
@@ -1322,7 +1304,7 @@
       ]
     },
     {
-      "tick": 53,
+      "tick": 51,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 52, "y": 48 },
         { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 52, "y": 48 },
@@ -1391,7 +1373,7 @@
       ]
     },
     {
-      "tick": 54,
+      "tick": 52,
       "rescuers": [
         { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 50, "y": 48 },
         { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 50, "y": 48 },
@@ -1459,7 +1441,7 @@
       ]
     },
     {
-      "tick": 55,
+      "tick": 53,
       "rescuers": [
         { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 66, "y": 57 },
         { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 66, "y": 57 },
@@ -1525,7 +1507,7 @@
       ]
     },
     {
-      "tick": 56,
+      "tick": 54,
       "rescuers": [
         { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 65, "y": 56 },
         { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 65, "y": 56 },
@@ -1590,7 +1572,7 @@
       ]
     },
     {
-      "tick": 57,
+      "tick": 55,
       "rescuers": [
         { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 64, "y": 55 },
         { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 64, "y": 55 },
@@ -1655,7 +1637,7 @@
       ]
     },
     {
-      "tick": 58,
+      "tick": 56,
       "rescuers": [
         { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 62, "y": 55 },
         { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 62, "y": 55 },
@@ -1720,7 +1702,7 @@
       ]
     },
     {
-      "tick": 59,
+      "tick": 57,
       "rescuers": [
         { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 61, "y": 54 },
         { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 61, "y": 54 },
@@ -1785,7 +1767,7 @@
       ]
     },
     {
-      "tick": 60,
+      "tick": 58,
       "rescuers": [
         { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 59, "y": 54 },
         { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 59, "y": 54 },
@@ -1850,7 +1832,7 @@
       ]
     },
     {
-      "tick": 61,
+      "tick": 59,
       "rescuers": [
         { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 58, "y": 53 },
         { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 58, "y": 53 },
@@ -1912,7 +1894,7 @@
       ]
     },
     {
-      "tick": 62,
+      "tick": 60,
       "rescuers": [
         { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 57, "y": 52 },
         { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 57, "y": 52 },
@@ -1972,7 +1954,7 @@
       ]
     },
     {
-      "tick": 63,
+      "tick": 61,
       "rescuers": [
         { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 55, "y": 52 },
         { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 55, "y": 52 },
@@ -2032,7 +2014,7 @@
       ]
     },
     {
-      "tick": 64,
+      "tick": 62,
       "rescuers": [
         { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 54, "y": 51 },
         { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 54, "y": 51 },
@@ -2092,7 +2074,7 @@
       ]
     },
     {
-      "tick": 65,
+      "tick": 63,
       "rescuers": [
         { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 53, "y": 50 },
         { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 53, "y": 50 },
@@ -2152,7 +2134,7 @@
       ]
     },
     {
-      "tick": 66,
+      "tick": 64,
       "rescuers": [
         { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 51, "y": 50 },
         { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 51, "y": 50 },
@@ -2212,7 +2194,7 @@
       ]
     },
     {
-      "tick": 67,
+      "tick": 65,
       "rescuers": [
         { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 50, "y": 49 },
         { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 50, "y": 49 },
@@ -2269,7 +2251,7 @@
       ]
     },
     {
-      "tick": 68,
+      "tick": 66,
       "rescuers": [
         { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 49, "y": 48 },
         { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 49, "y": 48 },
@@ -2326,7 +2308,7 @@
       ]
     },
     {
-      "tick": 69,
+      "tick": 67,
       "rescuers": [
         { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 51, "y": 52 },
         { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 51, "y": 52 },
@@ -2381,7 +2363,7 @@
       ]
     },
     {
-      "tick": 70,
+      "tick": 68,
       "rescuers": [
         { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 50, "y": 51 },
         { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 50, "y": 51 },
@@ -2436,7 +2418,7 @@
       ]
     },
     {
-      "tick": 71,
+      "tick": 69,
       "rescuers": [
         { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 49, "y": 50 },
         { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 49, "y": 50 },
@@ -2491,7 +2473,7 @@
       ]
     },
     {
-      "tick": 72,
+      "tick": 70,
       "rescuers": [
         { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 48, "y": 49 },
         { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 48, "y": 49 },
@@ -2543,3201 +2525,6 @@
         { "id": 13, "type": "Incendio Medio", "status": "IN_PROGRESS", "x": 8, "y": 63 },
         { "id": 14, "type": "Incendio Medio", "status": "COMPLETED", "x": 14, "y": 50 },
         { "id": 15, "type": "Incendio Grande", "status": "ASSIGNED", "x": 18, "y": 27 }
-      ]
-    },
-    {
-      "tick": 73,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 49, "y": 47 },
-        { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 49, "y": 47 },
-        { "id": 2, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 49, "y": 47 },
-        { "id": 6, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 73 },
-        { "id": 7, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 73 },
-        { "id": 8, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 73 },
-        { "id": 9, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 73 },
-        { "id": 10, "type": "Pompieri", "status": "ON_SCENE", "x": 8, "y": 63 },
-        { "id": 11, "type": "Pompieri", "status": "ON_SCENE", "x": 8, "y": 63 },
-        { "id": 12, "type": "Pompieri", "status": "ON_SCENE", "x": 8, "y": 63 },
-        { "id": 13, "type": "Pompieri", "status": "ON_SCENE", "x": 8, "y": 63 },
-        { "id": 14, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 18, "y": 50 },
-        { "id": 15, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 18, "y": 50 },
-        { "id": 16, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 18, "y": 50 },
-        { "id": 17, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 18, "y": 50 },
-        { "id": 18, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 21, "y": 29 },
-        { "id": 19, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 21, "y": 29 },
-        { "id": 20, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 21, "y": 29 },
-        { "id": 21, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 21, "y": 29 },
-        { "id": 22, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 21, "y": 29 },
-        { "id": 23, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 21, "y": 29 },
-        { "id": 24, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 21, "y": 29 },
-        { "id": 25, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 21, "y": 29 },
-        { "id": 26, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 21, "y": 29 },
-        { "id": 27, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 21, "y": 29 },
-        { "id": 35, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 26, "y": 57 },
-        { "id": 36, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 37, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 51, "y": 48 },
-        { "id": 38, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 51, "y": 48 },
-        { "id": 39, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 51, "y": 48 },
-        { "id": 44, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 45, "y": 57 },
-        { "id": 45, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 45, "y": 57 },
-        { "id": 46, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 45, "y": 57 },
-        { "id": 47, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 39, "y": 58 },
-        { "id": 48, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 39, "y": 58 },
-        { "id": 49, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 26, "y": 57 },
-        { "id": 50, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 47, "y": 50 },
-        { "id": 51, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 47, "y": 50 },
-        { "id": 52, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 53, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 54, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 55, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 }
-      ],
-      "emergencies": [
-        { "id": 6, "type": "Incendio Minore", "status": "ASSIGNED", "x": 84, "y": 50 },
-        { "id": 7, "type": "Incendio Minore", "status": "ASSIGNED", "x": 80, "y": 63 },
-        { "id": 8, "type": "Incendio Minore", "status": "ASSIGNED", "x": 70, "y": 73 },
-        { "id": 9, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 57, "y": 81 },
-        { "id": 10, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 43, "y": 85 },
-        { "id": 11, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 30, "y": 81 },
-        { "id": 12, "type": "Incendio Medio", "status": "IN_PROGRESS", "x": 18, "y": 73 },
-        { "id": 13, "type": "Incendio Medio", "status": "IN_PROGRESS", "x": 8, "y": 63 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 57, "y": 15 },
-        { "id": 15, "type": "Incendio Grande", "status": "ASSIGNED", "x": 18, "y": 27 }
-      ]
-    },
-    {
-      "tick": 74,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 49, "y": 45 },
-        { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 49, "y": 45 },
-        { "id": 2, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 49, "y": 45 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 19, "y": 72 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 19, "y": 72 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 19, "y": 72 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 19, "y": 72 },
-        { "id": 10, "type": "Pompieri", "status": "ON_SCENE", "x": 8, "y": 63 },
-        { "id": 11, "type": "Pompieri", "status": "ON_SCENE", "x": 8, "y": 63 },
-        { "id": 12, "type": "Pompieri", "status": "ON_SCENE", "x": 8, "y": 63 },
-        { "id": 13, "type": "Pompieri", "status": "ON_SCENE", "x": 8, "y": 63 },
-        { "id": 14, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 20, "y": 50 },
-        { "id": 15, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 20, "y": 50 },
-        { "id": 16, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 20, "y": 50 },
-        { "id": 17, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 20, "y": 50 },
-        { "id": 18, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 20, "y": 28 },
-        { "id": 19, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 20, "y": 28 },
-        { "id": 20, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 20, "y": 28 },
-        { "id": 21, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 20, "y": 28 },
-        { "id": 22, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 20, "y": 28 },
-        { "id": 23, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 20, "y": 28 },
-        { "id": 24, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 20, "y": 28 },
-        { "id": 25, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 20, "y": 28 },
-        { "id": 26, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 20, "y": 28 },
-        { "id": 27, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 20, "y": 28 },
-        { "id": 35, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 29, "y": 57 },
-        { "id": 36, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 37, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 51, "y": 45 },
-        { "id": 38, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 51, "y": 45 },
-        { "id": 39, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 51, "y": 45 },
-        { "id": 44, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 47, "y": 56 },
-        { "id": 45, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 47, "y": 56 },
-        { "id": 46, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 47, "y": 56 },
-        { "id": 47, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 41, "y": 57 },
-        { "id": 48, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 41, "y": 57 },
-        { "id": 49, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 29, "y": 57 },
-        { "id": 52, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 53, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 54, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 55, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 }
-      ],
-      "emergencies": [
-        { "id": 6, "type": "Incendio Minore", "status": "ASSIGNED", "x": 84, "y": 50 },
-        { "id": 7, "type": "Incendio Minore", "status": "ASSIGNED", "x": 80, "y": 63 },
-        { "id": 8, "type": "Incendio Minore", "status": "ASSIGNED", "x": 70, "y": 73 },
-        { "id": 9, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 57, "y": 81 },
-        { "id": 10, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 43, "y": 85 },
-        { "id": 11, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 30, "y": 81 },
-        { "id": 12, "type": "Incendio Medio", "status": "COMPLETED", "x": 18, "y": 73 },
-        { "id": 13, "type": "Incendio Medio", "status": "IN_PROGRESS", "x": 8, "y": 63 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 57, "y": 15 },
-        { "id": 15, "type": "Incendio Grande", "status": "ASSIGNED", "x": 18, "y": 27 }
-      ]
-    },
-    {
-      "tick": 75,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 49, "y": 43 },
-        { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 49, "y": 43 },
-        { "id": 2, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 49, "y": 43 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 49, "y": 47 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 49, "y": 47 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 49, "y": 47 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 20, "y": 71 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 20, "y": 71 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 20, "y": 71 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 20, "y": 71 },
-        { "id": 10, "type": "Pompieri", "status": "ON_SCENE", "x": 8, "y": 63 },
-        { "id": 11, "type": "Pompieri", "status": "ON_SCENE", "x": 8, "y": 63 },
-        { "id": 12, "type": "Pompieri", "status": "ON_SCENE", "x": 8, "y": 63 },
-        { "id": 13, "type": "Pompieri", "status": "ON_SCENE", "x": 8, "y": 63 },
-        { "id": 14, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 22, "y": 50 },
-        { "id": 15, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 22, "y": 50 },
-        { "id": 16, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 22, "y": 50 },
-        { "id": 17, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 22, "y": 50 },
-        { "id": 18, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 18, "y": 28 },
-        { "id": 19, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 18, "y": 28 },
-        { "id": 20, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 18, "y": 28 },
-        { "id": 21, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 18, "y": 28 },
-        { "id": 22, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 18, "y": 28 },
-        { "id": 23, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 18, "y": 28 },
-        { "id": 24, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 18, "y": 28 },
-        { "id": 25, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 18, "y": 28 },
-        { "id": 26, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 18, "y": 28 },
-        { "id": 27, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 18, "y": 28 },
-        { "id": 35, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 31, "y": 56 },
-        { "id": 36, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 37, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 52, "y": 43 },
-        { "id": 38, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 52, "y": 43 },
-        { "id": 39, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 52, "y": 43 },
-        { "id": 40, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 51, "y": 48 },
-        { "id": 41, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 51, "y": 48 },
-        { "id": 42, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 51, "y": 48 },
-        { "id": 44, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 48, "y": 54 },
-        { "id": 45, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 48, "y": 54 },
-        { "id": 46, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 48, "y": 54 },
-        { "id": 47, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 43, "y": 56 },
-        { "id": 48, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 43, "y": 56 },
-        { "id": 49, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 31, "y": 56 },
-        { "id": 52, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 53, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 54, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 55, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 }
-      ],
-      "emergencies": [
-        { "id": 6, "type": "Incendio Minore", "status": "ASSIGNED", "x": 84, "y": 50 },
-        { "id": 7, "type": "Incendio Minore", "status": "ASSIGNED", "x": 80, "y": 63 },
-        { "id": 8, "type": "Incendio Minore", "status": "ASSIGNED", "x": 70, "y": 73 },
-        { "id": 9, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 57, "y": 81 },
-        { "id": 10, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 43, "y": 85 },
-        { "id": 11, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 30, "y": 81 },
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 },
-        { "id": 13, "type": "Incendio Medio", "status": "IN_PROGRESS", "x": 8, "y": 63 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 57, "y": 15 },
-        { "id": 15, "type": "Incendio Grande", "status": "ASSIGNED", "x": 18, "y": 27 }
-      ]
-    },
-    {
-      "tick": 76,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 50, "y": 42 },
-        { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 50, "y": 42 },
-        { "id": 2, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 50, "y": 42 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 50, "y": 46 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 50, "y": 46 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 50, "y": 46 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 21, "y": 70 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 21, "y": 70 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 21, "y": 70 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 21, "y": 70 },
-        { "id": 10, "type": "Pompieri", "status": "ON_SCENE", "x": 8, "y": 63 },
-        { "id": 11, "type": "Pompieri", "status": "ON_SCENE", "x": 8, "y": 63 },
-        { "id": 12, "type": "Pompieri", "status": "ON_SCENE", "x": 8, "y": 63 },
-        { "id": 13, "type": "Pompieri", "status": "ON_SCENE", "x": 8, "y": 63 },
-        { "id": 14, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 23, "y": 49 },
-        { "id": 15, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 23, "y": 49 },
-        { "id": 16, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 23, "y": 49 },
-        { "id": 17, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 23, "y": 49 },
-        { "id": 18, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 19, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 20, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 21, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 22, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 23, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 24, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 25, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 26, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 27, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 35, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 33, "y": 55 },
-        { "id": 36, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 37, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 52, "y": 40 },
-        { "id": 38, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 52, "y": 40 },
-        { "id": 39, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 52, "y": 40 },
-        { "id": 40, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 53, "y": 47 },
-        { "id": 41, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 53, "y": 47 },
-        { "id": 42, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 53, "y": 47 },
-        { "id": 44, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 49, "y": 52 },
-        { "id": 45, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 49, "y": 52 },
-        { "id": 46, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 49, "y": 52 },
-        { "id": 47, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 44, "y": 54 },
-        { "id": 48, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 44, "y": 54 },
-        { "id": 49, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 33, "y": 55 },
-        { "id": 52, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 53, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 54, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 55, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 }
-      ],
-      "emergencies": [
-        { "id": 6, "type": "Incendio Minore", "status": "COMPLETED", "x": 84, "y": 50 },
-        { "id": 7, "type": "Incendio Minore", "status": "ASSIGNED", "x": 80, "y": 63 },
-        { "id": 8, "type": "Incendio Minore", "status": "ASSIGNED", "x": 70, "y": 73 },
-        { "id": 9, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 57, "y": 81 },
-        { "id": 10, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 43, "y": 85 },
-        { "id": 11, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 30, "y": 81 },
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 },
-        { "id": 13, "type": "Incendio Medio", "status": "IN_PROGRESS", "x": 8, "y": 63 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 57, "y": 15 },
-        { "id": 15, "type": "Incendio Grande", "status": "IN_PROGRESS", "x": 18, "y": 27 }
-      ]
-    },
-    {
-      "tick": 77,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 50, "y": 40 },
-        { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 50, "y": 40 },
-        { "id": 2, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 50, "y": 40 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 51, "y": 45 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 51, "y": 45 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 51, "y": 45 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 23, "y": 70 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 23, "y": 70 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 23, "y": 70 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 23, "y": 70 },
-        { "id": 10, "type": "Pompieri", "status": "ON_SCENE", "x": 8, "y": 63 },
-        { "id": 11, "type": "Pompieri", "status": "ON_SCENE", "x": 8, "y": 63 },
-        { "id": 12, "type": "Pompieri", "status": "ON_SCENE", "x": 8, "y": 63 },
-        { "id": 13, "type": "Pompieri", "status": "ON_SCENE", "x": 8, "y": 63 },
-        { "id": 14, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 25, "y": 49 },
-        { "id": 15, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 25, "y": 49 },
-        { "id": 16, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 25, "y": 49 },
-        { "id": 17, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 25, "y": 49 },
-        { "id": 18, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 19, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 20, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 21, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 22, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 23, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 24, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 25, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 26, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 27, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 35, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 36, "y": 55 },
-        { "id": 36, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 37, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 53, "y": 38 },
-        { "id": 38, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 53, "y": 38 },
-        { "id": 39, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 53, "y": 38 },
-        { "id": 40, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 54, "y": 45 },
-        { "id": 41, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 54, "y": 45 },
-        { "id": 42, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 54, "y": 45 },
-        { "id": 47, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 46, "y": 53 },
-        { "id": 48, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 46, "y": 53 },
-        { "id": 49, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 36, "y": 55 },
-        { "id": 52, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 53, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 54, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 55, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 }
-      ],
-      "emergencies": [
-        { "id": 7, "type": "Incendio Minore", "status": "ASSIGNED", "x": 80, "y": 63 },
-        { "id": 8, "type": "Incendio Minore", "status": "ASSIGNED", "x": 70, "y": 73 },
-        { "id": 9, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 57, "y": 81 },
-        { "id": 10, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 43, "y": 85 },
-        { "id": 11, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 30, "y": 81 },
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 },
-        { "id": 13, "type": "Incendio Medio", "status": "IN_PROGRESS", "x": 8, "y": 63 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 57, "y": 15 },
-        { "id": 15, "type": "Incendio Grande", "status": "IN_PROGRESS", "x": 18, "y": 27 }
-      ]
-    },
-    {
-      "tick": 78,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 51, "y": 39 },
-        { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 51, "y": 39 },
-        { "id": 2, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 51, "y": 39 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 52, "y": 44 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 52, "y": 44 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 52, "y": 44 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 24, "y": 69 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 24, "y": 69 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 24, "y": 69 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 24, "y": 69 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 10, "y": 63 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 10, "y": 63 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 10, "y": 63 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 10, "y": 63 },
-        { "id": 14, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 27, "y": 49 },
-        { "id": 15, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 27, "y": 49 },
-        { "id": 16, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 27, "y": 49 },
-        { "id": 17, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 27, "y": 49 },
-        { "id": 18, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 19, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 20, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 21, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 22, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 23, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 24, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 25, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 26, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 27, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 35, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 38, "y": 54 },
-        { "id": 36, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 37, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 53, "y": 35 },
-        { "id": 38, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 53, "y": 35 },
-        { "id": 39, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 53, "y": 35 },
-        { "id": 40, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 55, "y": 43 },
-        { "id": 41, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 55, "y": 43 },
-        { "id": 42, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 55, "y": 43 },
-        { "id": 47, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 48, "y": 52 },
-        { "id": 48, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 48, "y": 52 },
-        { "id": 49, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 38, "y": 54 },
-        { "id": 52, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 53, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 54, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 55, "type": "Ambulanza", "status": "ON_SCENE", "x": 18, "y": 27 }
-      ],
-      "emergencies": [
-        { "id": 7, "type": "Incendio Minore", "status": "ASSIGNED", "x": 80, "y": 63 },
-        { "id": 8, "type": "Incendio Minore", "status": "ASSIGNED", "x": 70, "y": 73 },
-        { "id": 9, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 57, "y": 81 },
-        { "id": 10, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 43, "y": 85 },
-        { "id": 11, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 30, "y": 81 },
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 },
-        { "id": 13, "type": "Incendio Medio", "status": "COMPLETED", "x": 8, "y": 63 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 57, "y": 15 },
-        { "id": 15, "type": "Incendio Grande", "status": "IN_PROGRESS", "x": 18, "y": 27 }
-      ]
-    },
-    {
-      "tick": 79,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 51, "y": 37 },
-        { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 51, "y": 37 },
-        { "id": 2, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 51, "y": 37 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 53, "y": 43 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 53, "y": 43 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 53, "y": 43 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 25, "y": 68 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 25, "y": 68 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 25, "y": 68 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 25, "y": 68 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 11, "y": 62 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 11, "y": 62 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 11, "y": 62 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 11, "y": 62 },
-        { "id": 14, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 29, "y": 49 },
-        { "id": 15, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 29, "y": 49 },
-        { "id": 16, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 29, "y": 49 },
-        { "id": 17, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 29, "y": 49 },
-        { "id": 18, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 19, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 20, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 21, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 22, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 23, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 24, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 25, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 26, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 27, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 35, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 40, "y": 53 },
-        { "id": 36, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 20, "y": 28 },
-        { "id": 37, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 54, "y": 33 },
-        { "id": 38, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 54, "y": 33 },
-        { "id": 39, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 54, "y": 33 },
-        { "id": 40, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 56, "y": 41 },
-        { "id": 41, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 56, "y": 41 },
-        { "id": 42, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 56, "y": 41 },
-        { "id": 47, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 50, "y": 51 },
-        { "id": 48, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 50, "y": 51 },
-        { "id": 49, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 40, "y": 53 },
-        { "id": 52, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 20, "y": 28 },
-        { "id": 53, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 20, "y": 28 },
-        { "id": 54, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 20, "y": 28 },
-        { "id": 55, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 20, "y": 28 }
-      ],
-      "emergencies": [
-        { "id": 7, "type": "Incendio Minore", "status": "ASSIGNED", "x": 80, "y": 63 },
-        { "id": 8, "type": "Incendio Minore", "status": "ASSIGNED", "x": 70, "y": 73 },
-        { "id": 9, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 57, "y": 81 },
-        { "id": 10, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 43, "y": 85 },
-        { "id": 11, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 30, "y": 81 },
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 57, "y": 15 },
-        { "id": 15, "type": "Incendio Grande", "status": "IN_PROGRESS", "x": 18, "y": 27 }
-      ]
-    },
-    {
-      "tick": 80,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 52, "y": 36 },
-        { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 52, "y": 36 },
-        { "id": 2, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 52, "y": 36 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 53, "y": 41 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 53, "y": 41 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 53, "y": 41 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 26, "y": 67 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 26, "y": 67 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 26, "y": 67 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 26, "y": 67 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 12, "y": 61 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 12, "y": 61 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 12, "y": 61 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 12, "y": 61 },
-        { "id": 14, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 31, "y": 49 },
-        { "id": 15, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 31, "y": 49 },
-        { "id": 16, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 31, "y": 49 },
-        { "id": 17, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 31, "y": 49 },
-        { "id": 18, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 19, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 20, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 21, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 22, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 23, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 24, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 25, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 26, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 27, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 35, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 42, "y": 52 },
-        { "id": 36, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 22, "y": 29 },
-        { "id": 37, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 54, "y": 30 },
-        { "id": 38, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 54, "y": 30 },
-        { "id": 39, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 54, "y": 30 },
-        { "id": 40, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 57, "y": 39 },
-        { "id": 41, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 57, "y": 39 },
-        { "id": 42, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 57, "y": 39 },
-        { "id": 49, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 42, "y": 52 },
-        { "id": 52, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 22, "y": 29 },
-        { "id": 53, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 22, "y": 29 },
-        { "id": 54, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 22, "y": 29 },
-        { "id": 55, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 22, "y": 29 }
-      ],
-      "emergencies": [
-        { "id": 7, "type": "Incendio Minore", "status": "COMPLETED", "x": 80, "y": 63 },
-        { "id": 8, "type": "Incendio Minore", "status": "ASSIGNED", "x": 70, "y": 73 },
-        { "id": 9, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 57, "y": 81 },
-        { "id": 10, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 43, "y": 85 },
-        { "id": 11, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 30, "y": 81 },
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 57, "y": 15 },
-        { "id": 15, "type": "Incendio Grande", "status": "IN_PROGRESS", "x": 18, "y": 27 }
-      ]
-    },
-    {
-      "tick": 81,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 52, "y": 34 },
-        { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 52, "y": 34 },
-        { "id": 2, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 52, "y": 34 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 54, "y": 40 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 54, "y": 40 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 54, "y": 40 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 27, "y": 66 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 27, "y": 66 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 27, "y": 66 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 27, "y": 66 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 14, "y": 61 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 14, "y": 61 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 14, "y": 61 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 14, "y": 61 },
-        { "id": 14, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 33, "y": 49 },
-        { "id": 15, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 33, "y": 49 },
-        { "id": 16, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 33, "y": 49 },
-        { "id": 17, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 33, "y": 49 },
-        { "id": 18, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 19, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 20, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 21, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 22, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 23, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 24, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 25, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 26, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 27, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 35, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 45, "y": 52 },
-        { "id": 36, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 23, "y": 31 },
-        { "id": 37, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 55, "y": 28 },
-        { "id": 38, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 55, "y": 28 },
-        { "id": 39, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 55, "y": 28 },
-        { "id": 40, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 58, "y": 37 },
-        { "id": 41, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 58, "y": 37 },
-        { "id": 42, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 58, "y": 37 },
-        { "id": 49, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 45, "y": 52 },
-        { "id": 52, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 23, "y": 31 },
-        { "id": 53, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 23, "y": 31 },
-        { "id": 54, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 23, "y": 31 },
-        { "id": 55, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 23, "y": 31 }
-      ],
-      "emergencies": [
-        { "id": 8, "type": "Incendio Minore", "status": "ASSIGNED", "x": 70, "y": 73 },
-        { "id": 9, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 57, "y": 81 },
-        { "id": 10, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 43, "y": 85 },
-        { "id": 11, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 30, "y": 81 },
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 57, "y": 15 },
-        { "id": 15, "type": "Incendio Grande", "status": "IN_PROGRESS", "x": 18, "y": 27 }
-      ]
-    },
-    {
-      "tick": 82,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 52, "y": 32 },
-        { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 52, "y": 32 },
-        { "id": 2, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 52, "y": 32 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 55, "y": 39 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 55, "y": 39 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 55, "y": 39 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 28, "y": 65 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 28, "y": 65 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 28, "y": 65 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 28, "y": 65 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 15, "y": 60 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 15, "y": 60 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 15, "y": 60 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 15, "y": 60 },
-        { "id": 14, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 35, "y": 49 },
-        { "id": 15, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 35, "y": 49 },
-        { "id": 16, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 35, "y": 49 },
-        { "id": 17, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 35, "y": 49 },
-        { "id": 18, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 19, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 20, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 21, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 22, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 23, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 24, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 25, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 26, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 27, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 35, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 47, "y": 51 },
-        { "id": 36, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 25, "y": 32 },
-        { "id": 37, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 55, "y": 25 },
-        { "id": 38, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 55, "y": 25 },
-        { "id": 39, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 55, "y": 25 },
-        { "id": 40, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 60, "y": 36 },
-        { "id": 41, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 60, "y": 36 },
-        { "id": 42, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 60, "y": 36 },
-        { "id": 49, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 47, "y": 51 },
-        { "id": 52, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 25, "y": 32 },
-        { "id": 53, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 25, "y": 32 },
-        { "id": 54, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 25, "y": 32 },
-        { "id": 55, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 25, "y": 32 }
-      ],
-      "emergencies": [
-        { "id": 8, "type": "Incendio Minore", "status": "ASSIGNED", "x": 70, "y": 73 },
-        { "id": 9, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 57, "y": 81 },
-        { "id": 10, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 43, "y": 85 },
-        { "id": 11, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 30, "y": 81 },
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 57, "y": 15 },
-        { "id": 15, "type": "Incendio Grande", "status": "IN_PROGRESS", "x": 18, "y": 27 }
-      ]
-    },
-    {
-      "tick": 83,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 53, "y": 31 },
-        { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 53, "y": 31 },
-        { "id": 2, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 53, "y": 31 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 56, "y": 38 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 56, "y": 38 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 56, "y": 38 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 29, "y": 64 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 29, "y": 64 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 29, "y": 64 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 29, "y": 64 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 17, "y": 60 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 17, "y": 60 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 17, "y": 60 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 17, "y": 60 },
-        { "id": 14, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 37, "y": 49 },
-        { "id": 15, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 37, "y": 49 },
-        { "id": 16, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 37, "y": 49 },
-        { "id": 17, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 37, "y": 49 },
-        { "id": 18, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 19, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 20, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 21, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 22, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 23, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 24, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 25, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 26, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 27, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 35, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 49, "y": 50 },
-        { "id": 36, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 27, "y": 33 },
-        { "id": 37, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 56, "y": 23 },
-        { "id": 38, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 56, "y": 23 },
-        { "id": 39, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 56, "y": 23 },
-        { "id": 40, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 61, "y": 34 },
-        { "id": 41, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 61, "y": 34 },
-        { "id": 42, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 61, "y": 34 },
-        { "id": 49, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 49, "y": 50 },
-        { "id": 52, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 27, "y": 33 },
-        { "id": 53, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 27, "y": 33 },
-        { "id": 54, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 27, "y": 33 },
-        { "id": 55, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 27, "y": 33 }
-      ],
-      "emergencies": [
-        { "id": 8, "type": "Incendio Minore", "status": "ASSIGNED", "x": 70, "y": 73 },
-        { "id": 9, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 57, "y": 81 },
-        { "id": 10, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 43, "y": 85 },
-        { "id": 11, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 30, "y": 81 },
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 57, "y": 15 },
-        { "id": 15, "type": "Incendio Grande", "status": "IN_PROGRESS", "x": 18, "y": 27 }
-      ]
-    },
-    {
-      "tick": 84,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 53, "y": 29 },
-        { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 53, "y": 29 },
-        { "id": 2, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 53, "y": 29 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 57, "y": 37 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 57, "y": 37 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 57, "y": 37 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 30, "y": 63 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 30, "y": 63 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 30, "y": 63 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 30, "y": 63 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 18, "y": 59 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 18, "y": 59 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 18, "y": 59 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 18, "y": 59 },
-        { "id": 14, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 39, "y": 49 },
-        { "id": 15, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 39, "y": 49 },
-        { "id": 16, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 39, "y": 49 },
-        { "id": 17, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 39, "y": 49 },
-        { "id": 18, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 19, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 20, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 21, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 22, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 23, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 24, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 25, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 26, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 27, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 36, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 29, "y": 34 },
-        { "id": 37, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 56, "y": 20 },
-        { "id": 38, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 56, "y": 20 },
-        { "id": 39, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 56, "y": 20 },
-        { "id": 40, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 62, "y": 32 },
-        { "id": 41, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 62, "y": 32 },
-        { "id": 42, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 62, "y": 32 },
-        { "id": 52, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 29, "y": 34 },
-        { "id": 53, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 29, "y": 34 },
-        { "id": 54, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 29, "y": 34 },
-        { "id": 55, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 29, "y": 34 }
-      ],
-      "emergencies": [
-        { "id": 8, "type": "Incendio Minore", "status": "COMPLETED", "x": 70, "y": 73 },
-        { "id": 9, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 57, "y": 81 },
-        { "id": 10, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 43, "y": 85 },
-        { "id": 11, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 30, "y": 81 },
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 57, "y": 15 },
-        { "id": 15, "type": "Incendio Grande", "status": "IN_PROGRESS", "x": 18, "y": 27 }
-      ]
-    },
-    {
-      "tick": 85,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 54, "y": 28 },
-        { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 54, "y": 28 },
-        { "id": 2, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 54, "y": 28 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 58, "y": 36 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 58, "y": 36 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 58, "y": 36 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 31, "y": 62 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 31, "y": 62 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 31, "y": 62 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 31, "y": 62 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 20, "y": 59 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 20, "y": 59 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 20, "y": 59 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 20, "y": 59 },
-        { "id": 14, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 40, "y": 48 },
-        { "id": 15, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 40, "y": 48 },
-        { "id": 16, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 40, "y": 48 },
-        { "id": 17, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 40, "y": 48 },
-        { "id": 18, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 19, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 20, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 21, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 22, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 23, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 24, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 25, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 26, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 27, "type": "Pompieri", "status": "ON_SCENE", "x": 18, "y": 27 },
-        { "id": 36, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 30, "y": 36 },
-        { "id": 37, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 57, "y": 18 },
-        { "id": 38, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 57, "y": 18 },
-        { "id": 39, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 57, "y": 18 },
-        { "id": 40, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 63, "y": 30 },
-        { "id": 41, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 63, "y": 30 },
-        { "id": 42, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 63, "y": 30 },
-        { "id": 52, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 30, "y": 36 },
-        { "id": 53, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 30, "y": 36 },
-        { "id": 54, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 30, "y": 36 },
-        { "id": 55, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 30, "y": 36 }
-      ],
-      "emergencies": [
-        { "id": 9, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 57, "y": 81 },
-        { "id": 10, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 43, "y": 85 },
-        { "id": 11, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 30, "y": 81 },
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 57, "y": 15 },
-        { "id": 15, "type": "Incendio Grande", "status": "IN_PROGRESS", "x": 18, "y": 27 }
-      ]
-    },
-    {
-      "tick": 86,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 54, "y": 26 },
-        { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 54, "y": 26 },
-        { "id": 2, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 54, "y": 26 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 59, "y": 35 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 59, "y": 35 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 59, "y": 35 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 32, "y": 61 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 32, "y": 61 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 32, "y": 61 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 32, "y": 61 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 21, "y": 58 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 21, "y": 58 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 21, "y": 58 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 21, "y": 58 },
-        { "id": 14, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 42, "y": 48 },
-        { "id": 15, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 42, "y": 48 },
-        { "id": 16, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 42, "y": 48 },
-        { "id": 17, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 42, "y": 48 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 19, "y": 28 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 19, "y": 28 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 19, "y": 28 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 19, "y": 28 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 19, "y": 28 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 19, "y": 28 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 19, "y": 28 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 19, "y": 28 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 19, "y": 28 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 19, "y": 28 },
-        { "id": 36, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 32, "y": 37 },
-        { "id": 37, "type": "Ambulanza", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 38, "type": "Ambulanza", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 39, "type": "Ambulanza", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 40, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 64, "y": 28 },
-        { "id": 41, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 64, "y": 28 },
-        { "id": 42, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 64, "y": 28 },
-        { "id": 52, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 32, "y": 37 },
-        { "id": 53, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 32, "y": 37 },
-        { "id": 54, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 32, "y": 37 },
-        { "id": 55, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 32, "y": 37 }
-      ],
-      "emergencies": [
-        { "id": 9, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 57, "y": 81 },
-        { "id": 10, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 43, "y": 85 },
-        { "id": 11, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 30, "y": 81 },
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 57, "y": 15 },
-        { "id": 15, "type": "Incendio Grande", "status": "COMPLETED", "x": 18, "y": 27 }
-      ]
-    },
-    {
-      "tick": 87,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 55, "y": 25 },
-        { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 55, "y": 25 },
-        { "id": 2, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 55, "y": 25 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 59, "y": 33 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 59, "y": 33 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 59, "y": 33 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 33, "y": 60 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 33, "y": 60 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 33, "y": 60 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 33, "y": 60 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 23, "y": 58 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 23, "y": 58 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 23, "y": 58 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 23, "y": 58 },
-        { "id": 14, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 44, "y": 48 },
-        { "id": 15, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 44, "y": 48 },
-        { "id": 16, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 44, "y": 48 },
-        { "id": 17, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 44, "y": 48 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 21, "y": 28 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 21, "y": 28 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 21, "y": 28 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 21, "y": 28 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 21, "y": 28 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 21, "y": 28 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 21, "y": 28 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 21, "y": 28 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 21, "y": 28 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 21, "y": 28 },
-        { "id": 36, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 34, "y": 38 },
-        { "id": 37, "type": "Ambulanza", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 38, "type": "Ambulanza", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 39, "type": "Ambulanza", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 40, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 65, "y": 26 },
-        { "id": 41, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 65, "y": 26 },
-        { "id": 42, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 65, "y": 26 },
-        { "id": 52, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 34, "y": 38 },
-        { "id": 53, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 34, "y": 38 },
-        { "id": 54, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 34, "y": 38 },
-        { "id": 55, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 34, "y": 38 }
-      ],
-      "emergencies": [
-        { "id": 9, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 57, "y": 81 },
-        { "id": 10, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 43, "y": 85 },
-        { "id": 11, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 30, "y": 81 },
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 57, "y": 15 }
-      ]
-    },
-    {
-      "tick": 88,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 55, "y": 23 },
-        { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 55, "y": 23 },
-        { "id": 2, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 55, "y": 23 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 60, "y": 32 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 60, "y": 32 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 60, "y": 32 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 35, "y": 60 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 35, "y": 60 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 35, "y": 60 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 35, "y": 60 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 24, "y": 57 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 24, "y": 57 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 24, "y": 57 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 24, "y": 57 },
-        { "id": 14, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 46, "y": 48 },
-        { "id": 15, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 46, "y": 48 },
-        { "id": 16, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 46, "y": 48 },
-        { "id": 17, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 46, "y": 48 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 22, "y": 29 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 22, "y": 29 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 22, "y": 29 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 22, "y": 29 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 22, "y": 29 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 22, "y": 29 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 22, "y": 29 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 22, "y": 29 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 22, "y": 29 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 22, "y": 29 },
-        { "id": 36, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 36, "y": 39 },
-        { "id": 37, "type": "Ambulanza", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 38, "type": "Ambulanza", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 39, "type": "Ambulanza", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 40, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 67, "y": 25 },
-        { "id": 41, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 67, "y": 25 },
-        { "id": 42, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 67, "y": 25 },
-        { "id": 52, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 36, "y": 39 },
-        { "id": 53, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 36, "y": 39 },
-        { "id": 54, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 36, "y": 39 },
-        { "id": 55, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 36, "y": 39 }
-      ],
-      "emergencies": [
-        { "id": 9, "type": "Terremoto Leggero", "status": "COMPLETED", "x": 57, "y": 81 },
-        { "id": 10, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 43, "y": 85 },
-        { "id": 11, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 30, "y": 81 },
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 57, "y": 15 }
-      ]
-    },
-    {
-      "tick": 89,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 55, "y": 21 },
-        { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 55, "y": 21 },
-        { "id": 2, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 55, "y": 21 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 61, "y": 31 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 61, "y": 31 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 61, "y": 31 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 36, "y": 59 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 36, "y": 59 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 36, "y": 59 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 36, "y": 59 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 26, "y": 57 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 26, "y": 57 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 26, "y": 57 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 26, "y": 57 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 23, "y": 30 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 23, "y": 30 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 23, "y": 30 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 23, "y": 30 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 23, "y": 30 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 23, "y": 30 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 23, "y": 30 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 23, "y": 30 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 23, "y": 30 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 23, "y": 30 },
-        { "id": 36, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 37, "y": 41 },
-        { "id": 37, "type": "Ambulanza", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 38, "type": "Ambulanza", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 39, "type": "Ambulanza", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 40, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 68, "y": 23 },
-        { "id": 41, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 68, "y": 23 },
-        { "id": 42, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 68, "y": 23 },
-        { "id": 52, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 37, "y": 41 },
-        { "id": 53, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 37, "y": 41 },
-        { "id": 54, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 37, "y": 41 },
-        { "id": 55, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 37, "y": 41 }
-      ],
-      "emergencies": [
-        { "id": 10, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 43, "y": 85 },
-        { "id": 11, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 30, "y": 81 },
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 57, "y": 15 }
-      ]
-    },
-    {
-      "tick": 90,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 56, "y": 20 },
-        { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 56, "y": 20 },
-        { "id": 2, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 56, "y": 20 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 62, "y": 30 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 62, "y": 30 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 62, "y": 30 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 37, "y": 58 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 37, "y": 58 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 37, "y": 58 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 37, "y": 58 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 27, "y": 56 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 27, "y": 56 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 27, "y": 56 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 27, "y": 56 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 24, "y": 31 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 24, "y": 31 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 24, "y": 31 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 24, "y": 31 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 24, "y": 31 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 24, "y": 31 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 24, "y": 31 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 24, "y": 31 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 24, "y": 31 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 24, "y": 31 },
-        { "id": 36, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 39, "y": 42 },
-        { "id": 37, "type": "Ambulanza", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 38, "type": "Ambulanza", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 39, "type": "Ambulanza", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 40, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 69, "y": 21 },
-        { "id": 41, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 69, "y": 21 },
-        { "id": 42, "type": "Ambulanza", "status": "EN_ROUTE_TO_SCENE", "x": 69, "y": 21 },
-        { "id": 52, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 39, "y": 42 },
-        { "id": 53, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 39, "y": 42 },
-        { "id": 54, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 39, "y": 42 },
-        { "id": 55, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 39, "y": 42 }
-      ],
-      "emergencies": [
-        { "id": 10, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 43, "y": 85 },
-        { "id": 11, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 30, "y": 81 },
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 57, "y": 15 }
-      ]
-    },
-    {
-      "tick": 91,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 56, "y": 18 },
-        { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 56, "y": 18 },
-        { "id": 2, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 56, "y": 18 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 63, "y": 29 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 63, "y": 29 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 63, "y": 29 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 38, "y": 57 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 38, "y": 57 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 38, "y": 57 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 38, "y": 57 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 28, "y": 55 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 28, "y": 55 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 28, "y": 55 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 28, "y": 55 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 25, "y": 32 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 25, "y": 32 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 25, "y": 32 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 25, "y": 32 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 25, "y": 32 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 25, "y": 32 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 25, "y": 32 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 25, "y": 32 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 25, "y": 32 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 25, "y": 32 },
-        { "id": 36, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 41, "y": 43 },
-        { "id": 37, "type": "Ambulanza", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 38, "type": "Ambulanza", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 39, "type": "Ambulanza", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 40, "type": "Ambulanza", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 41, "type": "Ambulanza", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 42, "type": "Ambulanza", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 52, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 41, "y": 43 },
-        { "id": 53, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 41, "y": 43 },
-        { "id": 54, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 41, "y": 43 },
-        { "id": 55, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 41, "y": 43 }
-      ],
-      "emergencies": [
-        { "id": 10, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 43, "y": 85 },
-        { "id": 11, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 30, "y": 81 },
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 57, "y": 15 }
-      ]
-    },
-    {
-      "tick": 92,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 57, "y": 17 },
-        { "id": 1, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 57, "y": 17 },
-        { "id": 2, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 57, "y": 17 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 64, "y": 28 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 64, "y": 28 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 64, "y": 28 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 39, "y": 56 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 39, "y": 56 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 39, "y": 56 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 39, "y": 56 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 30, "y": 55 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 30, "y": 55 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 30, "y": 55 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 30, "y": 55 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 26, "y": 33 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 26, "y": 33 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 26, "y": 33 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 26, "y": 33 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 26, "y": 33 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 26, "y": 33 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 26, "y": 33 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 26, "y": 33 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 26, "y": 33 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 26, "y": 33 },
-        { "id": 36, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 43, "y": 44 },
-        { "id": 37, "type": "Ambulanza", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 38, "type": "Ambulanza", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 39, "type": "Ambulanza", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 40, "type": "Ambulanza", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 41, "type": "Ambulanza", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 42, "type": "Ambulanza", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 52, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 43, "y": 44 },
-        { "id": 53, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 43, "y": 44 },
-        { "id": 54, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 43, "y": 44 },
-        { "id": 55, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 43, "y": 44 }
-      ],
-      "emergencies": [
-        { "id": 10, "type": "Terremoto Leggero", "status": "COMPLETED", "x": 43, "y": 85 },
-        { "id": 11, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 30, "y": 81 },
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 57, "y": 15 }
-      ]
-    },
-    {
-      "tick": 93,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 1, "type": "Pompieri", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 2, "type": "Pompieri", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 65, "y": 27 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 65, "y": 27 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 65, "y": 27 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 40, "y": 55 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 40, "y": 55 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 40, "y": 55 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 40, "y": 55 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 31, "y": 54 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 31, "y": 54 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 31, "y": 54 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 31, "y": 54 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 28, "y": 33 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 28, "y": 33 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 28, "y": 33 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 28, "y": 33 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 28, "y": 33 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 28, "y": 33 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 28, "y": 33 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 28, "y": 33 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 28, "y": 33 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 28, "y": 33 },
-        { "id": 36, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 44, "y": 46 },
-        { "id": 37, "type": "Ambulanza", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 38, "type": "Ambulanza", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 39, "type": "Ambulanza", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 40, "type": "Ambulanza", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 41, "type": "Ambulanza", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 42, "type": "Ambulanza", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 52, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 44, "y": 46 },
-        { "id": 53, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 44, "y": 46 },
-        { "id": 54, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 44, "y": 46 },
-        { "id": 55, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 44, "y": 46 }
-      ],
-      "emergencies": [
-        { "id": 11, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 30, "y": 81 },
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "IN_PROGRESS", "x": 57, "y": 15 }
-      ]
-    },
-    {
-      "tick": 94,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 1, "type": "Pompieri", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 2, "type": "Pompieri", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 65, "y": 25 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 65, "y": 25 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 65, "y": 25 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 41, "y": 54 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 41, "y": 54 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 41, "y": 54 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 41, "y": 54 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 33, "y": 54 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 33, "y": 54 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 33, "y": 54 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 33, "y": 54 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 29, "y": 34 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 29, "y": 34 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 29, "y": 34 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 29, "y": 34 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 29, "y": 34 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 29, "y": 34 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 29, "y": 34 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 29, "y": 34 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 29, "y": 34 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 29, "y": 34 },
-        { "id": 36, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 46, "y": 47 },
-        { "id": 37, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 56, "y": 17 },
-        { "id": 38, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 56, "y": 17 },
-        { "id": 39, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 56, "y": 17 },
-        { "id": 40, "type": "Ambulanza", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 41, "type": "Ambulanza", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 42, "type": "Ambulanza", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 52, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 46, "y": 47 },
-        { "id": 53, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 46, "y": 47 },
-        { "id": 54, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 46, "y": 47 },
-        { "id": 55, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 46, "y": 47 }
-      ],
-      "emergencies": [
-        { "id": 11, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 30, "y": 81 },
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "IN_PROGRESS", "x": 57, "y": 15 }
-      ]
-    },
-    {
-      "tick": 95,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 1, "type": "Pompieri", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 2, "type": "Pompieri", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 66, "y": 24 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 66, "y": 24 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 66, "y": 24 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 42, "y": 53 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 42, "y": 53 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 42, "y": 53 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 42, "y": 53 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 34, "y": 53 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 34, "y": 53 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 34, "y": 53 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 34, "y": 53 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 30, "y": 35 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 30, "y": 35 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 30, "y": 35 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 30, "y": 35 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 30, "y": 35 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 30, "y": 35 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 30, "y": 35 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 30, "y": 35 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 30, "y": 35 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 30, "y": 35 },
-        { "id": 36, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 48, "y": 48 },
-        { "id": 37, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 56, "y": 20 },
-        { "id": 38, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 56, "y": 20 },
-        { "id": 39, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 56, "y": 20 },
-        { "id": 40, "type": "Ambulanza", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 41, "type": "Ambulanza", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 42, "type": "Ambulanza", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 52, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 48, "y": 48 },
-        { "id": 53, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 48, "y": 48 },
-        { "id": 54, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 48, "y": 48 },
-        { "id": 55, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 48, "y": 48 }
-      ],
-      "emergencies": [
-        { "id": 11, "type": "Terremoto Leggero", "status": "ASSIGNED", "x": 30, "y": 81 },
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "IN_PROGRESS", "x": 57, "y": 15 }
-      ]
-    },
-    {
-      "tick": 96,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 1, "type": "Pompieri", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 2, "type": "Pompieri", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 67, "y": 23 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 67, "y": 23 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 67, "y": 23 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 43, "y": 52 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 43, "y": 52 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 43, "y": 52 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 43, "y": 52 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 36, "y": 53 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 36, "y": 53 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 36, "y": 53 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 36, "y": 53 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 31, "y": 36 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 31, "y": 36 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 31, "y": 36 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 31, "y": 36 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 31, "y": 36 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 31, "y": 36 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 31, "y": 36 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 31, "y": 36 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 31, "y": 36 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 31, "y": 36 },
-        { "id": 36, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 50, "y": 49 },
-        { "id": 37, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 55, "y": 22 },
-        { "id": 38, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 55, "y": 22 },
-        { "id": 39, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 55, "y": 22 },
-        { "id": 40, "type": "Ambulanza", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 41, "type": "Ambulanza", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 42, "type": "Ambulanza", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 52, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 50, "y": 49 },
-        { "id": 53, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 50, "y": 49 },
-        { "id": 54, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 50, "y": 49 },
-        { "id": 55, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 50, "y": 49 }
-      ],
-      "emergencies": [
-        { "id": 11, "type": "Terremoto Leggero", "status": "COMPLETED", "x": 30, "y": 81 },
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "IN_PROGRESS", "x": 57, "y": 15 }
-      ]
-    },
-    {
-      "tick": 97,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 1, "type": "Pompieri", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 2, "type": "Pompieri", "status": "ON_SCENE", "x": 57, "y": 15 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 68, "y": 22 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 68, "y": 22 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 68, "y": 22 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 44, "y": 51 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 44, "y": 51 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 44, "y": 51 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 44, "y": 51 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 37, "y": 52 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 37, "y": 52 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 37, "y": 52 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 37, "y": 52 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 32, "y": 37 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 32, "y": 37 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 32, "y": 37 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 32, "y": 37 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 32, "y": 37 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 32, "y": 37 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 32, "y": 37 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 32, "y": 37 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 32, "y": 37 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 32, "y": 37 },
-        { "id": 37, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 55, "y": 25 },
-        { "id": 38, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 55, "y": 25 },
-        { "id": 39, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 55, "y": 25 },
-        { "id": 40, "type": "Ambulanza", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 41, "type": "Ambulanza", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 42, "type": "Ambulanza", "status": "ON_SCENE", "x": 70, "y": 19 }
-      ],
-      "emergencies": [
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "IN_PROGRESS", "x": 57, "y": 15 }
-      ]
-    },
-    {
-      "tick": 98,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 56, "y": 16 },
-        { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 56, "y": 16 },
-        { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 56, "y": 16 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 69, "y": 21 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 69, "y": 21 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 69, "y": 21 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 45, "y": 50 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 45, "y": 50 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 45, "y": 50 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 45, "y": 50 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 39, "y": 52 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 39, "y": 52 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 39, "y": 52 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 39, "y": 52 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 33, "y": 38 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 33, "y": 38 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 33, "y": 38 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 33, "y": 38 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 33, "y": 38 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 33, "y": 38 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 33, "y": 38 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 33, "y": 38 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 33, "y": 38 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 33, "y": 38 },
-        { "id": 37, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 54, "y": 27 },
-        { "id": 38, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 54, "y": 27 },
-        { "id": 39, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 54, "y": 27 },
-        { "id": 40, "type": "Ambulanza", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 41, "type": "Ambulanza", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 42, "type": "Ambulanza", "status": "ON_SCENE", "x": 70, "y": 19 }
-      ],
-      "emergencies": [
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 },
-        { "id": 18, "type": "Terremoto Intenso", "status": "COMPLETED", "x": 57, "y": 15 }
-      ]
-    },
-    {
-      "tick": 99,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 56, "y": 18 },
-        { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 56, "y": 18 },
-        { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 56, "y": 18 },
-        { "id": 3, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 70, "y": 20 },
-        { "id": 4, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 70, "y": 20 },
-        { "id": 5, "type": "Pompieri", "status": "EN_ROUTE_TO_SCENE", "x": 70, "y": 20 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 47, "y": 50 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 47, "y": 50 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 47, "y": 50 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 47, "y": 50 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 40, "y": 51 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 40, "y": 51 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 40, "y": 51 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 40, "y": 51 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 35, "y": 38 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 35, "y": 38 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 35, "y": 38 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 35, "y": 38 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 35, "y": 38 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 35, "y": 38 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 35, "y": 38 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 35, "y": 38 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 35, "y": 38 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 35, "y": 38 },
-        { "id": 37, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 54, "y": 30 },
-        { "id": 38, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 54, "y": 30 },
-        { "id": 39, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 54, "y": 30 },
-        { "id": 40, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 69, "y": 21 },
-        { "id": 41, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 69, "y": 21 },
-        { "id": 42, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 69, "y": 21 }
-      ],
-      "emergencies": [
-        { "id": 19, "type": "Terremoto Intenso", "status": "ASSIGNED", "x": 70, "y": 19 }
-      ]
-    },
-    {
-      "tick": 100,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 56, "y": 20 },
-        { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 56, "y": 20 },
-        { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 56, "y": 20 },
-        { "id": 3, "type": "Pompieri", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 4, "type": "Pompieri", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 5, "type": "Pompieri", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 6, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 48, "y": 49 },
-        { "id": 7, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 48, "y": 49 },
-        { "id": 8, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 48, "y": 49 },
-        { "id": 9, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 48, "y": 49 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 42, "y": 51 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 42, "y": 51 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 42, "y": 51 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 42, "y": 51 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 36, "y": 39 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 36, "y": 39 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 36, "y": 39 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 36, "y": 39 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 36, "y": 39 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 36, "y": 39 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 36, "y": 39 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 36, "y": 39 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 36, "y": 39 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 36, "y": 39 },
-        { "id": 37, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 53, "y": 32 },
-        { "id": 38, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 53, "y": 32 },
-        { "id": 39, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 53, "y": 32 },
-        { "id": 40, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 67, "y": 22 },
-        { "id": 41, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 67, "y": 22 },
-        { "id": 42, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 67, "y": 22 }
-      ],
-      "emergencies": [
-        { "id": 19, "type": "Terremoto Intenso", "status": "IN_PROGRESS", "x": 70, "y": 19 }
-      ]
-    },
-    {
-      "tick": 101,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 55, "y": 21 },
-        { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 55, "y": 21 },
-        { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 55, "y": 21 },
-        { "id": 3, "type": "Pompieri", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 4, "type": "Pompieri", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 5, "type": "Pompieri", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 43, "y": 50 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 43, "y": 50 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 43, "y": 50 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 43, "y": 50 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 37, "y": 40 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 37, "y": 40 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 37, "y": 40 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 37, "y": 40 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 37, "y": 40 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 37, "y": 40 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 37, "y": 40 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 37, "y": 40 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 37, "y": 40 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 37, "y": 40 },
-        { "id": 37, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 53, "y": 35 },
-        { "id": 38, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 53, "y": 35 },
-        { "id": 39, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 53, "y": 35 },
-        { "id": 40, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 66, "y": 24 },
-        { "id": 41, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 66, "y": 24 },
-        { "id": 42, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 66, "y": 24 }
-      ],
-      "emergencies": [
-        { "id": 19, "type": "Terremoto Intenso", "status": "IN_PROGRESS", "x": 70, "y": 19 }
-      ]
-    },
-    {
-      "tick": 102,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 55, "y": 23 },
-        { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 55, "y": 23 },
-        { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 55, "y": 23 },
-        { "id": 3, "type": "Pompieri", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 4, "type": "Pompieri", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 5, "type": "Pompieri", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 44, "y": 49 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 44, "y": 49 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 44, "y": 49 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 44, "y": 49 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 38, "y": 41 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 38, "y": 41 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 38, "y": 41 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 38, "y": 41 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 38, "y": 41 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 38, "y": 41 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 38, "y": 41 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 38, "y": 41 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 38, "y": 41 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 38, "y": 41 },
-        { "id": 37, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 52, "y": 37 },
-        { "id": 38, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 52, "y": 37 },
-        { "id": 39, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 52, "y": 37 },
-        { "id": 40, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 65, "y": 26 },
-        { "id": 41, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 65, "y": 26 },
-        { "id": 42, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 65, "y": 26 }
-      ],
-      "emergencies": [
-        { "id": 19, "type": "Terremoto Intenso", "status": "IN_PROGRESS", "x": 70, "y": 19 }
-      ]
-    },
-    {
-      "tick": 103,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 54, "y": 24 },
-        { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 54, "y": 24 },
-        { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 54, "y": 24 },
-        { "id": 3, "type": "Pompieri", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 4, "type": "Pompieri", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 5, "type": "Pompieri", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 46, "y": 49 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 46, "y": 49 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 46, "y": 49 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 46, "y": 49 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 39, "y": 42 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 39, "y": 42 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 39, "y": 42 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 39, "y": 42 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 39, "y": 42 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 39, "y": 42 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 39, "y": 42 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 39, "y": 42 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 39, "y": 42 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 39, "y": 42 },
-        { "id": 37, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 52, "y": 40 },
-        { "id": 38, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 52, "y": 40 },
-        { "id": 39, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 52, "y": 40 },
-        { "id": 40, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 64, "y": 28 },
-        { "id": 41, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 64, "y": 28 },
-        { "id": 42, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 64, "y": 28 }
-      ],
-      "emergencies": [
-        { "id": 19, "type": "Terremoto Intenso", "status": "IN_PROGRESS", "x": 70, "y": 19 }
-      ]
-    },
-    {
-      "tick": 104,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 54, "y": 26 },
-        { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 54, "y": 26 },
-        { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 54, "y": 26 },
-        { "id": 3, "type": "Pompieri", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 4, "type": "Pompieri", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 5, "type": "Pompieri", "status": "ON_SCENE", "x": 70, "y": 19 },
-        { "id": 10, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 47, "y": 48 },
-        { "id": 11, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 47, "y": 48 },
-        { "id": 12, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 47, "y": 48 },
-        { "id": 13, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 47, "y": 48 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 41, "y": 42 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 41, "y": 42 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 41, "y": 42 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 41, "y": 42 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 41, "y": 42 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 41, "y": 42 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 41, "y": 42 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 41, "y": 42 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 41, "y": 42 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 41, "y": 42 },
-        { "id": 37, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 51, "y": 42 },
-        { "id": 38, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 51, "y": 42 },
-        { "id": 39, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 51, "y": 42 },
-        { "id": 40, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 63, "y": 30 },
-        { "id": 41, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 63, "y": 30 },
-        { "id": 42, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 63, "y": 30 }
-      ],
-      "emergencies": [
-        { "id": 19, "type": "Terremoto Intenso", "status": "IN_PROGRESS", "x": 70, "y": 19 }
-      ]
-    },
-    {
-      "tick": 105,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 53, "y": 27 },
-        { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 53, "y": 27 },
-        { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 53, "y": 27 },
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 69, "y": 20 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 69, "y": 20 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 69, "y": 20 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 42, "y": 43 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 42, "y": 43 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 42, "y": 43 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 42, "y": 43 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 42, "y": 43 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 42, "y": 43 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 42, "y": 43 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 42, "y": 43 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 42, "y": 43 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 42, "y": 43 },
-        { "id": 37, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 51, "y": 45 },
-        { "id": 38, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 51, "y": 45 },
-        { "id": 39, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 51, "y": 45 },
-        { "id": 40, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 62, "y": 32 },
-        { "id": 41, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 62, "y": 32 },
-        { "id": 42, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 62, "y": 32 }
-      ],
-      "emergencies": [
-        { "id": 19, "type": "Terremoto Intenso", "status": "COMPLETED", "x": 70, "y": 19 }
-      ]
-    },
-    {
-      "tick": 106,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 53, "y": 29 },
-        { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 53, "y": 29 },
-        { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 53, "y": 29 },
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 68, "y": 21 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 68, "y": 21 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 68, "y": 21 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 43, "y": 44 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 43, "y": 44 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 43, "y": 44 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 43, "y": 44 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 43, "y": 44 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 43, "y": 44 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 43, "y": 44 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 43, "y": 44 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 43, "y": 44 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 43, "y": 44 },
-        { "id": 37, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 50, "y": 47 },
-        { "id": 38, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 50, "y": 47 },
-        { "id": 39, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 50, "y": 47 },
-        { "id": 40, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 60, "y": 33 },
-        { "id": 41, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 60, "y": 33 },
-        { "id": 42, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 60, "y": 33 }
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 107,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 53, "y": 31 },
-        { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 53, "y": 31 },
-        { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 53, "y": 31 },
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 67, "y": 22 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 67, "y": 22 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 67, "y": 22 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 44, "y": 45 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 44, "y": 45 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 44, "y": 45 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 44, "y": 45 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 44, "y": 45 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 44, "y": 45 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 44, "y": 45 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 44, "y": 45 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 44, "y": 45 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 44, "y": 45 },
-        { "id": 40, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 59, "y": 35 },
-        { "id": 41, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 59, "y": 35 },
-        { "id": 42, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 59, "y": 35 }
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 108,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 52, "y": 32 },
-        { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 52, "y": 32 },
-        { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 52, "y": 32 },
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 66, "y": 23 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 66, "y": 23 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 66, "y": 23 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 45, "y": 46 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 45, "y": 46 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 45, "y": 46 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 45, "y": 46 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 45, "y": 46 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 45, "y": 46 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 45, "y": 46 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 45, "y": 46 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 45, "y": 46 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 45, "y": 46 },
-        { "id": 40, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 58, "y": 37 },
-        { "id": 41, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 58, "y": 37 },
-        { "id": 42, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 58, "y": 37 }
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 109,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 52, "y": 34 },
-        { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 52, "y": 34 },
-        { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 52, "y": 34 },
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 65, "y": 24 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 65, "y": 24 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 65, "y": 24 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 46, "y": 47 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 46, "y": 47 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 46, "y": 47 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 46, "y": 47 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 46, "y": 47 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 46, "y": 47 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 46, "y": 47 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 46, "y": 47 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 46, "y": 47 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 46, "y": 47 },
-        { "id": 40, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 57, "y": 39 },
-        { "id": 41, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 57, "y": 39 },
-        { "id": 42, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 57, "y": 39 }
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 110,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 51, "y": 35 },
-        { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 51, "y": 35 },
-        { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 51, "y": 35 },
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 65, "y": 26 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 65, "y": 26 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 65, "y": 26 },
-        { "id": 18, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 48, "y": 47 },
-        { "id": 19, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 48, "y": 47 },
-        { "id": 20, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 48, "y": 47 },
-        { "id": 21, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 48, "y": 47 },
-        { "id": 22, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 48, "y": 47 },
-        { "id": 23, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 48, "y": 47 },
-        { "id": 24, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 48, "y": 47 },
-        { "id": 25, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 48, "y": 47 },
-        { "id": 26, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 48, "y": 47 },
-        { "id": 27, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 48, "y": 47 },
-        { "id": 40, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 56, "y": 41 },
-        { "id": 41, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 56, "y": 41 },
-        { "id": 42, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 56, "y": 41 }
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 111,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 51, "y": 37 },
-        { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 51, "y": 37 },
-        { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 51, "y": 37 },
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 64, "y": 27 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 64, "y": 27 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 64, "y": 27 },
-        { "id": 40, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 55, "y": 43 },
-        { "id": 41, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 55, "y": 43 },
-        { "id": 42, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 55, "y": 43 }
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 112,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 50, "y": 38 },
-        { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 50, "y": 38 },
-        { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 50, "y": 38 },
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 63, "y": 28 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 63, "y": 28 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 63, "y": 28 },
-        { "id": 40, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 53, "y": 44 },
-        { "id": 41, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 53, "y": 44 },
-        { "id": 42, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 53, "y": 44 }
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 113,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 50, "y": 40 },
-        { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 50, "y": 40 },
-        { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 50, "y": 40 },
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 62, "y": 29 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 62, "y": 29 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 62, "y": 29 },
-        { "id": 40, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 52, "y": 46 },
-        { "id": 41, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 52, "y": 46 },
-        { "id": 42, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 52, "y": 46 }
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 114,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 50, "y": 42 },
-        { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 50, "y": 42 },
-        { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 50, "y": 42 },
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 61, "y": 30 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 61, "y": 30 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 61, "y": 30 },
-        { "id": 40, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 51, "y": 48 },
-        { "id": 41, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 51, "y": 48 },
-        { "id": 42, "type": "Ambulanza", "status": "RETURNING_TO_BASE", "x": 51, "y": 48 }
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 115,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 49, "y": 43 },
-        { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 49, "y": 43 },
-        { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 49, "y": 43 },
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 60, "y": 31 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 60, "y": 31 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 60, "y": 31 }
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 116,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 49, "y": 45 },
-        { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 49, "y": 45 },
-        { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 49, "y": 45 },
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 59, "y": 32 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 59, "y": 32 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 59, "y": 32 }
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 117,
-      "rescuers": [
-        { "id": 0, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 48, "y": 46 },
-        { "id": 1, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 48, "y": 46 },
-        { "id": 2, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 48, "y": 46 },
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 59, "y": 34 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 59, "y": 34 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 59, "y": 34 }
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 118,
-      "rescuers": [
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 58, "y": 35 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 58, "y": 35 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 58, "y": 35 }
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 119,
-      "rescuers": [
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 57, "y": 36 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 57, "y": 36 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 57, "y": 36 }
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 120,
-      "rescuers": [
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 56, "y": 37 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 56, "y": 37 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 56, "y": 37 }
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 121,
-      "rescuers": [
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 55, "y": 38 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 55, "y": 38 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 55, "y": 38 }
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 122,
-      "rescuers": [
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 54, "y": 39 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 54, "y": 39 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 54, "y": 39 }
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 123,
-      "rescuers": [
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 53, "y": 40 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 53, "y": 40 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 53, "y": 40 }
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 124,
-      "rescuers": [
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 53, "y": 42 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 53, "y": 42 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 53, "y": 42 }
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 125,
-      "rescuers": [
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 52, "y": 43 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 52, "y": 43 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 52, "y": 43 }
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 126,
-      "rescuers": [
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 51, "y": 44 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 51, "y": 44 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 51, "y": 44 }
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 127,
-      "rescuers": [
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 50, "y": 45 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 50, "y": 45 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 50, "y": 45 }
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 128,
-      "rescuers": [
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 49, "y": 46 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 49, "y": 46 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 49, "y": 46 }
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 129,
-      "rescuers": [
-        { "id": 3, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 48, "y": 47 },
-        { "id": 4, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 48, "y": 47 },
-        { "id": 5, "type": "Pompieri", "status": "RETURNING_TO_BASE", "x": 48, "y": 47 }
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 130,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 131,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 132,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 133,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 134,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 135,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 136,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 137,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 138,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 139,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 140,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 141,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 142,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 143,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 144,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 145,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 146,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 147,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 148,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 149,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 150,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 151,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 152,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 153,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 154,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 155,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 156,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 157,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 158,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 159,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 160,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 161,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 162,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 163,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 164,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 165,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 166,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 167,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 168,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 169,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 170,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 171,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 172,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 173,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 174,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 175,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 176,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 177,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 178,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 179,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 180,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 181,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 182,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 183,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 184,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 185,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 186,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 187,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 188,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 189,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 190,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 191,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 192,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 193,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 194,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 195,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 196,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 197,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 198,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 199,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 200,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 201,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 202,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 203,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 204,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 205,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 206,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 207,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 208,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 209,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 210,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 211,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 212,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 213,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 214,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 215,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 216,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 217,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 218,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 219,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 220,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 221,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 222,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 223,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 224,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 225,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 226,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 227,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 228,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 229,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 230,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 231,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 232,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 233,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 234,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 235,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 236,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 237,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 238,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 239,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 240,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 241,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 242,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 243,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 244,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 245,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 246,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 247,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 248,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 249,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 250,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 251,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 252,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 253,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 254,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 255,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 256,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 257,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 258,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 259,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 260,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 261,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 262,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 263,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 264,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 265,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
-      ]
-    },
-    {
-      "tick": 266,
-      "rescuers": [
-
-      ],
-      "emergencies": [
-
       ]
     }
   ]

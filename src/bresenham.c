@@ -40,19 +40,19 @@ bool compute_bresenham_step(int x, int y, bresenham_trajectory_t *trajectory, in
 	int sy = trajectory->sy;
 	int i = 0;
 
-	while (i < cells_per_step) {			// faccio un passo alla volta percorrendo la linea di Bresenham 
-		if (xA == xB && yA == yB) 			// siamo arrivati
+	while (i < cells_per_step) {		// faccio un passo alla volta percorrendo la linea di Bresenham 
+		if (xA == xB && yA == yB) 		// siamo arrivati
 			return true;				
-		int e2 = 2 * trajectory->err;		// l'errore serve a dirci se siamo più lontani sulla x o sulla y 
-		if (e2 >= -dy) {								// se siamo più lontani sulla x facciamo un passo sulla x
-			trajectory->err -= dy;				// aggiorno l'errore 
-			xA += sx;											// faccio un passo sull'asse x
+		int e2 = 2 * trajectory->err;	// l'errore serve a dirci se siamo più lontani sulla x o sulla y 
+		if (e2 >= -dy) {				// se siamo più lontani sulla x facciamo un passo sulla x
+			trajectory->err -= dy;		// aggiorno l'errore 
+			xA += sx;					// faccio un passo sull'asse x
 			(*x_step) += sx;	
-			i++;													// aggiorno il numero di passi fatti sull'asse x
+			i++;						// aggiorno il numero di passi fatti sull'asse x
 		}
-		if(i >= cells_per_step)					// potremmo aver raggiunto adesso i == cells_per_step
+		if(i >= cells_per_step)			// potremmo aver raggiunto adesso i == cells_per_step
 			break;
-		if (e2 <= dx) {									// se invece siamo più lontani sulla y si fa la stessa cosa ma sulla y
+		if (e2 <= dx) {					// se invece siamo più lontani sulla y si fa la stessa cosa ma sulla y
 			trajectory->err += dx;
 			yA += sy;		
 			(*y_step) += sy;	
@@ -60,7 +60,7 @@ bool compute_bresenham_step(int x, int y, bresenham_trajectory_t *trajectory, in
 		}
 	}
 
-	return (xA == xB && yA == yB) ? true : false;								// siamo arrivati?
+	return (xA == xB && yA == yB) ? true : false; // siamo arrivati?
 }
 
 void change_bresenham_trajectory(bresenham_trajectory_t *t, int current_x, int current_y, int new_x, int new_y){
