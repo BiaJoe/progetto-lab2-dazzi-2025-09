@@ -5,12 +5,33 @@
 #include <stdbool.h>
 #include "log.h"
 
+#ifdef LOG_DEBUGGING
+#  define LOG_DEBUG  true
+#  define LOG_CLOCK  true
+#  define LOG_TRAVEL true
+#  define LOG_DTWIN  true
+#elif defined(LOG_VERBOSE)
+#  define LOG_DEBUG  false
+#  define LOG_CLOCK  true
+#  define LOG_TRAVEL true
+#  define LOG_DTWIN  true
+#elif defined(LOG_SHY)
+#  define LOG_DEBUG  false
+#  define LOG_CLOCK  false
+#  define LOG_TRAVEL false
+#  define LOG_DTWIN  false
+#else // default
+#  define LOG_DEBUG  false
+#  define LOG_CLOCK  false
+#  define LOG_TRAVEL true
+#  define LOG_DTWIN  true
+#endif
 
 //lookup table per ogni evento
 const log_event_info_t LOG_EVENT_LOOKUP_TABLE[LOG_EVENT_TYPES_COUNT] = {
 //  TYPE											// STRING										// CODICE			//TERMINA?		// DA LOGGARE?
     [NON_APPLICABLE]                    		= { "NON_APPLICABLE",                   			" ",    			false, 			true },
-    [DEBUG]                             		= { "DEBUG",                            			"DEH ",  			false, 			false },
+    [DEBUG]                             		= { "DEBUG",                            			"DEH ",  			false, 			LOG_DEBUG },
     [FATAL_ERROR]                       		= { "FATAL_ERROR",                      			"ferr",  			true, 			true },
     [FATAL_ERROR_CLIENT]                       	= { "FATAL_ERROR_CLIENT",                      		"ferc",  			false, 			true },
 	[FATAL_ERROR_PARSING]               		= { "FATAL_ERROR_PARSING",              			"fepa",  			true, 			true },
@@ -30,12 +51,12 @@ const log_event_info_t LOG_EVENT_LOOKUP_TABLE[LOG_EVENT_TYPES_COUNT] = {
     [PARSING_STARTED]                   		= { "PARSING_STARTED",                  			"psta",  			false,  		true },
     [PARSING_ENDED]                     		= { "PARSING_ENDED",                    			"pend",  			false,  		true },
     [RESCUER_TYPE_PARSED]               		= { "RESCUER_TYPE_PARSED",              			"rtpa",  			false,  		true },
-    [RESCUER_DIGITAL_TWIN_ADDED]        		= { "RESCUER_DIGITAL_TWIN_ADDED",       			"rdta",  			false,  		true },
+    [RESCUER_DIGITAL_TWIN_ADDED]        		= { "RESCUER_DIGITAL_TWIN_ADDED",       			"rdta",  			false,  		LOG_DTWIN },
     [EMERGENCY_PARSED]                  		= { "EMERGENCY_PARSED",                 			"empa",  			false,  		true },
     [RESCUER_REQUEST_ADDED]             		= { "RESCUER_REQUEST_ADDED",            			"rrad",  			false,  		true },
     [SERVER_UPDATE]                     		= { "SERVER_UPDATE",                    			"seup",  			false,  		true },
     [SERVER]                            		= { "SERVER",                           			"srvr",  			false,  		true },
-    [SERVER_CLOCK]                            	= { "SERVER_CLOCK",                           		"srvc",  			false,  		false },
+    [SERVER_CLOCK]                            	= { "SERVER_CLOCK",                           		"srvc",  			false,  		LOG_CLOCK },
     [CLIENT]                            		= { "CLIENT",                           			"clnt",  			false,  		true },
     [EMERGENCY_REQUEST_RECEIVED]        		= { "EMERGENCY_REQUEST_RECEIVED",       			"errr",  			false,  		true },
     [EMERGENCY_REQUEST_PROCESSED]       		= { "EMERGENCY_REQUEST_PROCESSED",      			"erpr",  			false,  		true },
@@ -43,7 +64,7 @@ const log_event_info_t LOG_EVENT_LOOKUP_TABLE[LOG_EVENT_TYPES_COUNT] = {
     [MESSAGE_QUEUE_SERVER]              		= { "MESSAGE_QUEUE_SERVER",             			"mqse",  			false,  		true },
     [EMERGENCY_STATUS]                  		= { "EMERGENCY_STATUS",                 			"esta",  			false,  		true },
     [RESCUER_STATUS]                    		= { "RESCUER_STATUS",                   			"rsta",  			false,  		true },
-    [RESCUER_TRAVELLING_STATUS]         		= { "RESCUER_TRAVELLING_STATUS",        			"rtst",  			false,  		true },
+    [RESCUER_TRAVELLING_STATUS]         		= { "RESCUER_TRAVELLING_STATUS",        			"rtst",  			false,  		LOG_TRAVEL },
     [EMERGENCY_REQUEST]                 		= { "EMERGENCY_REQUEST",                			"erre",  			false,  		true },
     [PROGRAM_ENDED_SUCCESSFULLY]        		= { "PROGRAM_ENDED_SUCCESSFULLY",       			"pesu",  			true, 			true }
 };			

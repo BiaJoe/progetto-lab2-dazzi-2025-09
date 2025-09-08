@@ -48,8 +48,6 @@ static void logger_write_line(log_message_t m) {
 // thread che legge i messaggi dalla coda e li scrive nel file di log e/o in stdout
 // usato solo dal server
 static int logger_thread(void *arg) {
-    (void)arg;
-
     if (config.log_to_file && !config.log_file_ptr) {
         config.log_file_ptr = fopen(config.log_file, "w");
         check_error_fopen(config.log_file_ptr);

@@ -1,7 +1,7 @@
 #include "priority_queue.h"
 #include <stdlib.h>
 
-// rimuove un nodo arbitrario dalla lista (O(1))
+// rimuove un nodo arbitrario dalla lista 
 static void list_remove_node(list_t* list, node_t* n){
     if (!list || !n) return;
     if (n->prev) n->prev->next = n->next; else list->head = n->next;
@@ -38,7 +38,7 @@ static node_t* list_pop_front(list_t* list){
 
 pq_t* pq_create(int levels){
     if(levels==0) return NULL;
-    pq_t* q = malloc(sizeof(pq_t));
+    pq_t* q = (pq_t*)malloc(sizeof(pq_t));
     check_error_memory_allocation(q);
     q->levels = levels;
     q->lists = calloc((size_t)levels,sizeof(list_t));

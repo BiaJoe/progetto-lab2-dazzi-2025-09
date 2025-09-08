@@ -6,15 +6,7 @@
     { "name": "Ambulanza", "amount": 30, "x": 50, "y": 50 }
   ],
   "emergencies": [
-    { "type_desc": "Incendio Minore", "type_priority": 0, "id": 7, "priority": 0, "status": "CANCELED", "x": 80, "y": 63, "time": 1757161137, "tick_time": 16, "rescuer_count": 3, "how_many_times_was_paused": 0, "how_many_times_was_promoted": 0 },
-    { "type_desc": "Incendio Minore", "type_priority": 0, "id": 6, "priority": 0, "status": "CANCELED", "x": 84, "y": 50, "time": 1757161136, "tick_time": 12, "rescuer_count": 3, "how_many_times_was_paused": 0, "how_many_times_was_promoted": 0 },
-    { "type_desc": "Terremoto Leggero", "type_priority": 0, "id": 9, "priority": 0, "status": "CANCELED", "x": 57, "y": 81, "time": 1757161139, "tick_time": 24, "rescuer_count": 3, "how_many_times_was_paused": 0, "how_many_times_was_promoted": 0 },
-    { "type_desc": "Incendio Minore", "type_priority": 0, "id": 8, "priority": 0, "status": "CANCELED", "x": 70, "y": 73, "time": 1757161138, "tick_time": 20, "rescuer_count": 3, "how_many_times_was_paused": 0, "how_many_times_was_promoted": 0 },
-    { "type_desc": "Terremoto Leggero", "type_priority": 0, "id": 10, "priority": 0, "status": "CANCELED", "x": 43, "y": 85, "time": 1757161140, "tick_time": 28, "rescuer_count": 3, "how_many_times_was_paused": 0, "how_many_times_was_promoted": 0 },
-    { "type_desc": "Terremoto Leggero", "type_priority": 0, "id": 11, "priority": 0, "status": "CANCELED", "x": 30, "y": 81, "time": 1757161141, "tick_time": 32, "rescuer_count": 3, "how_many_times_was_paused": 0, "how_many_times_was_promoted": 0 },
-    { "type_desc": "Incendio Medio", "type_priority": 1, "id": 14, "priority": 1, "status": "CANCELED", "x": 14, "y": 50, "time": 1757161145, "tick_time": 44, "rescuer_count": 7, "how_many_times_was_paused": 0, "how_many_times_was_promoted": 0 },
-    { "type_desc": "Incendio Medio", "type_priority": 1, "id": 13, "priority": 1, "status": "CANCELED", "x": 8, "y": 63, "time": 1757161144, "tick_time": 40, "rescuer_count": 7, "how_many_times_was_paused": 0, "how_many_times_was_promoted": 0 },
-    { "type_desc": "Incendio Medio", "type_priority": 1, "id": 12, "priority": 1, "status": "CANCELED", "x": 18, "y": 73, "time": 1757161143, "tick_time": 36, "rescuer_count": 7, "how_many_times_was_paused": 0, "how_many_times_was_promoted": 0 },
-    { "type_desc": "Incendio Grande", "type_priority": 2, "id": 15, "priority": 2, "status": "CANCELED", "x": 18, "y": 27, "time": 1757161146, "tick_time": 48, "rescuer_count": 17, "how_many_times_was_paused": 0, "how_many_times_was_promoted": 0 }
+    { "type_desc": "Incendio Grande", "type_priority": 2, "id": 7, "priority": 2, "status": "COMPLETED", "x": 40, "y": 40, "time": 1757289228, "tick_time": 107, "rescuer_count": 17, "how_many_times_was_paused": 0, "how_many_times_was_promoted": 0 },
+    { "type_desc": "Incendio Grande", "type_priority": 2, "id": 6, "priority": 2, "status": "TIMEOUT", "x": 10, "y": 10, "time": 1757289192, "tick_time": 71, "rescuer_count": 17, "how_many_times_was_paused": 0, "how_many_times_was_promoted": 0 }
   ]
 }

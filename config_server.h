@@ -19,8 +19,8 @@
 static const logging_config_t server_logging_config = {
     .log_file                       = "log.txt",
     .log_file_ptr                   = NULL,
-    // .logging_syntax                 = "[%s] [%s] [%s] (thread %s) %s\n", //timestamp, id, event_name, thread_name, event_string
-    .logging_syntax                 = "%-13s %-4s %-30s %-12s %s\n",  //timestamp, id, event_name, thread_name, event_string
+    .logging_syntax                 = "[%s] [%s] [%s] (%s) %s\n", //timestamp, id, event_name, thread_name, event_string
+    //.logging_syntax                 = "%-13s %-4s %-30s %-12s %s\n",  //timestamp, id, event_name, thread_name, event_string
     .non_applicable_log_id_string   = "N/A",
     .log_to_file                    = true,
     .log_to_stdout                  = true,
@@ -34,9 +34,9 @@ static const logging_config_t server_logging_config = {
 #define ZERO_POINT_10_SECONDS 100000000
 #define ZERO_POINT_01_SECONDS 10000000
 
-static const struct timespec server_tick_time = {
-	.tv_sec = 0,
-	.tv_nsec = ZERO_POINT_25_SECONDS
+static const struct timespec server_tick_time = { // cambiare se si vogliono mettere dei valori manualmente
+    .tv_sec  = TICK_SEC,     
+    .tv_nsec = TICK_NSEC
 };
 
 static const priority_rule_t priority_lookup_table[] = {

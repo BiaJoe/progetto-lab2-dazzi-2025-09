@@ -1,31 +1,30 @@
 ---
 title: Documentazione Progetto LAB 2
-author: Biagio Montelisciani (676722)
+author: Biagio Montelisciani
 date: 2025-09-08
-toc: true
-toc-depth: 4
-numbersections: true
 ---
 
- 
+IL PDF CON LA DOCUMENTAZIONE SI TROVA IN docs/
 
 # Introduzione
 
-La seguente è la documentazione del progetto di gestione emergenze realizzato in C11 con programmazione concorrente da Biagio Montelisciani (matricola 676722) per l'esame di Laboratorio 2 AA 2024-2025 appello di luglio 2025.
+La seguente è la documentazione del progetto di gestione emergenze con prevenzione deadlock e preemption realizzato in C11 con programmazione concorrente da Biagio Montelisciani (matricola 676722) per l'esame di Laboratorio 2 AA 2024-2025 appello di settembre 2025.
 
 ## Overview sull'architettura del sistema
 
 Il sistema è strutturato in Server e Client. Come da specifiche, il Client invia messaggi su una message queue Posix; il Server li analizza e processa in modo concorrente. Il tutto è trascritto su un file di log.
-Per andare avanti in modo ordinato, il Server imposta un clock che fa un tick ogni unità di tempo (1 secondo di default, modificabile) e scandisce i momenti in cui fare l'update dello stato del sistema; intanto dei thread "Workers" processano le emergenze parallelamente.
+Per andare avanti in modo ordinato, il Server imposta un clock che fa un *tick* ogni unità di tempo (1 secondo di default, modificabile) e scandisce i momenti in cui fare l'update dello stato del sistema; intanto dei thread "Workers" processano le emergenze parallelamente. Più informazioni riguardo alla gestione del tempo in seguito.
 La scelta progettuale più grande è stata quella di gestire il modo in cui i rescuers si muovono nel mondo attraverso "passi" fatti ad ogni aggiornamento del sistema, e non semplicemente aspettando il tempo i arrivo e teletrasportandoli sul loro target; più informazioni al riguardo in seguito.
 Ci sono tre header file che permettono di modificare il comportamento del programma a piacimento: `config_server.h`,  `config_log.h`,  `config_client.h`.
+Per fare testing propongo dei file di configurazione in `docs/conf_samples.md`: copiare e incollare le liste nei file `conf` appositi se si vogliono usare.
 
 ## Overview su compilazione ed esecuzione
 
+Per una **lista di comandi del Makefile completa**, chiamare `make help`.
 `make` fa compilare server e client. `make run` fa compilare server e client ed eseguire il binario del server. In un'altra finestra di un terminale si può eseguire il client e il sistema inizierà a processare le emergenze richieste.
 `make clean` fa la pulizia degli oggetti e i binari.
-
-
+Si ha spazio per decidere quanti eventi si vogliono loggare:  `make debug` fa loggare tutti gli eventi; `make verbose` fa loggare tutti gli eventi eccetto DEBUG; `make shy` fa loggare solo gli eventi più importanti; make da solo fa loggare una serie di eventi di default.
+L'unità fondamentale di tempo è il *tick*, che di default è un secondo ma può essere modificato facendo `make TICK=<tick>` con valori anche nei decimali.
 
 # Sistema di Logging
 
@@ -36,24 +35,24 @@ Entrambi i processi chiamano `log_event(...)` per loggare. `log_event(...)` è u
 In `config_log.h` sono specificate le caratteristiche di ogni evento loggabile: il suo nome, se fa terminare il processo che lo ha loggato, se deve essere loggato (es: gli eventi di tipo `DEBUG` possono essere disattivati).
 
 Per quanto riguarda la formattazione degli eventi, essa funziona nel modo seguente:
+
 - il processo passa nella config la stringa della sintassi preferita
 - il sistema di logging la usa per scriverci:
 	- `timestamp` (stringa) calcolato da `log_event` 
 	- `id` dell'evento (stringa): è un numero oppure `N/A` 
 	- `event_type` (stringa)
-	- `thread_name`(stringa): il thread che ha loggato l'evento
-	- `messagge`(stringa): il messaggio formattato
-- è responsabilità del processo fornire una stringa di sintassi che supporta tale formato, ad esempio `"[%s] [%s] [%s] [(%s) %s]"` lo supporta.
+	- `thread_name` (stringa): il thread che ha loggato l'evento
+	- `messagge`  (stringa): il messaggio formattato
+- è responsabilità del processo fornire una stringa di sintassi che supporta tale formato, ad esempio `"[%s] [%s] [%s] (%s) %s"` lo supporta.
 Per capire quale thread scrivere la piccola libreria di logging offre la funzione `log_register_this_thread(<nome>);` che salva il nome insieme al thread id di chi lo chiama. 
-
 
 # Client
 
-Ho cercato di rendere il client il più semplice possibile, per lasciare al server la possibilità di fare il parsing esaustivo delle richieste di emergenza.
+Per una lista di comandi che il client può eseguire chiamare `./client -h`.
+Ho cercato di rendere il client il più semplice possibile per lasciare al server la possibilità di fare il parsing esaustivo delle richieste di emergenza.
 Come richiesto nelle specifiche, il client gestisce sia una input mode di un'emergenza da linea di comando, sia da file. In entrambi i casi gestisce le singole emergenze nello stesso modo: fa un **minimo parsing** per trovare il **delay** in secondi da attendere prima di inviarle, attende, le invia.
 
-Per aprire ed usare la message queue con il Server, usa una struttura di shared memory che viene creata e condivisa dal server e contiene il nome della coda (emergenze676722) 
-
+Per aprire ed usare la message queue con il Server, usa una struttura di **shared memory** che viene creata e condivisa dal server e contiene il nome della coda (emergenze676722) ed altre informazioni utili.
 
 # Server
 
@@ -69,6 +68,7 @@ Il server è il processo principale, in sostanza:
 Il server context `ctx` è una struttura globale che contiene lo stato del sistema. È definita in `structs.h` e popolata nel `main.c`. Viene usata dai threads del server per manipolare le strutture che essa contiene.
 
 Come sono organizzate le strutture:
+
 - ogni **rescuer type** contiene l'array dei suoi **gemelli digitali** e sono tutti protetti da un unico mutex.
 - ogni **emergency type** punta ai *rescuer types* che le servono
 - le emergenze ricevute vivono in una coda `pq_t emergency_queue`, più informazioni al riguardo in seguito.
@@ -78,20 +78,19 @@ Come sono organizzate le strutture:
 ## Concorrenza
 
 Il server è, come da richiesta progettuale, scritto in modo *concorrente*.
-Il sistema si aggiorna ad ogni *tick* (di default: 1 secondo) e aggiorna tutte le strutture mentre le emergenze vengono processate contemporaneamente.
+Il sistema si aggiorna ad ogni *tick* e aggiorna tutte le strutture mentre le emergenze vengono processate contemporaneamente.
 Aumentare o diminuire il tick permette di simulare la velocità del sistema, se il tick viene messo a 0.5 secondi, ad esempio, il sistema funziona allo stesso modo ma le cose avvengono al doppio della velocità.
-A seguire una descrizione di come ho reso le strutture thread safe con le primitive di sincronizzazione e il ruolo di ogni thread.
+A seguire una descrizione di come ho reso le strutture thread safe e deadlock-free con le primitive di sincronizzazione e il ruolo di ogni thread.
 
 ## Come ho reso le strutture thread safe
 
 Delle varie componenti da mantenere _thread safe_ ho cercato di isolarne il più possibile dietro a funzioni che fanno il lavoro per me.
 **Le code di emergenze** hanno tutte dei mutex per essere gestite parallelamente, ma sono nascosti dietro alle funzioni che uso per manipolarle.
 **Il sistema di logging** usa una message queue POSIX che è thread safe e dei mutex interni per gestire i nomi dei thread da tracciare e il flushing dei file, insieme a delle variabili atomiche per aggiornare dei counter.
-I mutex che devo attivamente manipolare sono il mutex che protegge l'**array di emergenze** `IN_PROGRESS` e il mutex che protegge i **rescuers**. Essi vengono bloccati durante l'update dalla funzione `lock_system()` che garantisce il loro blocco (e sblocco con `unlock_system()`) ordinati e permette di evitare deadlock. Vengono anche bloccati durante la ricerca di rescuer per un'emergenza da parte di un Thread Worker, in caso l'emergenza debba fare preemption.
+I mutex che devo attivamente manipolare sono il mutex che protegge l'**array di emergenze** `IN_PROGRESS` e il mutex che protegge i **rescuers**. Essi vengono bloccati durante l'update dalla funzione `lock_system()` che garantisce il loro blocco (e sblocco con `unlock_system()`) ordinati e permette di evitare deadlock. Vengono anche bloccati durante la ricerca di rescuer per un'emergenza da parte di un Thread Worker, in caso l'emergenza debba fare preemption. 
 
 ## Come ho diviso il ruolo dei thread
 
-Il lavoro è diviso tra tre thread singoli e una thread pool:
 - **thread receiver**: riceve richieste di emergenza
 - **thread clock**: gira ogni tick 
 - **thread updater**: aggiorna lo stato del sistema ad ogni tick
@@ -128,10 +127,9 @@ I rescuers si spostano di cella in cella in modo discreto. Ci sono vari modi per
 
 I miei rescuers si spostano sulla mappa approssimando una retta dal punto in cui sono a quello in cui devono arrivare. Per farlo su celle discrete ho implementato una funzione, `update_rescuer_digital_twin_position(t)` che usa una versione adattata dell'Algoritmo di Bresenham [^1], implementato in `bresenham.h` e `bresenham.c` nel progetto. A seguire una breve descrizione dell'algoritmo e della modifica necessaria che gli è stata fatta e di come è integrato nel progetto.
 
-
-
 ### Algoritmo di Bresenham
 
+Un algoritmo usato per percorrere celle quadrate in una riga il più dritta possibile da un punto A a un puinto B.
 Siano $x, y$ le coordinate correnti e $x_t, y_t$ le coordinate della destinazione.  Introduciamo $dx, dy, sx, sy, err$ che sono rispettivamente le distanze su $X$ e $Y$ tra il punto di partenza e quello di arrivo, le "direzioni" su cui andare (alto o basso, destra o sinistra) rispetto alla nostra posizione attuale, e l'errore, che riflette la differenza tra i passi da percorre su $X$ e quelli su $Y$. Le seguenti regole permettono di incrementare $x,y$ un passo alla volta per arrivare a $x_t, y_t$ lungo il percorso più simile alla retta ideale.
 
 
@@ -184,8 +182,6 @@ Le emergenze messe in pausa si ricordano quali rescuers hanno perso e quali hann
 Una volta trovati i rescuer per l'emergenza ed inviati verso la scena, il thread si mette in attesa sulla condition variable dell'emergenza, attende che un evento significativo avvenga all'emergenza: ad esempio che essa venga messa in pausa da un'altra, in caso riparte la sua ricerca dei rescuers; oppure che venga cancellata, allora la mette nelle cancellate; oppure che sia completata.
 Quando l'emergenza è stata rilasciata nella coda delle cancellate o delle completate, ne estrae un'altra e il ciclo riparte.
 
-
-
 # Altre aggiunte 
 
 ## Sistema di stop pulito
@@ -200,7 +196,7 @@ Per facilitare il debugging e la visualizzazione di quello che accade ho fatto i
 | ----------------- | ------------------------------------------------- |
 | `simulation.json` | Posizioni rescuers ed emergenze ad ogni tick      |
 | `positions.json`  | Coordinate richieste di emergenza e basi rescuers |
-| `positions.txt`   | (ASCII) Rappresentazione grafica delle posizioni  | 
+| `positions.txt`   | (ASCII) Rappresentazione grafica delle posizioni  |
 
 
 [^1]:  https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm

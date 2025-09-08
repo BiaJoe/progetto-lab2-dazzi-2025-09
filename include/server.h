@@ -26,6 +26,21 @@
 #include "log.h"
 #include "parsers.h"
 
+#ifndef TICK_SEC
+#  define TICK_SEC 1
+#endif
+#ifndef TICK_NSEC
+#  define TICK_NSEC 0
+#endif
+
+#if (TICK_SEC < 0) || (TICK_SEC > 10)
+# error "TICK_SEC fuori range [0..10]"
+#endif
+#if (TICK_NSEC < 0) || (TICK_NSEC > 999999999)
+# error "TICK_NSEC fuori range [0..999999999]"
+#endif
+
+
 #define POS_MAX_WIDTH       70
 #define POS_EMERGENCY_CHAR  'E'
 #define POS_RESCUER_CHAR    'R'

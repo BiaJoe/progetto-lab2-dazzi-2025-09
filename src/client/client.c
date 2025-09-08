@@ -1,8 +1,6 @@
 #include "client.h"
 #include "config_client.h"
 
-// client.c prende in input le emergenze e fa un minimo di error handling
-// poi invia le emergenze, ma lascia al server il compito di finire il check dei valori
 mqd_t mq;
 char requests_argument_separator;
 pid_t server_pid;

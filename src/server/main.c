@@ -21,9 +21,9 @@ int main(void){
 	init_server_context();		
 
 	log_event(NON_APPLICABLE_LOG_ID, PARSING_STARTED, "Inizio parsing dei file di configurazione");
-	ctx -> enviroment  = parse_env(ENV_CONF);														// ottengo l'ambiente
-	ctx -> rescuers    = parse_rescuers(RESCUERS_CONF, ctx->enviroment->width, ctx->enviroment->height);	// ottengo i rescuers (mi servono max X e max Y)
-	ctx -> emergencies = parse_emergencies(EMERGENCY_TYPES_CONF, ctx->rescuers, priority_lookup_table, priority_count);									// ottengo le emergenze (mi servono i rescuers per le richieste di rescuer)
+	ctx -> enviroment  = parse_env(ENV_CONF);														
+	ctx -> rescuers    = parse_rescuers(RESCUERS_CONF, ctx->enviroment->width, ctx->enviroment->height);	
+	ctx -> emergencies = parse_emergencies(EMERGENCY_TYPES_CONF, ctx->rescuers, priority_lookup_table, priority_count);	
 	
 	if(ctx->enviroment == NULL || ctx->rescuers == NULL || ctx->emergencies == NULL)
 		log_error_and_exit(close_server, "Il parsing dei config file è fallito!");
@@ -321,7 +321,7 @@ void close_server(int code){
 	pq_map(ctx->emergency_queue, count_pq_waiting);
 	log_event(AUTOMATIC_LOG_ID, SERVER, "📋  Emergenze elaborate:         %d", ctx->requests->valid_count);
 	log_event(AUTOMATIC_LOG_ID, SERVER, "✅  Emergenze completate:        %d", ctx->completed_emergencies->size);
-	log_event(AUTOMATIC_LOG_ID, SERVER, "❌  Emergenze andate intimeout:  %d", timeout_count);
+	log_event(AUTOMATIC_LOG_ID, SERVER, "❌  Emergenze andate in timeout:  %d", timeout_count);
 	log_event(AUTOMATIC_LOG_ID, SERVER, "💀  Emergenze cancellate:        %d", canceled_count);
 	log_event(AUTOMATIC_LOG_ID, SERVER, "🕰️  Emergenze rimaste in attesa: %d", waiting_count);
 
